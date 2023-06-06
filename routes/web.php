@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use Illuminate\Http\Request;
 
+use App\Http\Controllers\RegistroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +18,21 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+    })
+    ->middleware('auth');
+    Auth::routes();
 
-Auth::routes();
 Route::get('/admin',[AdminController::class,'index'])
 ->middleware('auth.admin')
 ->name('admin.index');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
+Route::get('denuncia',function(){
+    return view('denuncia');
+});
+
+Route::resource('registros', RegistroController::class);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
