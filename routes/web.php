@@ -22,7 +22,7 @@ Route::get('/', function () {
     ->middleware('auth');
     Auth::routes();
 
-Route::get('/admin',[AdminController::class,'index'])
+Route::get('/administrator',[AdminController::class,'index'])
 ->middleware('auth.admin')
 ->name('admin.index');
 
