@@ -17,7 +17,12 @@ use App\Http\Controllers\RegistroController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(auth()->user()->role=='admin') {
+        return view('administrator');
+    }else{
+        return view('welcome');
+    }
+    
     })
     ->middleware('auth');
     Auth::routes();

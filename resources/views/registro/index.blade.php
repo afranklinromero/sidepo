@@ -55,8 +55,7 @@
                                     @foreach ($registros as $registro)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $registro->id_user }}</td>
+                                            <td>{{ $registro->id_user }}</td>
 											<td>{{ $registro->tipo }}</td>
 											<td>{{ $registro->nombre }}</td>
 											<td>{{ $registro->apaterno }}</td>
