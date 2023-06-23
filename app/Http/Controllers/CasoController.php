@@ -48,18 +48,18 @@ class CasoController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Caso::$rules);
+        //request()->validate(Caso::$rules);
 
         //$caso = Caso::create($request->all());
 
 
         $req = new Caso();
         $req->caso= $request->caso;
-        $req->fecha= $request->fecha;
+        $req->ano= $request->ano;
         $req->placa= $request->placa;
         $req->vehiculo= $request->vehiculo;
         $req->marca=$request->marca;
-        $req->clase=$request->clase;
+        $req->tipo=$request->tipo;
         $req->color=$request->color;
         $req->modelo=$request->modelo;
         $req->chasis=$request->chasis;
@@ -68,12 +68,13 @@ class CasoController extends Controller
         $req->apaterno=$request->apaterno;
         $req->amaterno=$request->amaterno;
         $req->estado=$request->estado;
+        $req->fecha_denuncia=$request->fecha_denuncia;
         $req->grupo_designado=$request->grupo_designado;
-        $req->designado=$request->designado;
+        $req->asignado=$request->asignado;
         $req->regional=$request->regional;
         $req->lugar=$request->lugar;
-        $req->mes=$request->mes;
-        $req->ano=$request->ano;
+       
+        $req->ano_auto=$request->ano_auto;
         $req->ci=$request->ci;
         $req->id_user=$request->id_user;
 
@@ -109,7 +110,7 @@ class CasoController extends Controller
     public function edit($id)
     {
         $caso = Caso::find($id);
-
+        
         return view('caso.edit', compact('caso'));
     }
 
@@ -122,9 +123,14 @@ class CasoController extends Controller
      */
     public function update(Request $request, Caso $caso)
     {
-        request()->validate(Caso::$rules);
+        
+        
+       // request()->validate(Caso::$rules);
 
-        $caso->update($request->all());
+       
+        $caso->ci= $request->ci;
+        $caso->archivo= $request->archivo->store('public');
+        $caso->save();
 
         return redirect()->route('casos.index')
             ->with('success', 'Caso updated successfully');

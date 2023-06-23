@@ -96,6 +96,7 @@
                         </div>
                     </div>
                 </div>
+         
                 {!! $casos->links() !!}
             </div>
         </div>
