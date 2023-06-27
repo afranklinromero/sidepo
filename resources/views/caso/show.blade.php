@@ -17,7 +17,7 @@
                             <a class="btn btn-primary" href="{{ route('casos.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
-
+                    
                     <div class="card-body">
                         
                         <div class="form-group">
@@ -25,8 +25,12 @@
                             {{ $caso->caso }}
                         </div>
                         <div class="form-group">
+                            <strong>asignado:</strong>
+                            {{ $caso->asignado }}
+                        </div>
+                        <div class="form-group">
                             <strong>Fecha:</strong>
-                            {{ $caso->fecha }}
+                            {{ $caso->fecha_denuncia }}
                         </div>
                         <div class="form-group">
                             <strong>Placa:</strong>
@@ -42,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Clase:</strong>
-                            {{ $caso->clase }}
+                            {{ $caso->tipo }}
                         </div>
                         <div class="form-group">
                             <strong>Color:</strong>
@@ -81,8 +85,8 @@
                             {{ $caso->grupo_designado }}
                         </div>
                         <div class="form-group">
-                            <strong>Designado:</strong>
-                            {{ $caso->designado }}
+                            <strong>Asignado:</strong>
+                            {{ $caso->asignado }}
                         </div>
                         <div class="form-group">
                             <strong>Regional:</strong>
@@ -92,10 +96,7 @@
                             <strong>Lugar:</strong>
                             {{ $caso->lugar }}
                         </div>
-                        <div class="form-group">
-                            <strong>Mes:</strong>
-                            {{ $caso->mes }}
-                        </div>
+                        
                         <div class="form-group">
                             <strong>Ano:</strong>
                             {{ $caso->ano }}
@@ -107,15 +108,21 @@
                         <div class="form-group">
                             <strong>Id User:</strong>
                             {{ $caso->id_user }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Archivo:</strong>
-                            <a target="_blank" href= 
-                            {{ $url= Storage::url ($caso->archivo) }}
-                            >pdf
-                            </a>
-                        </div>
 
+                         
+                        </div>
+                       <!-- 
+                        <div class="form-group">
+                            <strong>Cargar Archivo:</strong>
+                            <a target="_blank" href= 
+                               {{ $url= Storage::url ($caso->archivo) }}
+                            >pdf
+                            
+                            </a>
+
+                            
+                        </div>
+                        -->
                     </div>
                 </div>
             </div>

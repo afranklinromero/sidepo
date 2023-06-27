@@ -1,4 +1,5 @@
 <div class="box box-info padding-1">
+    
     <div class="box-body">
         
         <div class="form-group">
@@ -7,10 +8,11 @@
             {!! $errors->first('caso', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('ano') }}
-            {{ Form::date('ano', $caso->ano, ['class' => 'form-control' . ($errors->has('ano') ? ' is-invalid' : ''), 'placeholder' => 'Año']) }}
-            {!! $errors->first('ano', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('fecha_denuncia') }}
+            {{ Form::date('fecha_denuncia', $caso->fecha_denuncia, ['class' => 'form-control' . ($errors->has('fecha_denuncia') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase', 'placeholder' => 'fecha denuncia']) }}
+            {!! $errors->first('fecha_denuncia', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+       
         <div class="form-group">
             {{ Form::label('placa') }}
             {{ Form::text('placa', $caso->placa, ['class' => 'form-control' . ($errors->has('placa') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'Placa']) }}
@@ -91,28 +93,18 @@
             {{ Form::text('lugar', $caso->lugar, ['class' => 'form-control' . ($errors->has('lugar') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' =>'Lugar']) }}
             {!! $errors->first('lugar', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('fecha_denuncia') }}
-            {{ Form::date('fecha_denuncia', $caso->fecha_denuncia, ['class' => 'form-control' . ($errors->has('fecha_denuncia') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase', 'placeholder' => 'fecha denuncia']) }}
-            {!! $errors->first('fecha_denuncia', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('año auto') }}
-            {{ Form::number('ano_auto', $caso->ano, ['class' => 'form-control' . ($errors->has('ano_auto') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'Año']) }}
-            {!! $errors->first('ano_auto', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+      
+       
         <div class="form-group">
             {{ Form::label('ci') }}
             {{ Form::number('ci', $caso->ci, ['class' => 'form-control' . ($errors->has('ci') ? ' is-invalid' : ''), 'placeholder' =>'Ci']) }}
             {!! $errors->first('ci', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        
-      <div class="form-group">
-            {{ Form::label('archivo') }}
-            {{ Form::file('archivo', $caso->archivo, ['class' => 'form-control' . ($errors->has('archivo') ? ' is-invalid' : ''), 'placeholder' => 'Archivo']) }}
-            {!! $errors->first('archivo', '<div class="invalid-feedback">:message</div>') !!}
+        <div class="form-group">
+            {{ Form::label('ano') }}
+            {{ Form::date('ano', $caso->ano, ['class' => 'form-control' . ($errors->has('ano') ? ' is-invalid' : ''), 'placeholder' => 'Año']) }}
+            {!! $errors->first('ano', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
         <div class="form-group">
             {{ Form::label('Usuario') }} <br>
             {{ Form::label('id_user', Auth::user()->name,['class' => 'form-control']) }}
@@ -120,8 +112,7 @@
         </div>
         <div class="form-group">
            {{ Form::label('id Usuario') }}
-           {{ Form::number('id_user', Auth::user()->id,['class' => 'form-control' ,'disabled' => 'disabled']) }}
-           
+           {{ Form::number('id_user', Auth::user()->id,['class' => 'form-control' ]) }}
         </div>
     </div>
     <div class="box-footer mt20">

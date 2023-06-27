@@ -13,31 +13,31 @@ return new class extends Migration
     {
         Schema::create('casos', function (Blueprint $table) {
             $table->id();
-            $table->string('grupo_designado');
-            $table->string('lugar');
-            $table->string('ano');
-            $table->string('ci');
-            $table->string('caso');
-            $table->date('fecha_denuncia');
-            $table->string('placa');
-            $table->string('vehiculo');
-            $table->string('marca');
-            $table->string('tipo');
-            $table->string('color');
-           $table->string('ano_auto');
-            $table->integer('modelo');
-            $table->string('chasis');
-            $table->string('hecho');
-           $table->string('nombre');
-            $table->string('apaterno');
-            $table->string('amaterno');
-            $table->string('estado');
-           $table->string('asignado');
-          $table->string('regional');
+            $table->string('grupo_designado')->nullable();;
+            $table->string('lugar')->nullable();;
+            $table->string('ano')->nullable();;
+            $table->string('ci')->nullable();;
+            $table->string('caso')->nullable();;
+            $table->date('fecha_denuncia')->nullable();;
+            $table->string('placa')->nullable();;
+            $table->string('vehiculo')->nullable();;
+            $table->string('marca')->nullable();;
+            $table->string('tipo')->nullable();;
+            $table->string('color')->nullable();;
+          
+            $table->integer('modelo')->nullable();;
+            $table->string('chasis')->nullable();;
+            $table->string('hecho')->nullable();;
+           $table->string('nombre')->nullable();;
+            $table->string('apaterno')->nullable();;
+            $table->string('amaterno')->nullable();;
+            $table->string('estado')->nullable();;
+           $table->string('asignado')->nullable();;
+          $table->string('regional')->nullable();;
 
             $table->BigInteger('id_user')->unsigned();
             $table->timestamps();
-            $table->string('archivo')->nullable();
+           // $table->string('id_archivo')->nullable();
 
 
             $table->foreign('id_user')->references('id')->on('users')

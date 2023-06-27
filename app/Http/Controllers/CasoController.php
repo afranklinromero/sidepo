@@ -48,7 +48,9 @@ class CasoController extends Controller
      */
     public function store(Request $request)
     {
-        //request()->validate(Caso::$rules);
+       // request()->validate(
+       //     ['archivo'=>'required|pdf|mimes:pdf|max:5000']
+       // );
 
         //$caso = Caso::create($request->all());
 
@@ -74,11 +76,11 @@ class CasoController extends Controller
         $req->regional=$request->regional;
         $req->lugar=$request->lugar;
        
-        $req->ano_auto=$request->ano_auto;
+        
         $req->ci=$request->ci;
         $req->id_user=$request->id_user;
 
-        $req->archivo= $request->archivo->store('public');
+        //$req->archivo= $request->archivo->store('public');
         
         $req->save();
    
@@ -129,7 +131,44 @@ class CasoController extends Controller
 
        
         $caso->ci= $request->ci;
-        $caso->archivo= $request->archivo->store('public');
+        
+        //$caso->archivo= $request->archivo->store('public');
+
+        $caso->id_user=$request->id_user;
+
+        $caso->caso= $request->caso;
+        $caso->ano= $request->ano;
+        $caso->placa= $request->placa;
+        $caso->vehiculo= $request->vehiculo;
+        $caso->marca=$request->marca;
+        $caso->tipo=$request->tipo;
+        $caso->color=$request->color;
+        $caso->modelo=$request->modelo;
+        $caso->chasis=$request->chasis;
+        $caso->hecho=$request->hecho;
+        $caso->nombre=$request->nombre;
+        $caso->apaterno=$request->apaterno;
+        $caso->amaterno=$request->amaterno;
+        $caso->estado=$request->estado;
+        $caso->fecha_denuncia=$request->fecha_denuncia;
+        $caso->grupo_designado=$request->grupo_designado;
+        $caso->asignado=$request->asignado;
+        $caso->regional=$request->regional;
+        $caso->lugar=$request->lugar;
+       
+        
+        $caso->ci=$request->ci;
+    
+
+
+
+
+
+
+
+
+
+
         $caso->save();
 
         return redirect()->route('casos.index')
@@ -147,5 +186,10 @@ class CasoController extends Controller
 
         return redirect()->route('casos.index')
             ->with('success', 'Caso deleted successfully');
+    }
+
+    public function pdf(Request $request, Caso $caso)
+    {
+        
     }
 }

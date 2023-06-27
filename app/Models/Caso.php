@@ -74,7 +74,7 @@ class Caso extends Model
      *
      * @var array
      */
-    protected $fillable = ['caso','fecha','placa','vehiculo','marca','clase','color','modelo','chasis','hecho','nombre','apaterno','amaterno','estado','grupo_designado','designado','regional','lugar','mes','ano','ci','id_user','archivo'];
+    protected $fillable = ['caso','fecha','placa','vehiculo','marca','clase','color','modelo','chasis','hecho','nombre','apaterno','amaterno','estado','grupo_designado','designado','regional','lugar','mes','ano','ci','id_user'];
 
 
     /**
@@ -82,7 +82,13 @@ class Caso extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'id_user');
+        return $this->hasOne(User::class);
+		
+    }
+	public function archivo()
+    {
+        return $this->hasMany(Archivo::class);
+		
     }
     
 

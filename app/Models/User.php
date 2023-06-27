@@ -49,5 +49,6 @@ class User extends Authenticatable
     public function users()
     {
         return $this->hasMany(Registro::class);
+        return $this->hasMany(Casos::class);
     }
 }
