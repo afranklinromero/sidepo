@@ -8,6 +8,8 @@ use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\CasoController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ArchivoController;
+use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\MunicipioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +41,8 @@ Route::resource('casos', CasoController::class);
 
 
 Route::resource('archivos', ArchivoController::class) ;
+Route::resource('departamentos', DepartamentoController::class);
+Route::resource('municipios', MunicipioController::class);
 
 
 

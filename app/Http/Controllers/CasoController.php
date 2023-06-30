@@ -56,25 +56,25 @@ class CasoController extends Controller
 
 
         $req = new Caso();
-        $req->caso= $request->caso;
+        $req->caso= (strtoupper($request->caso));
         $req->ano= $request->ano;
-        $req->placa= $request->placa;
-        $req->vehiculo= $request->vehiculo;
-        $req->marca=$request->marca;
-        $req->tipo=$request->tipo;
-        $req->color=$request->color;
+        $req->placa= (strtoupper($request->placa));
+        $req->vehiculo= (strtoupper($request->vehiculo));
+        $req->marca=(strtoupper($request->marca));
+        $req->tipo=(strtoupper($request->tipo));
+        $req->color=(strtoupper($request->color));
         $req->modelo=$request->modelo;
-        $req->chasis=$request->chasis;
-        $req->hecho=$request->hecho;
-        $req->nombre=$request->nombre;
-        $req->apaterno=$request->apaterno;
-        $req->amaterno=$request->amaterno;
-        $req->estado=$request->estado;
+        $req->chasis=(strtoupper($request->chasis));
+        $req->hecho=(strtoupper($request->hecho));
+        $req->nombre=(strtoupper($request->nombre));
+        $req->apaterno=(strtoupper($request->apaterno));
+        $req->amaterno=(strtoupper($request->amaterno));
+        $req->estado=(strtoupper($request->estado));
         $req->fecha_denuncia=$request->fecha_denuncia;
-        $req->grupo_designado=$request->grupo_designado;
-        $req->asignado=$request->asignado;
-        $req->regional=$request->regional;
-        $req->lugar=$request->lugar;
+        $req->grupo_designado=(strtoupper($request->grupo_designado));
+        $req->asignado=(strtoupper($request->asignado));
+        $req->regional=(strtoupper($request->regional));
+        $req->lugar=(strtoupper($request->lugar));
        
         
         $req->ci=$request->ci;

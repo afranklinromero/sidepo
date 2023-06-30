@@ -83,11 +83,23 @@
             {{ Form::text('asignado', $caso->asignado, ['class' => 'form-control' . ($errors->has('asignado') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'oficial asignado']) }}
             {!! $errors->first('asignado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+       
         <div class="form-group">
-            {{ Form::label('regional') }}
-            {{ Form::text('regional', $caso->regional, ['class' => 'form-control' . ($errors->has('regional') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'Regional']) }}
-            {!! $errors->first('regional', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+             {{ Form::label('regional', 'Selecciona la region:'), }}
+             {{ Form::select('regional', ['SANTA CRUZ' => 'SANTA CRUZ', 
+                'COCHABAMBA' => 'COCHABAMBA', 
+                'LA PAZ' => 'LA PAZ',
+                'ORURO' => 'ORURO',
+                'TARIJA' => 'TARIJA',
+                'BENI' => 'BENI',
+                'PANDO' => 'PANDO',
+                'SUCRE' => 'SUCRE',
+                'POTOSI' => 'POTOSI',
+                ], null, ['multiple' => false, 'class' => 'form-control']) }}
+             {!! $errors->first('regional', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
+              
+        
         <div class="form-group">
             {{ Form::label('lugar') }}
             {{ Form::text('lugar', $caso->lugar, ['class' => 'form-control' . ($errors->has('lugar') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' =>'Lugar']) }}
