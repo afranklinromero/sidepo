@@ -32,4 +32,8 @@ class Departamento extends Model
     {
         return $this->hasMany(Municipio::class);
     }
+    public function caso()
+    {
+        return $this->belongsTo(Caso::class);
+    }
 }
