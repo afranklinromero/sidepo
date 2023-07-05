@@ -35,20 +35,25 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+                                        <th>Departamento</th>
+                                        <th>Municipio</th>
+
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($municipios as $municipio)
+                                    @foreach ($paginatedMunicipios as $municipio)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ ++$i; }}</td>
+                                            <td>{{ $municipio->nombre }}</td>
+
+                                            <td>{{ $municipio->departamento->nombre }}</td>
+
 
                                             <td>
                                                 <form action="{{ route('municipios.destroy',$municipio->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('municipios.show',$municipio->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+
                                                     <a class="btn btn-sm btn-success" href="{{ route('municipios.edit',$municipio->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
@@ -62,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $municipios->links() !!}
+                {!! $paginatedMunicipios->links() !!}
             </div>
         </div>
     </div>

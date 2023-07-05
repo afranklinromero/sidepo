@@ -20,7 +20,10 @@
 
                     <div class="card-body">
                        
-
+                    <div class="form-group">
+                            <strong>Departamento:</strong>
+                            {{ $departamento->nombre }}
+                        </div>
                     </div>
                 </div>
             </div>

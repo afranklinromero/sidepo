@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Caso;
+use App\Models\Departamento;
+use App\Models\Municipio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 /**
@@ -36,8 +38,20 @@ class CasoController extends Controller
      */
     public function create()
     {
+
+         
+        $departamentos = Departamento::paginate();
+        $municipios = Municipio::paginate();
         $caso = new Caso();
-        return view('caso.create', compact('caso'));
+        
+        if (request()->ajax()) {
+        $municipios = Municipio::when(request()->input('departamento_id'), function($query) {
+            $query->where('departamento_id', request()->input('departamento_id'));
+        })->pluck('nombre', 'id');
+    
+        return response()->json($municipios);
+    }
+        return view('caso.create', compact('caso','departamentos','municipios'));
     }
 
     /**
@@ -192,4 +206,13 @@ class CasoController extends Controller
     {
         
     }
+
+    public function byDepartamento()
+    { 
+    $municipios = Municipio::when(request()->input('departamento_id'), function($query) {
+        $query->where('departamento_id', request()->input('departamento_id'));
+    })->pluck('name', 'id');
+
+    return response()->json($municipios);
+}
 }

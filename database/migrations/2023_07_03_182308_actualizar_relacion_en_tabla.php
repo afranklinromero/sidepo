@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('municipios', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->foreignId('departamento_id')->constrained('departamentos')->unsigned();
-            $table->timestamps();
+        Schema::table('casos', function (Blueprint $table) {
+            //
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('municipios');
+        Schema::table('casos', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -28,3 +28,30 @@
         </div>
     </section>
 @endsection
+@section('script')
+    <script> 
+ $(document).ready(function(){
+    $('#departamento_id').on('change', function(){
+        var municipioDropdown = $('#municipio_id');
+        var departamentoId = $(this).val();
+
+        if ($.trim(departamentoId) != '') {
+            $.ajax({
+                url: "{{ route('casos.create') }}",
+                data: {
+                    departamento_id: departamentoId
+                },
+                success: function(data){
+                    municipioDropdown.empty();
+                    municipioDropdown.append('<option value="" selected>Seleccione</option>');
+                    
+                    $.each(data, function(id, value){
+                        municipioDropdown.append('<option value="' + id + '">' + value + '</option>');
+                    });
+                }
+            });
+        }
+    });
+});
+    </script>
+@endsection

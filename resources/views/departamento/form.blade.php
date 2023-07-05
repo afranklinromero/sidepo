@@ -3,7 +3,7 @@
         <div class="form-group">
             {{ Form::label('nombre') }}
             {{ Form::text('nombre', $departamento->nombre, ['class' => 'form-control', 'style'=>'text-transform:uppercase','placeholder' => 'Nombre']) }}
-            {!! $errors->first('nombsre', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>

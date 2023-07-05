@@ -32,6 +32,7 @@ Route::get('/', function () {
 Route::get('/administrator',[AdminController::class,'index']);
 Route::resource('registros', RegistroController::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::resource('casos', CasoController::class);
 //Route::get('casos/{id}', function ($id){
 //$caso= App\Caso::find($id);

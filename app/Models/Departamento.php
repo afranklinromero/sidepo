@@ -32,6 +32,4 @@ class Departamento extends Model
     {
         return $this->hasMany(Municipio::class);
     }
-
-
 }

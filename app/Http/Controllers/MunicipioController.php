@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request as HttpRequest; 
 use App\Models\Municipio;
-use Illuminate\Http\Request;
+use App\Models\Departamento;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 /**
  * Class MunicipioController
@@ -17,12 +21,30 @@ class MunicipioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $municipios = Municipio::paginate();
+    { 
+    $municipios = Municipio::with('departamento')->get();
 
-        return view('municipio.index', compact('municipios'))
-            ->with('i', (request()->input('page', 1) - 1) * $municipios->perPage());
-    }
+    $perPage = 10; // Número de elementos por página
+    $currentPage = request()->input('page', 1); // Obtiene la página actual de la solicitud, por defecto es 1
+
+    // Pagina manualmente la colección de municipios
+    $i=0;
+    $offset = ($currentPage - 1) * $perPage;
+    $paginatedMunicipios = new LengthAwarePaginator(
+        $municipios->slice($offset, $perPage),
+        $municipios->count(),
+        $perPage,
+     
+        $currentPage,
+        [
+            'path' => Request::url(), // URL actual
+            'query' => Request::query(), // Parámetros de la consulta
+        ]
+    );
+
+    return view('municipio.index', compact('paginatedMunicipios','i'));
+}
+  
 
     /**
      * Show the form for creating a new resource.
@@ -31,8 +53,10 @@ class MunicipioController extends Controller
      */
     public function create()
     {
+        
+        $departamentos = Departamento::all();
         $municipio = new Municipio();
-        return view('municipio.create', compact('municipio'));
+        return view('municipio.create', compact('departamentos', 'municipio'));
     }
 
     /**
@@ -41,7 +65,7 @@ class MunicipioController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HttpRequest $request)
     {
         request()->validate(Municipio::$rules);
 
@@ -72,9 +96,10 @@ class MunicipioController extends Controller
      */
     public function edit($id)
     {
+        $departamentos = Departamento::all();
         $municipio = Municipio::find($id);
 
-        return view('municipio.edit', compact('municipio'));
+        return view('municipio.edit', compact('municipio', 'departamentos'));
     }
 
     /**
@@ -84,7 +109,7 @@ class MunicipioController extends Controller
      * @param  Municipio $municipio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Municipio $municipio)
+    public function update(HttpRequest $request, Municipio $municipio)
     {
         request()->validate(Municipio::$rules);
 

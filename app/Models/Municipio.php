@@ -27,7 +27,7 @@ class Municipio extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['nombre', 'departamento_id'];
 
     public function departamento()
     {
