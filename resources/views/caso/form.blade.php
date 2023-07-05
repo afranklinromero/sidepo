@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('tipo') }}
-            {{ Form::text('tipo', $caso->tipo, ['class' => 'form-control' . ($errors->has('placa') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'tipo']) }}
+            {{ Form::text('tipo', $caso->tipo, ['class' => 'form-control' . ($errors->has('tipo') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase','placeholder' => 'Tipo']) }}
             {!! $errors->first('tipo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -83,11 +83,33 @@
             {{ Form::text('asignado', $caso->asignado, ['class' => 'form-control' . ($errors->has('asignado') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'oficial asignado']) }}
             {!! $errors->first('asignado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('regional') }}
-            {{ Form::text('regional', $caso->regional, ['class' => 'form-control' . ($errors->has('regional') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'Regional']) }}
-            {!! $errors->first('regional', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+       
+        
+
+            <div class="form-group">
+            <label  id="label_departamento"> Lugar 
+            <select name="departamento_id" id="departamento_id" class="from-control">
+                @foreach ($departamentos as $departamento)
+                    <option value="{{$departamento['id']}}">{{$departamento['nombre']}}
+                    </option>
+                @endforeach
+            </select>
+             </div>
+
+             <div class="form-group">
+                <label> Municipio 
+                    <select name="municipio_id"  id="municipio_id" class="from-control" data-old="{{ old('municipio_id') }}" ></select>
+               
+                    @if ($errors->has('municipio_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->firts('municipio_id') }} </strong>
+                    </span>
+                    @endif
+            
+             </div>
+
+              
+        
         <div class="form-group">
             {{ Form::label('lugar') }}
             {{ Form::text('lugar', $caso->lugar, ['class' => 'form-control' . ($errors->has('lugar') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' =>'Lugar']) }}
@@ -106,12 +128,12 @@
             {!! $errors->first('ano', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('Usuario') }} <br>
+            {{ Form::label('usuario') }} <br>
             {{ Form::label('id_user', Auth::user()->name,['class' => 'form-control']) }}
           
         </div>
         <div class="form-group">
-           {{ Form::label('id Usuario') }}
+           {{ Form::label('id_usuario') }}
            {{ Form::number('id_user', Auth::user()->id,['class' => 'form-control' ]) }}
         </div>
     </div>

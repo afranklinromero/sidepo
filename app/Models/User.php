@@ -45,7 +45,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['name'] = strtoupper($value);
+        $this->attributes['apellido'] = strtoupper($value);
+        $this->attributes['grado'] = strtoupper($value);
+        $this->attributes['grupo'] = strtoupper($value);
+   
+    }
     public function users()
     {
         return $this->hasMany(Registro::class);

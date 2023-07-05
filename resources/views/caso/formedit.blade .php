@@ -2,12 +2,6 @@
     <div class="box-body">
         
       
-   
-        <div class="form-group">
-            {{ Form::label('archivo') }}
-            {{ Form::file('archivo', $caso->archivo, ['class' => 'form-control' . ($errors->has('archivo') ? ' is-invalid' : ''), 'placeholder' => 'Archivo']) }}
-            {!! $errors->first('archivo', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
 
         <div class="form-group">
             {{ Form::label('Usuario') }} <br>
