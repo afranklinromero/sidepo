@@ -81,10 +81,10 @@
 											<td>{{ $caso->asignado }}</td>
 											<td>  
                                                  @if (is_numeric($caso->lugar))
-                {{ $municipios[$caso->lugar] }}
-            @else
-                {{ $caso->lugar }}
-            @endif
+                                                    {{ $municipios[$caso->lugar] }}
+                                                @else
+                                                    {{ $caso->lugar }}
+                                                @endif
                                                 </td>
 											
 											
