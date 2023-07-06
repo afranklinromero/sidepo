@@ -114,8 +114,13 @@ class CasoController extends Controller
     public function show($id)
     {
         $caso = Caso::find($id);
-
-        return view('caso.show', compact('caso'));
+        $val = $caso->regional;
+        $departamentos = Departamento::where('id', $val)->get();
+        $val2 = $caso->lugar;
+        $municipios = Municipio::where('id', $val2)->get();
+        
+        //$departamentos = Departamento::where('departamento_id',$val)->get();
+        return view('caso.show', compact('caso','departamentos','val','municipios','val2'));
     }
 
     /**
