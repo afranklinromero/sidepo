@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('grupo_designado');
             $table->string('lugar');
-            $table->string('ano');
+      
             $table->string('ci');
             $table->string('caso');
             $table->date('fecha_denuncia');
@@ -37,7 +37,7 @@ return new class extends Migration
 
             $table->BigInteger('id_user')->unsigned();
             $table->timestamps();
-           // $table->string('id_archivo')->nullable();
+          //  $table->string('id_archivo')->nullable();
 
 
             $table->foreign('id_user')->references('id')->on('users')

@@ -90,8 +90,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Regional:</strong>
-                        
-                        
+                                               
                             @foreach ($departamentos as $departamento)
                             {{ $departamento->nombre }}
                             @endforeach

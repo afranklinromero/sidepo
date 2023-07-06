@@ -15,6 +15,8 @@
                     <div class="card-header">
                         <span class="card-title">{{ __('Create') }} Caso</span>
                     </div>
+                   
+                        <br>
                     <div class="card-body">
                         <form method="POST" action="{{ route('casos.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
@@ -22,8 +24,11 @@
                             @include('caso.form')
 
                         </form>
+                       
                     </div>
+                   
                 </div>
+                
             </div>
         </div>
     </section>

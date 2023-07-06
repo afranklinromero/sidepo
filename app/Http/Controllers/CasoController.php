@@ -26,8 +26,9 @@ class CasoController extends Controller
     public function index()
     {
         $casos = Caso::paginate();
-
-        return view('caso.index', compact('casos'))
+       
+        $municipios = Municipio::pluck('nombre', 'id');
+        return view('caso.index', compact('casos','municipios'))
             ->with('i', (request()->input('page', 1) - 1) * $casos->perPage());
     }
 
@@ -71,7 +72,7 @@ class CasoController extends Controller
 
         $req = new Caso();
         $req->caso= (strtoupper($request->caso));
-        $req->ano= $request->ano;
+        
         $req->placa= (strtoupper($request->placa));
         $req->vehiculo= (strtoupper($request->vehiculo));
         $req->marca=(strtoupper($request->marca));
@@ -91,7 +92,7 @@ class CasoController extends Controller
        
         $req->lugar=(strtoupper($request->lugar_id));
        
-        
+    
         $req->ci=$request->ci;
         $req->id_user=$request->id_user;
 
@@ -120,7 +121,7 @@ class CasoController extends Controller
         $municipios = Municipio::where('id', $val2)->get();
         
         //$departamentos = Departamento::where('departamento_id',$val)->get();
-        return view('caso.show', compact('caso','departamentos','val','municipios','val2'));
+        return view('caso.show', compact('caso','departamentos','municipios','val2'));
     }
 
     /**
@@ -165,7 +166,7 @@ class CasoController extends Controller
         $caso->id_user=$request->id_user;
 
         $caso->caso= $request->caso;
-        $caso->ano= $request->ano;
+        
         $caso->placa= $request->placa;
         $caso->vehiculo= $request->vehiculo;
         $caso->marca=$request->marca;
