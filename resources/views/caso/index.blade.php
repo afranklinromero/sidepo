@@ -1,8 +1,7 @@
-
 @extends('layouts.app')
 
 @section('template_title')
-    Registro
+    Caso
 @endsection
 
 @section('content')
@@ -14,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Registro') }}
+                                {{ __('Caso') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('registros.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,41 +34,56 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
                                         
-										<th>Id User</th>
-										<th>Tipo</th>
-										<th>Nombre</th>
-										<th>Apaterno</th>
-										<th>Amaterno</th>
-										<th>Ci</th>
+                                        
+										<th>Caso</th>
+									
 										<th>Placa</th>
-										<th>Chasis</th>
-										<th>Archivo</th>
-										<th>Alias</th>
+										
+										<th>Apaterno</th>
+									
+										<th>Estado</th>
+										
+										<th>Asignado</th>
+										<th>Regional</th>
+										
+										
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($registros as $registro)
+                                    @foreach ($casos as $caso)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            <td>{{ $registro->id_user }}</td>
-											<td>{{ $registro->tipo }}</td>
-											<td>{{ $registro->nombre }}</td>
-											<td>{{ $registro->apaterno }}</td>
-											<td>{{ $registro->amaterno }}</td>
-											<td>{{ $registro->ci }}</td>
-											<td>{{ $registro->placa }}</td>
-											<td>{{ $registro->chasis }}</td>
-											<td>{{ $registro->archivo }}</td>
-											<td>{{ $registro->alias }}</td>
+                                            
+                                            
+											<td>{{ $caso->caso }}</td>
+											
+											<td>{{ $caso->placa }}</td>
+											
+											
+											
+											
+											
+											
+											
+											
+											<td>{{ $caso->apaterno }}</td>
+											
+											<td>{{ $caso->estado }}</td>
+											
+											<td>{{ $caso->asignado }}</td>
+											<td>{{ $caso->regional }}</td>
+											
+											
+											
+										
+											
 
                                             <td>
-                                                <form action="{{ route('registros.destroy',$registro->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('registros.show',$registro->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('registros.edit',$registro->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -82,7 +96,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $registros->links() !!}
+         
+                {!! $casos->links() !!}
             </div>
         </div>
     </div>

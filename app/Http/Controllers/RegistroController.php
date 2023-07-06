@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Registro;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 /**
  * Class RegistroController
  * @package App\Http\Controllers
@@ -16,6 +16,12 @@ class RegistroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+       
+    }
     public function index()
     {
         $registros = Registro::paginate();
@@ -45,10 +51,32 @@ class RegistroController extends Controller
     {
         request()->validate(Registro::$rules);
 
-        $registro = Registro::create($request->all());
+       // $registro = Registro::create($request->all());
+        //Storage::disk('public')->put("texto.txt","hola");
+      
+        $req = new Registro();
+        $req->id_user=$request->id_user;
+        $req->tipo = $request->tipo;
+        $req->nombre=$request->nombre;
+        $req->apaterno=$request->apaterno;
+        $req->amaterno=$request->amaterno;
+        $req->ci= $request->ci;
+        $req->placa= $request->placa;
+        $req->chasis= $request->chasis;
+        $req->archivo= $request->archivo->store('public');
+       // $req-=$request->archivo->store('archivo');
+        
+       // if($req->isMethod('POST')){
+     //   $file = $req->archivo('archivo');
+       
+     //   $file->storeAs('',$file->extension(),'public');
+  //  }
+        $req->alias= $request->alias;
 
+        $req->save();
+   
         return redirect()->route('registros.index')
-            ->with('success', 'Registro created successfully.');
+            ->with('success', 'Registro creado correctamente.');
     }
 
     /**

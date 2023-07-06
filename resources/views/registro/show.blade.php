@@ -53,8 +53,12 @@
                             {{ $registro->chasis }}
                         </div>
                         <div class="form-group">
-                            <strong>Archivo:</strong>
-                            {{ $registro->archivo }}
+                            <strong>Archivos:</strong>
+                            <a target="_blank" href= 
+                            {{ $url= Storage::url ($registro->archivo) }}
+                            >pdf
+                            </a>
+                            
                         </div>
                         <div class="form-group">
                             <strong>Alias:</strong>

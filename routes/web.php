@@ -3,8 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\CasoController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ArchivoController;
+use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\MunicipioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,22 +22,28 @@ use App\Http\Controllers\RegistroController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-    })
+    if(auth()->user()->role=='admin') {
+        return view('administrator');
+    }else{
+        return view('welcome');
+    }})
     ->middleware('auth');
     Auth::routes();
-
-Route::get('/admin',[AdminController::class,'index'])
-->middleware('auth.admin')
-->name('admin.index');
-
-
-
-Route::get('denuncia',function(){
-    return view('denuncia');
-});
-
+Route::get('/administrator',[AdminController::class,'index']);
 Route::resource('registros', RegistroController::class);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::resource('casos', CasoController::class);
+//Route::get('casos/{id}', function ($id){
+//$caso= App\Caso::find($id);
+//return "{$id}";
+//});
+//view('pdf', [    'caso'=>$caso]);})->name('pdf');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('archivos', ArchivoController::class) ;
+Route::resource('departamentos', DepartamentoController::class);
+Route::resource('municipios', MunicipioController::class);
+
+
+

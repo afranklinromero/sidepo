@@ -1,8 +1,7 @@
-
 @extends('layouts.app')
 
 @section('template_title')
-    Registro
+    Archivo
 @endsection
 
 @section('content')
@@ -14,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Registro') }}
+                                {{ __('Archivo') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('registros.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('archivos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -37,39 +36,20 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Id User</th>
-										<th>Tipo</th>
-										<th>Nombre</th>
-										<th>Apaterno</th>
-										<th>Amaterno</th>
-										<th>Ci</th>
-										<th>Placa</th>
-										<th>Chasis</th>
-										<th>Archivo</th>
-										<th>Alias</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($registros as $registro)
+                                    @foreach ($archivos as $archivo)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $registro->id_user }}</td>
-											<td>{{ $registro->tipo }}</td>
-											<td>{{ $registro->nombre }}</td>
-											<td>{{ $registro->apaterno }}</td>
-											<td>{{ $registro->amaterno }}</td>
-											<td>{{ $registro->ci }}</td>
-											<td>{{ $registro->placa }}</td>
-											<td>{{ $registro->chasis }}</td>
-											<td>{{ $registro->archivo }}</td>
-											<td>{{ $registro->alias }}</td>
+                                            
 
                                             <td>
-                                                <form action="{{ route('registros.destroy',$registro->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('registros.show',$registro->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('registros.edit',$registro->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('archivos.destroy',$archivo->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('archivos.show',$archivo->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('archivos.edit',$archivo->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -82,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $registros->links() !!}
+                {!! $archivos->links() !!}
             </div>
         </div>
     </div>

@@ -2,29 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Registro
- *
- * @property $id
- * @property $id_user
- * @property $created_at
- * @property $updated_at
- * @property $tipo
- * @property $nombre
- * @property $apaterno
- * @property $amaterno
- * @property $ci
- * @property $placa
- * @property $chasis
- * @property $archivo
- * @property $alias
- *
- * @property User $user
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Registro extends Model
 {
     
