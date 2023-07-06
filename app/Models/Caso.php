@@ -91,6 +91,9 @@ class Caso extends Model
 		
     }
 
-	
+	public function departamento()
+    {
+        return $this->hasOne(Departamento::class);
+    }
 
 }

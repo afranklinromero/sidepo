@@ -96,18 +96,19 @@
                 @endforeach
             </select>
              </div>
-               
-            <div class="form-group">
-                <label for="municipio">Lugar</label> 
-                    <select name="municipio_id"  id="municipio_id" class="from-control"></select>
-                 
-                    @if ($errors->has('municipio_id'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->firts('municipio_id') }} </strong>
-                    </span>
-                    @endif
-            
+
+             <div class="form-group">
+            <label  id="label_municipio"> Regional 
+            <select name="municipio_id" id="municipio_id" class="from-control">
+            <option value="">Selecciona Lugar </option> 
+            @foreach ($municipios as $municipio)
+                    <option value="{{$municipio['id']}}">{{$municipio['nombre']}}
+                    </option>
+                @endforeach
+            </select>
              </div>
+               
+           
         
         <div class="form-group">
             {{ Form::label('ci') }}

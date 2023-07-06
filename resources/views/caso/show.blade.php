@@ -90,11 +90,18 @@
                         </div>
                         <div class="form-group">
                             <strong>Regional:</strong>
-                            {{ $caso->regional }}
+                        
+                        
+                            @foreach ($departamentos as $departamento)
+                            {{ $departamento->nombre }}
+                            @endforeach
+
                         </div>
-                        <div class="form-group">
+                            <div class="form-group">
                             <strong>Lugar:</strong>
-                            {{ $caso->lugar }}
+                            @foreach ($municipios as $municipio)
+                            {{ $municipio->nombre }}
+                            @endforeach
                         </div>
                         
                         <div class="form-group">

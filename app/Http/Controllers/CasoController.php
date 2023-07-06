@@ -87,8 +87,9 @@ class CasoController extends Controller
         $req->fecha_denuncia=$request->fecha_denuncia;
         $req->grupo_designado=(strtoupper($request->grupo_designado));
         $req->asignado=(strtoupper($request->asignado));
-        $req->regional=(strtoupper($request->regional));
-        $req->lugar=(strtoupper($request->lugar));
+        $req->regional=(strtoupper($request->departamento_id));
+       
+        $req->lugar=(strtoupper($request->lugar_id));
        
         
         $req->ci=$request->ci;
@@ -113,8 +114,13 @@ class CasoController extends Controller
     public function show($id)
     {
         $caso = Caso::find($id);
-
-        return view('caso.show', compact('caso'));
+        $val = $caso->regional;
+        $departamentos = Departamento::where('id', $val)->get();
+        $val2 = $caso->lugar;
+        $municipios = Municipio::where('id', $val2)->get();
+        
+        //$departamentos = Departamento::where('departamento_id',$val)->get();
+        return view('caso.show', compact('caso','departamentos','val','municipios','val2'));
     }
 
     /**
@@ -126,8 +132,16 @@ class CasoController extends Controller
     public function edit($id)
     {
         $caso = Caso::find($id);
+        $departamentos = Departamento::paginate();
+        $municipios = Municipio::paginate();
+        if (request()->ajax()) {
+            $municipios = Municipio::when(request()->input('departamento_id'), function($query) {
+                $query->where('departamento_id', request()->input('departamento_id'));
+            })->pluck('nombre', 'id');
         
-        return view('caso.edit', compact('caso'));
+            return response()->json($municipios);
+        }
+        return view('caso.edit',compact('caso','departamentos','municipios'));
     }
 
     /**
@@ -167,8 +181,10 @@ class CasoController extends Controller
         $caso->fecha_denuncia=$request->fecha_denuncia;
         $caso->grupo_designado=$request->grupo_designado;
         $caso->asignado=$request->asignado;
-        $caso->regional=$request->regional;
-        $caso->lugar=$request->lugar;
+
+        $caso->regional=$request->departamento_id;
+       
+        $caso->lugar=$request->municipio_id;
        
         
         $caso->ci=$request->ci;
@@ -207,12 +223,5 @@ class CasoController extends Controller
         
     }
 
-    public function byDepartamento()
-    { 
-    $municipios = Municipio::when(request()->input('departamento_id'), function($query) {
-        $query->where('departamento_id', request()->input('departamento_id'));
-    })->pluck('name', 'id');
-
-    return response()->json($municipios);
-}
+ 
 }

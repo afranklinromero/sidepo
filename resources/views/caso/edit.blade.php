@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Caso</span>
+                        <span class="card-title">{{ __('Update') }}Caso</span>
                     </div>
                     <div class="card-body">
                     <button type="submit" class="btn btn-primary">{{ __('Cargar PDF') }}</button>
@@ -25,7 +25,7 @@
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('caso.form')
+                            @include('caso.formedit')
 
                         </form>
                     </div>
