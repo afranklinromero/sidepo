@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Caso;
 use App\Models\Departamento;
 use App\Models\Municipio;
+use App\Models\Archivodenuncia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 /**
@@ -29,7 +30,7 @@ class CasoController extends Controller
        
         $municipios = Municipio::pluck('nombre', 'id');
         return view('caso.index', compact('casos','municipios'))
-            ->with('i', (request()->input('page', 1) - 1) * $casos->perPage());
+        ->with('i', (request()->input('page', 1) - 1) * $casos->perPage());
     }
 
     /**
@@ -119,13 +120,20 @@ class CasoController extends Controller
         $departamentos = Departamento::where('id', $val)->get();
         $val2 = $caso->lugar;
         $municipios = Municipio::where('id', $val2)->get();
+        $archivodenuncias=Archivodenuncia::where('id_caso', $id)->get();
+       
+            
+            
+
+    
         
+      
         //$departamentos = Departamento::where('departamento_id',$val)->get();
-        return view('caso.show', compact('caso','departamentos','municipios','val2'));
+        return view('caso.show', compact('caso','departamentos','municipios','val2','archivodenuncias'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource.->first();
      *
      * @param  int $id
      * @return \Illuminate\Http\Response

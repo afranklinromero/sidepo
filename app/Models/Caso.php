@@ -90,6 +90,11 @@ class Caso extends Model
         return $this->hasMany(Archivo::class);
 		
     }
+	public function archivodenuncia()
+    {
+        return $this->hasMany(Archivodenuncia::class);
+		
+    }
 
 	public function departamento()
     {

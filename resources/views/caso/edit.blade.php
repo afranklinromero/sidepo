@@ -16,7 +16,12 @@
                         <span class="card-title">{{ __('Update') }}Caso</span>
                     </div>
                     <div class="card-body">
-                    <button type="submit" class="btn btn-primary">{{ __('Cargar PDF') }}</button>
+                   
+                    <a href="{{ route('archivodenuncias.create', $caso->id) }}" class="btn btn-primary float-right"  data-placement="left">
+                                  {{ __('Crear PDF') }}
+                    </a>
+                 
+                   
                     <form method="POST" action="{{ route('casos.update', $caso->id) }}"  role="form" enctype="multipart/form-data">
                          
 

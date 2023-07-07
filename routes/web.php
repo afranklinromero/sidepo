@@ -10,6 +10,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\MunicipioController;
+use App\Http\Controllers\ArchivodenunciaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,19 @@ Route::resource('registros', RegistroController::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('casos', CasoController::class);
+
+
+Route::get('/archivodenuncias', [ArchivodenunciaController::class, 'index'])->name('archivodenuncias.index');
+Route::get('/archivodenuncias/{casos}/create', [ArchivodenunciaController::class, 'create'])->name('archivodenuncias.create');
+Route::post('/archivodenuncias', [ArchivodenunciaController::class, 'store'])->name('archivodenuncias.store');
+Route::get('/archivodenuncias/{archivodenuncia}', [ArchivodenunciaController::class, 'show'])->name('archivodenuncias.show');
+Route::get('/archivodenuncias/{archivodenuncia}/edit', [ArchivodenunciaController::class, 'edit'])->name('archivodenuncias.edit');
+Route::put('/archivodenuncias/{archivodenuncia}', [ArchivodenunciaController::class, 'update'])->name('archivodenuncias.update');
+Route::delete('/archivodenuncias/{archivodenuncia}', [ArchivodenunciaController::class, 'destroy'])->name('archivodenuncias.destroy');
+
+//Route::get('/casos/{id}/archivodenuncia', [ArchivodenunciaController::class, 'edit'])->name('archivodenuncia.edit');
+
+
 //Route::get('casos/{id}', function ($id){
 //$caso= App\Caso::find($id);
 //return "{$id}";
@@ -41,9 +55,11 @@ Route::resource('casos', CasoController::class);
 //view('pdf', [    'caso'=>$caso]);})->name('pdf');
 
 
+
 Route::resource('archivos', ArchivoController::class) ;
 Route::resource('departamentos', DepartamentoController::class);
 Route::resource('municipios', MunicipioController::class);
+
 
 
 
