@@ -101,7 +101,7 @@
             <label  id="label_municipio"> Regional 
             <select name="municipio_id" id="municipio_id" class="from-control">
             <option value="">Selecciona Lugar </option> 
-            @foreach ($municipios as $municipio)
+                @foreach ($municipios as $municipio)
                     <option value="{{$municipio['id']}}">{{$municipio['nombre']}}
                     </option>
                 @endforeach
@@ -115,11 +115,7 @@
             {{ Form::number('ci', $caso->ci, ['class' => 'form-control' . ($errors->has('ci') ? ' is-invalid' : ''), 'placeholder' =>'Ci']) }}
             {!! $errors->first('ci', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('ano') }}
-            {{ Form::date('ano', $caso->ano, ['class' => 'form-control' . ($errors->has('ano') ? ' is-invalid' : ''), 'placeholder' => 'Año']) }}
-            {!! $errors->first('ano', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        
         <div class="form-group">
             {{ Form::label('usuario') }} <br>
             {{ Form::label('id_user', Auth::user()->name,['class' => 'form-control']) }}

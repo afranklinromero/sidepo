@@ -17,10 +17,16 @@
                             </span>
 
                              <div class="float-right">
+                             <form action="{{ route('casos.index') }}" method="GET">
+                             @csrf
+                                <label for="anio">Ingrese el año:</label>
+                                <input style="margin-right: 5px;"type="number" name="anio" id="anio" required>
+                                <button style="margin-right: 5px;"type="submit" class="btn btn-primary btn-sm float-right"  data-placement="left">Buscar</button>
                                 <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
-                              </div>
+                            </form> 
+                             </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -40,7 +46,7 @@
 									
 										<th>Placa</th>
 										
-										<th>Apaterno</th>
+										<th>Denuncia</th>
 									
 										<th>Estado</th>
 										
@@ -68,12 +74,18 @@
 											
 											
 											
-											<td>{{ $caso->apaterno }}</td>
+											<td>{{ $caso->fecha_denuncia }}</td>
 											
 											<td>{{ $caso->estado }}</td>
 											
 											<td>{{ $caso->asignado }}</td>
-											<td>{{ $caso->regional }}</td>
+											<td>  
+                                                 @if (is_numeric($caso->lugar))
+                                                    {{ $municipios[$caso->lugar] }}
+                                                @else
+                                                    {{ $caso->lugar }}
+                                                @endif
+                                                </td>
 											
 											
 											

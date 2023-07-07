@@ -1,0 +1,17 @@
+.seleccion {
+    border-radius: 5px; 
+    background-color: #ffffff;
+    color: #333;
+    padding: 8px;
+    font-size: 14px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    
+}
+.seleccion:focus {
+    border-color: #6c757d;
+    color: #333;
+}
+.seleccion:hover {
+    cursor: pointer;
+}
