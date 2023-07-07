@@ -32,16 +32,15 @@ return new class extends Migration
             $table->string('apaterno');
             $table->string('amaterno');
             $table->string('estado');
-           $table->string('asignado');
-          $table->string('regional');
+            $table->string('asignado');
+            $table->string('regional');
 
             $table->BigInteger('id_user')->unsigned();
             $table->timestamps();
           //  $table->string('id_archivo')->nullable();
 
 
-            $table->foreign('id_user')->references('id')->on('users')
-            ;
+            $table->foreign('id_user')->references('id')->on('users');
 
 
         });

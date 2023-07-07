@@ -88,7 +88,7 @@
 
             <div class="form-group">
             <label  id="label_departamento"> Regional 
-            <select name="departamento_id" id="departamento_id" class="from-control">
+            <select name="departamento_id" id="departamento_id" class="from-control seleccion">
             <option value="">Selecciona Regional </option> 
             @foreach ($departamentos as $departamento)
                     <option value="{{$departamento['id']}}">{{$departamento['nombre']}}
@@ -99,7 +99,7 @@
 
              <div class="form-group">
             <label  id="label_municipio"> Regional 
-            <select name="municipio_id" id="municipio_id" class="from-control">
+            <select name="municipio_id" id="municipio_id" class="from-control seleccion">
             <option value="">Selecciona Lugar </option> 
                 @foreach ($municipios as $municipio)
                     <option value="{{$municipio['id']}}">{{$municipio['nombre']}}

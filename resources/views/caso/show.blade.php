@@ -128,8 +128,43 @@
 
                             
                         </div>
-                        -->
+                        --> 
+                        @php
+    $etapaPreliminarMostrada = false;
+    $etapaPreparatoriaMostrada = false;
+    $juicioOralMostrado = false;
+@endphp
+
+@foreach ($archivodenuncias as $archivodenuncia)
+    @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 1 && !$etapaPreliminarMostrada)
+        @php $etapaPreliminarMostrada = true; @endphp
+        
+        <label>Documentación Etapa Preliminar:</label><br>
+    @endif
+
+    @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 2 && !$etapaPreparatoriaMostrada)
+        @php $etapaPreparatoriaMostrada = true; @endphp
+        <label>Documentación Etapa Preparatoria:</label><br>
+    @endif
+
+    @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 3 && !$juicioOralMostrado)
+        @php $juicioOralMostrado = true; @endphp
+        <label>Documentación Juicio Oral:</label><br>
+    @endif
+
+    <div>
+        <embed src="{{ Storage::url('pdf/' . $archivodenuncia->pdf) }}" type="application/pdf" width="50%" height="150px" />
+        <a href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
+        <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
+        @csrf 
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+        </form>
+    </div>
+@endforeach
                     </div>
+
+                  
                 </div>
             </div>
         </div>
