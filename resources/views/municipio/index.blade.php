@@ -35,8 +35,8 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        <th>Departamento</th>
                                         <th>Municipio</th>
+                                        <th>Departamento</th>
 
 
                                         <th></th>

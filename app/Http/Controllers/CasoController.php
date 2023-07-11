@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Caso;
+use App\Models\User;
 use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Archivodenuncia;
@@ -44,6 +45,7 @@ class CasoController extends Controller
          
         $departamentos = Departamento::paginate();
         $municipios = Municipio::paginate();
+        $users = User::paginate();
         $caso = new Caso();
         
         if (request()->ajax()) {
@@ -53,7 +55,7 @@ class CasoController extends Controller
     
         return response()->json($municipios);
     }
-        return view('caso.create', compact('caso','departamentos','municipios'));
+        return view('caso.create', compact('users','caso','departamentos','municipios'));
     }
 
     /**
@@ -91,7 +93,7 @@ class CasoController extends Controller
         $req->asignado=(strtoupper($request->asignado));
         $req->regional=(strtoupper($request->departamento_id));
        
-        $req->lugar=(strtoupper($request->lugar_id));
+        $req->lugar=(strtoupper($request->municipio_id));
        
     
         $req->ci=$request->ci;
@@ -121,7 +123,7 @@ class CasoController extends Controller
         $val2 = $caso->lugar;
         $municipios = Municipio::where('id', $val2)->get();
         $archivodenuncias=Archivodenuncia::where('id_caso', $id)->get();
-       
+        $users = User::pluck('name', 'id');
             
             
 
@@ -129,7 +131,7 @@ class CasoController extends Controller
         
       
         //$departamentos = Departamento::where('departamento_id',$val)->get();
-        return view('caso.show', compact('caso','departamentos','municipios','val2','archivodenuncias'));
+        return view('caso.show', compact('users','caso','departamentos','municipios','val2','archivodenuncias'));
     }
 
     /**
@@ -150,7 +152,8 @@ class CasoController extends Controller
         
             return response()->json($municipios);
         }
-        return view('caso.edit',compact('caso','departamentos','municipios'));
+        $users = User::pluck('name', 'id')->toArray();
+        return view('caso.edit',compact('users','caso','departamentos','municipios'));
     }
 
     /**
@@ -162,19 +165,9 @@ class CasoController extends Controller
      */
     public function update(Request $request, Caso $caso)
     {
-        
-        
-       // request()->validate(Caso::$rules);
-
-       
         $caso->ci= $request->ci;
-        
-        //$caso->archivo= $request->archivo->store('public');
-
         $caso->id_user=$request->id_user;
-
         $caso->caso= $request->caso;
-        
         $caso->placa= $request->placa;
         $caso->vehiculo= $request->vehiculo;
         $caso->marca=$request->marca;
@@ -190,24 +183,9 @@ class CasoController extends Controller
         $caso->fecha_denuncia=$request->fecha_denuncia;
         $caso->grupo_designado=$request->grupo_designado;
         $caso->asignado=$request->asignado;
-
         $caso->regional=$request->departamento_id;
-       
         $caso->lugar=$request->municipio_id;
-       
-        
         $caso->ci=$request->ci;
-    
-
-
-
-
-
-
-
-
-
-
         $caso->save();
 
         return redirect()->route('casos.index')
@@ -226,11 +204,4 @@ class CasoController extends Controller
         return redirect()->route('casos.index')
             ->with('success', 'Caso deleted successfully');
     }
-
-    public function pdf(Request $request, Caso $caso)
-    {
-        
-    }
-
- 
 }

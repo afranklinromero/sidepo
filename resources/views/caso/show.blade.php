@@ -24,10 +24,7 @@
                             <strong>Caso:</strong>
                             {{ $caso->caso }}
                         </div>
-                        <div class="form-group">
-                            <strong>asignado:</strong>
-                            {{ $caso->asignado }}
-                        </div>
+                        
                         <div class="form-group">
                             <strong>Fecha:</strong>
                             {{ $caso->fecha_denuncia }}
@@ -77,17 +74,14 @@
                             {{ $caso->amaterno }}
                         </div>
                         <div class="form-group">
+                            <strong>Ci:</strong>
+                            {{ $caso->ci }}
+                        </div>
+                        <div class="form-group">
                             <strong>Estado:</strong>
                             {{ $caso->estado }}
                         </div>
-                        <div class="form-group">
-                            <strong>Grupo Designado:</strong>
-                            {{ $caso->grupo_designado }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Asignado:</strong>
-                            {{ $caso->asignado }}
-                        </div>
+                        
                         <div class="form-group">
                             <strong>Regional:</strong>
                                                
@@ -102,33 +96,17 @@
                             {{ $municipio->nombre }}
                             @endforeach
                         </div>
-                        
                         <div class="form-group">
-                            <strong>Ano:</strong>
-                            {{ $caso->ano }}
+                            <strong>Grupo Designado:</strong>
+                            {{ $caso->grupo_designado }}
                         </div>
                         <div class="form-group">
-                            <strong>Ci:</strong>
-                            {{ $caso->ci }}
+                            <strong>Asignado:</strong>
+                            {{ $caso->asignado }}
                         </div>
-                        <div class="form-group">
-                            <strong>Id User:</strong>
-                            {{ $caso->id_user }}
-
                          
-                        </div>
-                       <!-- 
-                        <div class="form-group">
-                            <strong>Cargar Archivo:</strong>
-                            <a target="_blank" href= 
-                               {{ $url= Storage::url ($caso->archivo) }}
-                            >pdf
-                            
-                            </a>
-
-                            
-                        </div>
-                        --> 
+                        
+                     
                         @php
     $etapaPreliminarMostrada = false;
     $etapaPreparatoriaMostrada = false;
