@@ -22,9 +22,12 @@
                                 <label for="anio">Ingrese el año:</label>
                                 <input style="margin-right: 5px;"type="number" name="anio" id="anio" required>
                                 <button style="margin-right: 5px;"type="submit" class="btn btn-primary btn-sm float-right"  data-placement="left">Buscar</button>
+                                
+                                @role('ventanilla')
                                 <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
+                                @endrole
                             </form> 
                              </div>
                         </div>

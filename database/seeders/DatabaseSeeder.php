@@ -19,18 +19,32 @@ class DatabaseSeeder extends Seeder
         $user->apellido ='';
         $user->grado ='';
         $user->grupo ='';
-        $user->email = 'afranklin.romero@gmail.com';
-        $user->password= 'Afrm4321!';
+        $user->email = 'admin@gmail.com';
+        $user->password= 'Policia2023!';
         $user->role= 'admin';
         
         $user-> save();
 
         
         $user = new User;
+        $user->name ='ventanilla';
+        $user->apellido ='';
+        $user->grado ='';
+        $user->grupo ='';
+        $user->email = 'ventanilla@gmail.com';
+        $user->password= 'Vediprove!';
+        $user->role= 'ventanilla';
+        
+        $user-> save();
+
+        $user = new User;
         $user->name ='prueba';
+        $user->apellido ='';
+        $user->grado ='';
+        $user->grupo ='';
         $user->email = 'prueba@gmail.com';
-        $user->password= 'Afrm4321!';
-        $user->role= '';
+        $user->password= 'Policia2023!';
+        $user->role= 'denuncia';
         
         $user-> save();
         // \App\Models\User::factory(10)->create();
