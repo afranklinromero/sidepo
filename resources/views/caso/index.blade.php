@@ -37,7 +37,7 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-
+                   @role('denuncia')
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -110,6 +110,7 @@
                             </table>
                         </div>
                     </div>
+                   @endrole
                 </div>
          
                 {!! $casos->links() !!}

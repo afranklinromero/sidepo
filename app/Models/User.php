@@ -52,11 +52,14 @@ class User extends Authenticatable
         $this->attributes['apellido'] = strtoupper($value);
         $this->attributes['grado'] = strtoupper($value);
         $this->attributes['grupo'] = strtoupper($value);
-   
+        $this->attributes['rol'] = $value;
     }
     public function users()
     {
         return $this->hasMany(Registro::class);
         return $this->hasMany(Casos::class);
+        return $this->hasMany(ModelHasRole::class);
+        
     }
 }
+

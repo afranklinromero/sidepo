@@ -74,7 +74,7 @@ class Caso extends Model
      *
      * @var array
      */
-    protected $fillable = ['caso','fecha','placa','vehiculo','marca','clase','color','modelo','chasis','hecho','nombre','apaterno','amaterno','estado','grupo_designado','designado','regional','lugar','mes','ano','ci','id_user'];
+    protected $fillable = ['caso','fecha','placa','vehiculo','marca','clase','color','modelo','chasis','hecho','nombre','apaterno','amaterno','estado','grupo_designado','designado','regional','lugar','mes','ano','ci','fechahecho','detalle','id_user'];
 
 
     /**

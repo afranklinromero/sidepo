@@ -73,8 +73,24 @@
             {{ Form::number('ci', $caso->ci, ['class' => 'form-control' . ($errors->has('ci') ? ' is-invalid' : ''), 'placeholder' =>'Ci']) }}
             {!! $errors->first('ci', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        
-       
+        <div class="form-group">
+            {{ Form::label('fechahecho') }}
+            {{ Form::date('fechahecho', $caso->fechahecho, ['class' => 'form-control' . ($errors->has('fechahecho') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase', 'placeholder' => 'fecha del hecho']) }}
+            {!! $errors->first('fechahecho', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('detalle') }}
+            {{ Form::textarea('detalle', $caso->detalle,null, ['rows' => 4, 'cols' => 50, 'maxlength' => 1200, 'oninput' => 'mostrarContador(this)', 'class' => 'form-control' . ($errors->has('detalle') ? ' is-invalid' : ''), 'placeholder' =>'Breve detalle']) }}
+            {!! $errors->first('detalle', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <span id="contador"></span>
+        <script>
+        function mostrarContador(elemento) {
+        var contador = document.getElementById("contador");
+        var caracteresRestantes = elemento.getAttribute('maxlength') - elemento.value.length;
+        contador.textContent = "Caracteres restantes: " + caracteresRestantes;
+         }
+        </script>
         
 
             <div class="form-group">

@@ -39,9 +39,9 @@ class DatabaseSeeder extends Seeder
 
         $user = new User;
         $user->name ='prueba';
-        $user->apellido ='';
-        $user->grado ='';
-        $user->grupo ='';
+        $user->apellido ='prueba';
+        $user->grado ='prueba';
+        $user->grupo ='prueba';
         $user->email = 'prueba@gmail.com';
         $user->password= 'Policia2023!';
         $user->role= 'denuncia';
