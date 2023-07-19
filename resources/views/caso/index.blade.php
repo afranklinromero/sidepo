@@ -22,9 +22,12 @@
                                 <label for="anio">Ingrese el año:</label>
                                 <input style="margin-right: 5px;"type="number" name="anio" id="anio" required>
                                 <button style="margin-right: 5px;"type="submit" class="btn btn-primary btn-sm float-right"  data-placement="left">Buscar</button>
+                                
+                                @role('ventanilla')
                                 <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
+                                @endrole
                             </form> 
                              </div>
                         </div>
@@ -34,7 +37,7 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-
+                   @role('denuncia')
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -107,6 +110,7 @@
                             </table>
                         </div>
                     </div>
+                   @endrole
                 </div>
          
                 {!! $casos->links() !!}

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\CasoController;
 use App\Http\Controllers\PDFController;
@@ -11,6 +12,8 @@ use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\ArchivodenunciaController;
+use App\Http\Controllers\ModelHasRoleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +24,6 @@ use App\Http\Controllers\ArchivodenunciaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     if(auth()->user()->role=='admin') {
         return view('administrator');
@@ -33,9 +35,7 @@ Route::get('/', function () {
 Route::get('/administrator',[AdminController::class,'index']);
 Route::resource('registros', RegistroController::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::resource('casos', CasoController::class);
-
 
 Route::get('/archivodenuncias', [ArchivodenunciaController::class, 'index'])->name('archivodenuncias.index');
 Route::get('/archivodenuncias/{casos}/create', [ArchivodenunciaController::class, 'create'])->name('archivodenuncias.create');
@@ -44,21 +44,11 @@ Route::get('/archivodenuncias/{archivodenuncia}', [ArchivodenunciaController::cl
 Route::get('/archivodenuncias/{archivodenuncia}/edit', [ArchivodenunciaController::class, 'edit'])->name('archivodenuncias.edit');
 Route::put('/archivodenuncias/{archivodenuncia}', [ArchivodenunciaController::class, 'update'])->name('archivodenuncias.update');
 Route::delete('/archivodenuncias/{archivodenuncia}', [ArchivodenunciaController::class, 'destroy'])->name('archivodenuncias.destroy');
-
-//Route::get('/casos/{id}/archivodenuncia', [ArchivodenunciaController::class, 'edit'])->name('archivodenuncia.edit');
-
-
-//Route::get('casos/{id}', function ($id){
-//$caso= App\Caso::find($id);
-//return "{$id}";
-//});
-//view('pdf', [    'caso'=>$caso]);})->name('pdf');
-
-
-
 Route::resource('archivos', ArchivoController::class) ;
 Route::resource('departamentos', DepartamentoController::class);
 Route::resource('municipios', MunicipioController::class);
+Route::resource('model-has-roles', ModelHasRoleController::class);
+Route::resource('users', UserController::class);
 
 
 

@@ -34,6 +34,9 @@ return new class extends Migration
             $table->string('estado');
             $table->string('asignado');
             $table->string('regional');
+            $table->date('fechahecho');
+            $table->string('detalle', 2000);
+
 
             $table->BigInteger('id_user')->unsigned();
             $table->timestamps();

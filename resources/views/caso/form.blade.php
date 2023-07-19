@@ -69,19 +69,36 @@
             {!! $errors->first('amaterno', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
+            {{ Form::label('ci') }}
+            {{ Form::text('ci', $caso->ci, ['class' => 'form-control' . ($errors->has('ci') ? ' is-invalid' : ''), 'placeholder' =>'Ci']) }}
+            {!! $errors->first('ci', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('fechahecho') }}
+            {{ Form::date('fechahecho', $caso->fechahecho, ['class' => 'form-control' . ($errors->has('fechahecho') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase', 'placeholder' => 'fecha del hecho']) }}
+            {!! $errors->first('fechahecho', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+       
+        
+        <div class="form-group">
+    <label for="detalle">Detalle</label><br>
+    <textarea style="text-transform:uppercase" name="detalle" id="detalle" rows="4" cols="50" maxlength="1200" oninput="mostrarContador(this)" class="form-control{{ $errors->has('detalle') ? ' is-invalid' : '' }}" placeholder="Breve detalle">{{ $caso->detalle }}</textarea>
+    @if ($errors->has('detalle'))
+        <div class="invalid-feedback">{{ $errors->first('detalle') }}</div>
+    @endif
+</div>
+        <span id="contador"></span>
+                <script>
+                function mostrarContador(elemento) {
+                var contador = document.getElementById("contador");
+                var caracteresRestantes = elemento.getAttribute('maxlength') - elemento.value.length;
+                contador.textContent = "Caracteres restantes: " + caracteresRestantes;
+            }
+        </script>
+        <div class="form-group">
             {{ Form::label('estado') }}
             {{ Form::text('estado', $caso->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'INVESTIGACION, RESUELTO']) }}
             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('grupo_designado') }}
-            {{ Form::text('grupo_designado', $caso->grupo_designado, ['class' => 'form-control' . ($errors->has('grupo_designado') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase','placeholder' => 'Grupo Designado']) }}
-            {!! $errors->first('grupo_designado', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('asignado') }}
-            {{ Form::text('asignado', $caso->asignado, ['class' => 'form-control' . ($errors->has('asignado') ? ' is-invalid' : ''), 'style'=>'text-transform:uppercase','placeholder' => 'oficial asignado']) }}
-            {!! $errors->first('asignado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
        
         
@@ -108,22 +125,32 @@
                     @endif
             
              </div>
-        
-        <div class="form-group">
-            {{ Form::label('ci') }}
-            {{ Form::number('ci', $caso->ci, ['class' => 'form-control' . ($errors->has('ci') ? ' is-invalid' : ''), 'placeholder' =>'Ci']) }}
-            {!! $errors->first('ci', '<div class="invalid-feedback">:message</div>') !!}
+             <div class="form-group">
+            {{ Form::label('grupo_designado') }}
+            {{ Form::text('grupo_designado', $caso->grupo_designado, ['class' => 'form-control' . ($errors->has('grupo_designado') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase','placeholder' => 'Grupo Designado']) }}
+            {!! $errors->first('grupo_designado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         
+       
+        
+        
         <div class="form-group">
-            {{ Form::label('usuario') }} <br>
-            {{ Form::label('id_user', Auth::user()->name,['class' => 'form-control']) }}
-          
-        </div>
-        <div class="form-group">
-           {{ Form::label('id_usuario') }}
-           {{ Form::number('id_user', Auth::user()->id,['class' => 'form-control' ]) }}
-        </div>
+
+        
+            {{ Form::label('Oficial Asignado') }} <br>
+            <select name="id_user" id="id_user" class="from-control seleccion">
+            <option value="">Seleccionar usuario </option> 
+            @foreach ($users as $user)
+        @if(!empty($user['grado']) || !empty($user['apellido']))
+            <option value="{{$user['id']}}">
+                {{$user['grado'] ?? ''}} {{$user['apellido'] ?? ''}}
+            </option>
+        @endif
+    @endforeach
+            </select>
+            <input type="hidden" name="asignado" value="{{ $user['apellido'] }}">
+          </div>
+       
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>

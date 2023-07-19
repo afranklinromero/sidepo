@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Municipio
+    User
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Municipio') }}
+                                {{ __('User') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('municipios.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,26 +35,33 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        <th>Municipio</th>
-                                        <th>Departamento</th>
-
+                                        
+										<th>Name</th>
+										<th>Apellido</th>
+										<th>Grado</th>
+										<th>Grupo</th>
+										<th>Email</th>
+										<th>Role</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($paginatedMunicipios as $municipio)
+                                    @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ ++$i; }}</td>
-                                            <td>{{ $municipio->nombre }}</td>
-
-                                            <td>{{ $municipio->departamento->nombre }}</td>
-
+                                            <td>{{ ++$i }}</td>
+                                            
+											<td>{{ $user->name }}</td>
+											<td>{{ $user->apellido }}</td>
+											<td>{{ $user->grado }}</td>
+											<td>{{ $user->grupo }}</td>
+											<td>{{ $user->email }}</td>
+											<td>{{ $user->role }}</td>
 
                                             <td>
-                                                <form action="{{ route('municipios.destroy',$municipio->id) }}" method="POST">
-
-                                                    <a class="btn btn-sm btn-success" href="{{ route('municipios.edit',$municipio->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -67,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $paginatedMunicipios->links() !!}
+                {!! $users->links() !!}
             </div>
         </div>
     </div>

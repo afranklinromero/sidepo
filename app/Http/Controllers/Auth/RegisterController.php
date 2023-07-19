@@ -70,8 +70,9 @@ class RegisterController extends Controller
             'apellido' => (strtoupper($data['apellido'])),
             'grado' => (strtoupper($data['grado'])),
             'grupo' => (strtoupper($data['grupo'])),
-            'email' => $data['email'],
+            'email' => (strtolower($data['email'])),
             'password' => Hash::make($data['password']),
+            'role' => (strtoupper($data['role'])),
         ]);
     }
     

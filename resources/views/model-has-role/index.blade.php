@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Municipio
+    Model Has Role
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Municipio') }}
+                                {{ __('Model Has Role') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('municipios.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('model-has-roles.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,30 +35,33 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        <th>Municipio</th>
-                                        <th>Departamento</th>
-
+                                        
+										<th>Role Id</th>
+										<th>Model Type</th>
+										<th>Model Id</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($paginatedMunicipios as $municipio)
+                                    @foreach ($modelHasRoles as $modelHasRole)
                                         <tr>
-                                            <td>{{ ++$i; }}</td>
-                                            <td>{{ $municipio->nombre }}</td>
-
-                                            <td>{{ $municipio->departamento->nombre }}</td>
-
+                                            <td>{{ ++$i }}</td>
+                                            
+											<td>{{ $modelHasRole->role_id }}</td>
+											<td>{{ $modelHasRole->model_type }}</td>
+											<td>{{ $modelHasRole->model_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('municipios.destroy',$municipio->id) }}" method="POST">
-
-                                                    <a class="btn btn-sm btn-success" href="{{ route('municipios.edit',$municipio->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                           
+                                                <form action="{{ route('model-has-roles.destroy',$modelHasRole->model_id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('model-has-roles.show',$modelHasRole->model_id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
+                                       
                                             </td>
                                         </tr>
                                     @endforeach
@@ -67,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $paginatedMunicipios->links() !!}
+                {!! $modelHasRoles->links() !!}
             </div>
         </div>
     </div>

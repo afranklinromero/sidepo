@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Caso;
+use App\Models\User;
 use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Archivodenuncia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Dompdf\Dompdf;
 /**
  * Class CasoController
  * @package App\Http\Controllers
@@ -44,6 +46,7 @@ class CasoController extends Controller
          
         $departamentos = Departamento::paginate();
         $municipios = Municipio::paginate();
+        $users = User::paginate();
         $caso = new Caso();
         
         if (request()->ajax()) {
@@ -53,7 +56,7 @@ class CasoController extends Controller
     
         return response()->json($municipios);
     }
-        return view('caso.create', compact('caso','departamentos','municipios'));
+        return view('caso.create', compact('users','caso','departamentos','municipios'));
     }
 
     /**
@@ -90,13 +93,14 @@ class CasoController extends Controller
         $req->grupo_designado=(strtoupper($request->grupo_designado));
         $req->asignado=(strtoupper($request->asignado));
         $req->regional=(strtoupper($request->departamento_id));
+        $req->detalle=(strtoupper($request->detalle));
        
-        $req->lugar=(strtoupper($request->lugar_id));
-       
-    
+        $req->lugar=(strtoupper($request->municipio_id));
+        $req->fechahecho=$request->fechahecho;
         $req->ci=$request->ci;
         $req->id_user=$request->id_user;
 
+     
         //$req->archivo= $request->archivo->store('public');
         
         $req->save();
@@ -105,6 +109,8 @@ class CasoController extends Controller
         
         return redirect()->route('casos.index')
             ->with('success', 'Caso created successfully.');
+
+            
     }
 
     /**
@@ -121,7 +127,7 @@ class CasoController extends Controller
         $val2 = $caso->lugar;
         $municipios = Municipio::where('id', $val2)->get();
         $archivodenuncias=Archivodenuncia::where('id_caso', $id)->get();
-       
+        $users = User::pluck('name', 'id');
             
             
 
@@ -129,7 +135,7 @@ class CasoController extends Controller
         
       
         //$departamentos = Departamento::where('departamento_id',$val)->get();
-        return view('caso.show', compact('caso','departamentos','municipios','val2','archivodenuncias'));
+        return view('caso.show', compact('users','caso','departamentos','municipios','val2','archivodenuncias'));
     }
 
     /**
@@ -150,7 +156,8 @@ class CasoController extends Controller
         
             return response()->json($municipios);
         }
-        return view('caso.edit',compact('caso','departamentos','municipios'));
+        $users = User::pluck('name', 'id')->toArray();
+        return view('caso.edit',compact('users','caso','departamentos','municipios'));
     }
 
     /**
@@ -162,52 +169,29 @@ class CasoController extends Controller
      */
     public function update(Request $request, Caso $caso)
     {
-        
-        
-       // request()->validate(Caso::$rules);
-
-       
         $caso->ci= $request->ci;
-        
-        //$caso->archivo= $request->archivo->store('public');
-
         $caso->id_user=$request->id_user;
-
-        $caso->caso= $request->caso;
-        
-        $caso->placa= $request->placa;
-        $caso->vehiculo= $request->vehiculo;
-        $caso->marca=$request->marca;
-        $caso->tipo=$request->tipo;
-        $caso->color=$request->color;
+        $caso->caso= (strtoupper($request->caso));
+        $caso->placa= (strtoupper($request->placa));
+        $caso->vehiculo= (strtoupper($request->vehiculo));
+        $caso->marca=(strtoupper($request->marca));
+        $caso->tipo=(strtoupper($request->tipo));
+        $caso->color=(strtoupper($request->color));
         $caso->modelo=$request->modelo;
-        $caso->chasis=$request->chasis;
-        $caso->hecho=$request->hecho;
-        $caso->nombre=$request->nombre;
-        $caso->apaterno=$request->apaterno;
-        $caso->amaterno=$request->amaterno;
-        $caso->estado=$request->estado;
+        $caso->chasis=(strtoupper($request->chasis));
+        $caso->hecho=(strtoupper($request->hecho));
+        $caso->nombre=(strtoupper($request->nombre));
+        $caso->apaterno=(strtoupper($request->apaterno));
+        $caso->amaterno=(strtoupper($request->amaterno));
+        $caso->estado=(strtoupper($request->estado));
         $caso->fecha_denuncia=$request->fecha_denuncia;
-        $caso->grupo_designado=$request->grupo_designado;
-        $caso->asignado=$request->asignado;
-
-        $caso->regional=$request->departamento_id;
-       
-        $caso->lugar=$request->municipio_id;
-       
-        
+        $caso->grupo_designado=(strtoupper($request->grupo_designado));
+        $caso->asignado=(strtoupper($request->asignado));
+        $caso->regional=(strtoupper($request->departamento_id));
+        $caso->lugar=(strtoupper($request->municipio_id));
         $caso->ci=$request->ci;
-    
-
-
-
-
-
-
-
-
-
-
+        $caso->detalle=(strtoupper($request->detalle));
+        $caso->fechahecho=$request->fechahecho;
         $caso->save();
 
         return redirect()->route('casos.index')
@@ -226,11 +210,4 @@ class CasoController extends Controller
         return redirect()->route('casos.index')
             ->with('success', 'Caso deleted successfully');
     }
-
-    public function pdf(Request $request, Caso $caso)
-    {
-        
-    }
-
- 
 }

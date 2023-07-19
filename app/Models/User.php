@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use HasApiTokens, HasFactory, Notifiable; 
+    use HasRoles;
     /**
      * The attributes that are mass assignable.
      *
@@ -51,11 +52,14 @@ class User extends Authenticatable
         $this->attributes['apellido'] = strtoupper($value);
         $this->attributes['grado'] = strtoupper($value);
         $this->attributes['grupo'] = strtoupper($value);
-   
+        $this->attributes['rol'] = $value;
     }
     public function users()
     {
         return $this->hasMany(Registro::class);
         return $this->hasMany(Casos::class);
+        return $this->hasMany(ModelHasRole::class);
+        
     }
 }
+
