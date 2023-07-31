@@ -186,23 +186,23 @@
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Borrar') }}</button>
                                     <div class="d-flex justify-content-center">
                                     
-                                    <div style="position: relative; width: 65%; height: 400px; ">
-                                    <object data="{{asset('storage/pdf/' . $archivodenuncia->pdf)}}" type="application/pdf" frameborder="0" width="100%" height="600px" style="padding: 20px;">
-                                    <iframe src="https://docs.google.com/viewer?url={{asset('storage/pdf/' . $archivodenuncia->pdf)}}&embedded=true" style="width:100%; height:650px;" frameborder="0"></iframe>
-                                    </object>
-                                    
+                                        <div style="width: 65%; height: 400px; ">
+                                            <object data="{{asset('storage/pdf/' . $archivodenuncia->pdf)}}" type="application/pdf" frameborder="0" width="100%" height="400px">
+                                        <iframe src="https://docs.google.com/viewer?url={{asset('storage/pdf/' . $archivodenuncia->pdf)}}&embedded=true" style="width:100%; height:400px;" frameborder="0"></iframe>
+                                        </object>
+                                        
 
-                                 
-                                   
+                                    
+                                    
+                                        </div>
+
                                     </div>
-
-                                    
                                     <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
                                     
                                     </form>
-                                </div>
+                                
                                 @endforeach
                             </div>
                         </div>
