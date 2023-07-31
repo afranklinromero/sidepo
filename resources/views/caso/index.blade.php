@@ -17,28 +17,28 @@
                             </span>
 
                              <div class="float-right">
-                             <form action="{{ route('casos.index') }}" method="GET">
-                             @csrf
-                                <label for="anio">Ingrese el año:</label>
-                                <input style="margin-right: 5px;"type="number" name="anio" id="anio" required>
-                                <button style="margin-right: 5px;"type="submit" class="btn btn-primary btn-sm float-right"  data-placement="left">Buscar</button>
-                                
-                                @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
-                                <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                                @endrole
-                            </form> 
+                                <form action="{{ route('casos.index') }}" method="GET">
+                                    @csrf
+                                    <label for="anio">Ingrese el año:</label>
+                                    <input style="margin-right: 5px;"type="number" name="anio" id="anio" required>
+                                    <button style="margin-right: 5px;"type="submit" class="btn btn-primary btn-sm float-right"  data-placement="left">Buscar</button>
+                                    
+                                    @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
+                                    <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                    {{ __('Create New') }}
+                                    </a>
+                                    @endrole
+                                </form> 
                              </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
                    
-                    @if(auth()->user()->hasRole(['admin', 'denuncia']))
+                         @if(auth()->user()->hasRole(['admin', 'denuncia']))
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -111,12 +111,16 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {!! $casos->links() !!}
                         </div>
+                       
                     </div>
                    @endif
+                   
                 </div>
-         
-                {!! $casos->links() !!}
+                
+               
+               
             </div>
         </div>
     </div>
