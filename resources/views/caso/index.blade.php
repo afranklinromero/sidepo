@@ -23,7 +23,7 @@
                                 <input style="margin-right: 5px;"type="number" name="anio" id="anio" required>
                                 <button style="margin-right: 5px;"type="submit" class="btn btn-primary btn-sm float-right"  data-placement="left">Buscar</button>
                                 
-                                @role('ventanilla')
+                                @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
                                 <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
@@ -37,7 +37,8 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-                   @role('denuncia')
+                   
+                    @if(auth()->user()->hasRole(['admin', 'denuncia']))
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -101,7 +102,9 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
+                                                    @role('admin') 
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    @endrole
                                                 </form>
                                             </td>
                                         </tr>
@@ -110,7 +113,7 @@
                             </table>
                         </div>
                     </div>
-                   @endrole
+                   @endif
                 </div>
          
                 {!! $casos->links() !!}

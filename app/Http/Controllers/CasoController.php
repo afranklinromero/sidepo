@@ -10,6 +10,12 @@ use App\Models\Archivodenuncia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Dompdf\Dompdf;
+use PDF;
+use setasign\Fpdi\Fpdi;
+
+use Intervention\Image\Facades\Image;
+
+
 /**
  * Class CasoController
  * @package App\Http\Controllers
@@ -74,9 +80,15 @@ class CasoController extends Controller
         //$caso = Caso::create($request->all());
 
 
+      
+
+        $caso = strtoupper($request->caso);
+            $existingCaso = Caso::where('caso', $caso)->first();
+            if ($existingCaso) {
+                return redirect()->back()->with('error', 'El caso ya está registrado.');
+            } else {    
         $req = new Caso();
-        $req->caso= (strtoupper($request->caso));
-        
+        $req->caso= $caso;
         $req->placa= (strtoupper($request->placa));
         $req->vehiculo= (strtoupper($request->vehiculo));
         $req->marca=(strtoupper($request->marca));
@@ -110,7 +122,7 @@ class CasoController extends Controller
         return redirect()->route('casos.index')
             ->with('success', 'Caso created successfully.');
 
-            
+        }      
     }
 
     /**
@@ -126,18 +138,13 @@ class CasoController extends Controller
         $departamentos = Departamento::where('id', $val)->get();
         $val2 = $caso->lugar;
         $municipios = Municipio::where('id', $val2)->get();
-        $archivodenuncias=Archivodenuncia::where('id_caso', $id)->get();
+        $archivodenuncias = Archivodenuncia::where('id_caso', $id)->get();
         $users = User::pluck('name', 'id');
-            
-            
-
-    
         
-      
-        //$departamentos = Departamento::where('departamento_id',$val)->get();
-        return view('caso.show', compact('users','caso','departamentos','municipios','val2','archivodenuncias'));
+        
+    
+        return view('caso.show', compact('users', 'caso', 'departamentos', 'municipios', 'val2', 'archivodenuncias'));
     }
-
     /**
      * Show the form for editing the specified resource.->first();
      *

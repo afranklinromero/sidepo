@@ -29,7 +29,11 @@ return [
     */
 
     'disks' => [
-
+        'pdf' => [
+            'driver' => 'local',
+            'root' => storage_path('app/pdf'),
+        ],  
+        
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

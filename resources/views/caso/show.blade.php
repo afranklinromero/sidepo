@@ -94,17 +94,23 @@
                                     
                                     <div class="form-group">
                                         <strong>Regional:</strong>
-                                                        
+                                        @if (is_numeric($caso->regional))               
                                         @foreach ($departamentos as $departamento)
                                         {{ $departamento->nombre }}
                                         @endforeach
-
+                                        @else
+                                        {{ $caso->regional }}
+                                        @endif
                                     </div>
                                         <div class="form-group">
                                         <strong>Lugar:</strong>
+                                        @if (is_numeric($caso->lugar))           
                                         @foreach ($municipios as $municipio)
                                         {{ $municipio->nombre }}
                                         @endforeach
+                                        @else
+                                        {{ $caso->lugar }}
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <strong>Grupo Designado:</strong>
@@ -176,14 +182,21 @@
                                         @php $juicioOralMostrado = true; @endphp
                                         <label>Documentación Juicio Oral:</label><br>
                                     @endif
-
-                                <div class="d-flex justify-content-center">
-                                    <embed src="{{ Storage::url('pdf/' . $archivodenuncia->pdf) }}" type="application/pdf" width="65%" height="400px" />
                                     <a class ="btn   " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Borrar') }}</button>
+                                    <div class="d-flex justify-content-center">
+                                    
+                                    <div style="position: relative; width: 65%; height: 400px; ">
+                                    <iframe src="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" type="application/pdf" width="100%" height="400px">
+                                    </iframe>
+                                   
+                                    </div>
+
+                                    
                                     <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                    
                                     </form>
                                 </div>
                                 @endforeach
@@ -192,6 +205,8 @@
                     </div>
                 </div> 
             </div>
+          
         </div>
+        
     </section>
 @endsection
