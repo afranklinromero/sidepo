@@ -187,9 +187,14 @@
                                     <div class="d-flex justify-content-center">
                                     
                                     
-                                   <!-- <object data="{{asset('storage/pdf/' . $archivodenuncia->pdf)}}" type="application/pdf" frameborder="0" width="100%" height="400px""> -->
+                                  
+                                    <object data="{{asset('storage/pdf/' . $archivodenuncia->pdf)}}" type="application/pdf" frameborder="0" width="100%" height="400px">
                                     <iframe src="https://docs.google.com/viewer?url={{asset('storage/pdf/' . $archivodenuncia->pdf)}}&embedded=true" style="width:100%; height:400px;" frameborder="0"></iframe>
-                                   <!-- </object> -->
+                                   </object>
+
+                                   
+                                  
+
                                     
 
                                  

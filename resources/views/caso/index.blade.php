@@ -6,6 +6,47 @@
 
 @section('content')
     <div class="container-fluid">
+        <b>BUSCAR POR</b>
+    {{ Form::open(['route'=>'casos.index', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
+
+           
+            <div class="form-group">
+                {{ Form::select('busqueda_por', [
+                    'caso' => 'Caso',
+                    'nombre' => 'Nombre',
+                    'apaterno' => 'Apellido Paterno',
+                    'grupo_designado' => 'Grupo designado',
+                    'lugar' => 'Lugar',
+
+                    'ci' => 'Ci',
+                    'marca' => 'Marca',
+                    'fecha_denuncia' => 'Fecha denuncia',
+                    'placa' => 'Placa',
+                    'vehiculo' => 'Vehiculo',
+                    'tipo' => 'Tipo',
+                    'color' => 'Color',
+                    'modelo' => 'Modelo',
+                    'chasis' => 'Chasis',
+                    'hecho' => 'Hecho',
+                    
+                    'amaterno' => 'Apellido Materno',
+                    'asignado' => 'Asignado',
+                    'regional' => 'Regional',
+                    'fechahecho' => 'Fecha hecho'
+                    
+                    ], null, ['class' => 'form-control']) }}
+             </div>
+            <div class="form-group">
+                {{ Form::text('termino_busqueda', null, ['class'=>'form-control', 'placeholder'=> 'Ingrese el término de búsqueda'] )}}
+            </div>
+            <div class="form-group">
+                <button type = "submit" class = "btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+    {{ Form::close() }}
+
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -19,9 +60,7 @@
                              <div class="float-right">
                                 <form action="{{ route('casos.index') }}" method="GET">
                                     @csrf
-                                    <label for="anio">Ingrese el año:</label>
-                                    <input style="margin-right: 5px;"type="number" name="anio" id="anio" required>
-                                    <button style="margin-right: 5px;"type="submit" class="btn btn-primary btn-sm float-right"  data-placement="left">Buscar</button>
+                                   
                                     
                                     @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
                                     <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
@@ -68,21 +107,14 @@
                                             
                                             
 											<td>{{ $caso->caso }}</td>
-											
 											<td>{{ $caso->placa }}</td>
-											
-											
-											
-											
-											
-											
-											
-											
 											<td>{{ $caso->fecha_denuncia }}</td>
 											
 											<td>{{ $caso->estado }}</td>
 											
 											<td>{{ $caso->asignado }}</td>
+                                            
+
 											<td>  
                                                  @if (is_numeric($caso->lugar))
                                                     {{ $municipios[$caso->lugar] }}
@@ -90,13 +122,7 @@
                                                     {{ $caso->lugar }}
                                                 @endif
                                                 </td>
-											
-											
-											
-										
-											
-
-                                            <td>
+											<td>
                                                 <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>

@@ -8,12 +8,14 @@ use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Archivodenuncia;
 use Illuminate\Http\Request;
+use setasign\Fpdi\Fpdi;
 use Illuminate\Support\Facades\Storage;
 use Dompdf\Dompdf;
 use PDF;
-use setasign\Fpdi\Fpdi;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 use Intervention\Image\Facades\Image;
+
 
 
 /**
@@ -32,13 +34,30 @@ class CasoController extends Controller
         $this->middleware('auth');
        
     }
-    public function index()
+    public function index(Request $request)
     {
-        $casos = Caso::paginate();
-       
+        $busquedaPor = $request->get('busqueda_por');
+        $terminoBusqueda = $request->get('termino_busqueda');
+    
+        $casos = Caso::orderBy('id', 'DESC');
+    
+        if ($busquedaPor === 'caso') {
+            $casos->caso($terminoBusqueda);
+        } elseif ($busquedaPor === 'nombre') {
+            $casos->nombre($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'apaterno') {
+            $casos->apaterno($terminoBusqueda);
+        }
+        
+
+    
+        $casos = $casos->paginate();
+        
         $municipios = Municipio::pluck('nombre', 'id');
-        return view('caso.index', compact('casos','municipios'))
-        ->with('i', (request()->input('page', 1) - 1) * $casos->perPage());
+    
+        return view('caso.index', compact('casos', 'municipios'))
+            ->with('i', ($casos->currentPage() - 1) * $casos->perPage());
     }
 
     /**
@@ -140,11 +159,12 @@ class CasoController extends Controller
         $municipios = Municipio::where('id', $val2)->get();
         $archivodenuncias = Archivodenuncia::where('id_caso', $id)->get();
         $users = User::pluck('name', 'id');
-        
-        
-    
+
         return view('caso.show', compact('users', 'caso', 'departamentos', 'municipios', 'val2', 'archivodenuncias'));
-    }
+    }  
+          
+         
+  
     /**
      * Show the form for editing the specified resource.->first();
      *
