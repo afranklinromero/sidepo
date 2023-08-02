@@ -49,8 +49,63 @@ class CasoController extends Controller
         elseif ($busquedaPor === 'apaterno') {
             $casos->apaterno($terminoBusqueda);
         }
+        elseif ($busquedaPor === 'fecha_denuncia') {
+            $casos->fecha_denuncia($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'placa') {
+            $casos->placa($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'vehiculo') {
+            $casos->vehiculo($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'marca') {
+            $casos->marca($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'tipo') {
+            $casos->tipo($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'color') {
+            $casos->color($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'modelo') {
+            $casos->modelo($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'chasis') {
+            $casos->chasis($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'hecho') {
+            $casos->hecho($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'amaterno') {
+            $casos->amaterno($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'estado') {
+            $casos->estado($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'grupo_designado') {
+            $casos->grupo_designado($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'regional') {
+            $casos->regional($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'asignado') {
+            $casos->asignado($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'lugar') {
+            $casos->lugar($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'ci') {
+            $casos->ci($terminoBusqueda);
+        }
+        elseif ($busquedaPor === 'fechahecho') {
+            $casos->fechahecho($terminoBusqueda);
+        }
+       
         
-
+        
+		
+		
+	
     
         $casos = $casos->paginate();
         
