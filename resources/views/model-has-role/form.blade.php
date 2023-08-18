@@ -3,7 +3,7 @@
         
         <div class="form-group">
             {{ Form::label('role_id') }}
-            {{ Form::select('role_id', ['1' => 'administrador', '2' => 'ventanilla', '3' => 'denuncia'], $modelHasRole->role_id, ['class' => 'form-control' . ($errors->has('role_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una opción']) }}
+            {{ Form::select('role_id', ['1' => 'administrador', '2' => 'ventanilla', '3' => 'denuncia', '4' => 'seguimiento'], $modelHasRole->role_id, ['class' => 'form-control' . ($errors->has('role_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una opción']) }}
            
             {!! $errors->first('role_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>

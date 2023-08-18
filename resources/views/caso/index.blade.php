@@ -67,6 +67,9 @@
                                     {{ __('Create New') }}
                                     </a>
                                     @endrole
+                                    @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
+                                                    <a class="btn btn-sm btn-secondary " href="{{ route('seguimientos.index') }}"><i class="fa-solid fa-magnifying-glass"></i> </a>
+                                    @endrole
                                 </form> 
                              </div>
                         </div>
@@ -77,7 +80,7 @@
                             </div>
                         @endif
                    
-                         @if(auth()->user()->hasRole(['admin', 'denuncia']))
+                         @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento']))
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -124,12 +127,27 @@
                                                 </td>
 											<td>
                                                 <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                  
+                                                  
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
+                                                    @if(auth()->user()->hasRole(['admin', 'denuncia'])) 
+                                                    <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                                                    @endrole
+                                                    @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
+                                                     <span class="btn btn-sm {{ $caso->seguimientos->isEmpty() ? 'btn-danger' : 'btn-success' }}" >
+   
+                                                        @if($caso->seguimientos->isEmpty())
+                                                            <i class="fa-solid fa-x"></i>
+                                                        @else
+                                                            <i class="fa-solid fa-check"></i>
+                                                        @endif
+                                                    </span>
+                                                    @endrole
+
                                                     @csrf
                                                     @method('DELETE')
                                                     @role('admin') 
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
                                                     @endrole
                                                 </form>
                                             </td>
@@ -139,15 +157,16 @@
                             </table>
                             {!! $casos->links() !!}
                         </div>
-                       
+                    
                     </div>
                    @endif
                    
                 </div>
                 
-               
+              
                
             </div>
+           
         </div>
     </div>
 @endsection

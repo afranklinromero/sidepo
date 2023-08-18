@@ -60,7 +60,7 @@ class Caso extends Model
 		'asignado' => 'required',
 		'regional' => 'required',
 		'lugar' => 'required',
-		'fechahecho' => 'required',
+		
 		'fecha_denuncia' => 'required',
 		'ci' => 'required',
 		'id_user' => 'required',
@@ -100,6 +100,17 @@ class Caso extends Model
     {
         return $this->hasOne(Departamento::class);
     }
+
+
+	public function seguimientos()
+	{
+		return $this->hasMany(Seguimiento::class, 'id_caso');
+	}
+
+
+
+
+
 
 	public function scopeCaso($query, $caso)
 	{

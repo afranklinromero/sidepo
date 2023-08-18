@@ -6,6 +6,7 @@ use App\Models\Caso;
 use App\Models\User;
 use App\Models\Departamento;
 use App\Models\Municipio;
+use App\Models\Seguimiento;
 use App\Models\Archivodenuncia;
 use Illuminate\Http\Request;
 use setasign\Fpdi\Fpdi;
@@ -36,11 +37,18 @@ class CasoController extends Controller
     }
     public function index(Request $request)
     {
+        $user = auth()->user();
+        $allowedUserIds = [1, 4];
         $busquedaPor = $request->get('busqueda_por');
         $terminoBusqueda = $request->get('termino_busqueda');
     
-        $casos = Caso::orderBy('id', 'DESC');
-    
+        if (in_array($user->id, $allowedUserIds)) {
+            // El usuario actual puede ver todos los registros
+            $casos = Caso::orderBy('id', 'DESC')->paginate();
+        } else {
+            // El usuario actual solo puede ver los registros asignados a él
+            $casos = Caso::where('id_user', $user->id)->orderBy('id', 'DESC')->paginate();
+        }
         if ($busquedaPor === 'caso') {
             $casos->caso($terminoBusqueda);
         } elseif ($busquedaPor === 'nombre') {
@@ -107,7 +115,6 @@ class CasoController extends Controller
 		
 	
     
-        $casos = $casos->paginate();
         
         $municipios = Municipio::pluck('nombre', 'id');
     
@@ -135,7 +142,7 @@ class CasoController extends Controller
         })->pluck('nombre', 'id');
     
         return response()->json($municipios);
-    }
+        }
         return view('caso.create', compact('users','caso','departamentos','municipios'));
     }
 
@@ -214,8 +221,8 @@ class CasoController extends Controller
         $municipios = Municipio::where('id', $val2)->get();
         $archivodenuncias = Archivodenuncia::where('id_caso', $id)->get();
         $users = User::pluck('name', 'id');
-
-        return view('caso.show', compact('users', 'caso', 'departamentos', 'municipios', 'val2', 'archivodenuncias'));
+        $seguimiento = $caso;
+        return view('caso.show', compact('seguimiento','users', 'caso', 'departamentos', 'municipios', 'val2', 'archivodenuncias'));
     }  
           
          
@@ -239,6 +246,8 @@ class CasoController extends Controller
             return response()->json($municipios);
         }
         $users = User::pluck('name', 'id')->toArray();
+
+        
         return view('caso.edit',compact('users','caso','departamentos','municipios'));
     }
 

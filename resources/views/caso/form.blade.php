@@ -152,12 +152,12 @@
             <select name="id_user" id="id_user" class="from-control seleccion">
             <option value="">Seleccionar usuario </option> 
             @foreach ($users as $user)
-        @if(!empty($user['grado']) || !empty($user['apellido']))
+             @if(!empty($user['grado']) || !empty($user['apellido']))
             <option value="{{$user['id']}}">
                 {{$user['grado'] ?? ''}} {{$user['apellido'] ?? ''}}
             </option>
-        @endif
-    @endforeach
+             @endif
+            @endforeach
             </select>
             <input type="hidden" name="asignado" value="{{ $user['apellido'] }}">
           </div>

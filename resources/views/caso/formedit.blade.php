@@ -126,7 +126,7 @@
             {{ Form::text('grupo_designado', $caso->grupo_designado, ['class' => 'form-control' . ($errors->has('grupo_designado') ? ' is-invalid' : ''),'style'=>'text-transform:uppercase','placeholder' => 'Grupo Designado']) }}
             {!! $errors->first('grupo_designado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-          
+        @if(auth()->user()->hasRole(['admin']))  
         <div class="form-group">
         {{ Form::label('Oficial Asignado') }} <br>
         <select name="id_user" id="id_user" class="from-control seleccion">
@@ -136,9 +136,9 @@
             </option>
         @endforeach
         </select>
-        <input type="hidden" name="asignado" value="{{ $name }}">
+        <input type="" name="asignado" value="{{ $name }}">
         </div>
-        
+        @endrole
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>

@@ -17,8 +17,8 @@
  
         </div>
         <div class="form-group">
-            {{ Form::label('id_caso') }}
-            {{ Form::text('id_caso', $caso->id, ['class' => 'form-control' . ($errors->has('id_caso') ? ' is-invalid' : '')]) }}
+            
+            {{ Form::text('id_caso', $caso->id, ['class' => 'form-control' . ($errors->has('id_caso') ? ' is-invalid' : ''),'hidden' => true]) }}
             {!! $errors->first('id_caso', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

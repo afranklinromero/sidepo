@@ -13,7 +13,7 @@ use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\ArchivodenunciaController;
 use App\Http\Controllers\ModelHasRoleController;
-
+use App\Http\Controllers\SeguimientoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +50,6 @@ Route::resource('municipios', MunicipioController::class);
 Route::resource('model-has-roles', ModelHasRoleController::class);
 Route::resource('users', UserController::class);
 
-
+Route::resource('seguimientos', SeguimientoController::class);
 
 
