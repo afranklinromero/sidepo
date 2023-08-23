@@ -98,18 +98,22 @@
             <select name="departamento_id" id="departamento_id" class="from-control seleccion">
             <option value="">Selecciona Regional </option> 
             @foreach ($departamentos as $departamento)
-                    <option value="{{$departamento['id']}}">{{$departamento['nombre']}}
+                    <option value="{{$departamento['id']}}"
+                     @if ($departamento['id'] == $caso->regional) selected @endif>
+                      {{$departamento['nombre']}}
                     </option>
                 @endforeach
             </select>
              </div>
 
              <div class="form-group">
-            <label  id="label_municipio"> Regional 
+            <label  id="label_municipio"> Unidad 
             <select name="municipio_id" id="municipio_id" class="from-control seleccion">
             <option value="">Selecciona Lugar </option> 
                 @foreach ($municipios as $municipio)
-                    <option value="{{$municipio['id']}}">{{$municipio['nombre']}}
+                    <option value="{{$municipio['id']}}"
+                    @if ($municipio['id'] == $caso->lugar) selected @endif>
+                    {{$municipio['nombre']}}
                     </option>
                 @endforeach
             </select>
@@ -131,12 +135,12 @@
         {{ Form::label('Oficial Asignado') }} <br>
         <select name="id_user" id="id_user" class="from-control seleccion">
         <option value="">Seleccionar usuario </option> 
-        @foreach ($users as $id =>$name)
-            <option value="{{$id}}">{{$name}}</option>
-            </option>
+        @foreach ($users as $id =>$apellido)
+        <option value="{{ $id }}" {{ $id == $caso->id_user ? 'selected' : '' }}>{{ $apellido }}</option>
+           
         @endforeach
         </select>
-        <input type="" name="asignado" value="{{ $name }}">
+        <input type="hidden" name="asignado" id="asignado" value="{{ $caso->user->apellido ?? '' }}" readonly>
         </div>
         @endrole
     </div>
@@ -144,3 +148,19 @@
         <button type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
     </div>
 </div>
+<script>
+     // Inicializar el valor del campo asignado
+     document.addEventListener('DOMContentLoaded', function() {
+        var selectedUserName = document.querySelector('#id_user option:checked').textContent;
+        document.getElementById('asignado').value = selectedUserName;
+    });
+
+    // Agregar un evento al cambiar la selección del usuario
+    document.getElementById('id_user').addEventListener('change', function() {
+        var selectedUserName = this.options[this.selectedIndex].text;
+        document.getElementById('asignado').value = selectedUserName;
+    });
+</script>
+
+
+

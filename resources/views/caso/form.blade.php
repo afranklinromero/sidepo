@@ -154,16 +154,36 @@
             @foreach ($users as $user)
              @if(!empty($user['grado']) || !empty($user['apellido']))
             <option value="{{$user['id']}}">
-                {{$user['grado'] ?? ''}} {{$user['apellido'] ?? ''}}
+                {{$user['apellido'] ?? ''}}
             </option>
              @endif
             @endforeach
             </select>
-            <input type="hidden" name="asignado" value="{{ $user['apellido'] }}">
+            
           </div>
        
+         
+        <input type="hidden" name="asignado" id="asignado" value="{{ $caso->user->name ?? '' }}" readonly>
+        </div>
+
+
+
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
     </div>
 </div>
+
+<script>
+     // Inicializar el valor del campo asignado
+     document.addEventListener('DOMContentLoaded', function() {
+        var selectedUserName = document.querySelector('#id_user option:checked').textContent;
+        document.getElementById('asignado').value = selectedUserName;
+    });
+
+    // Agregar un evento al cambiar la selección del usuario
+    document.getElementById('id_user').addEventListener('change', function() {
+        var selectedUserName = this.options[this.selectedIndex].text;
+        document.getElementById('asignado').value = selectedUserName;
+    });
+</script>

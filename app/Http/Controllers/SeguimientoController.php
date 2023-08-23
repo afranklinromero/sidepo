@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seguimiento;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 /**
  * Class SeguimientoController
@@ -74,7 +75,9 @@ class SeguimientoController extends Controller
     {
         $seguimiento = Seguimiento::find($id);
 
-        return view('seguimiento.edit', compact('seguimiento'));
+        $users = User::pluck('apellido', 'id')->toArray();
+
+        return view('seguimiento.edit', compact('users','seguimiento'));
     }
 
     /**

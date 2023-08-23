@@ -55,12 +55,12 @@ class Seguimiento extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'id_usuario');
-    }
+   
     
   
-
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 
 }

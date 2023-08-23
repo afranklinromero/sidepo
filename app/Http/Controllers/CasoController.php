@@ -44,10 +44,10 @@ class CasoController extends Controller
     
         if (in_array($user->id, $allowedUserIds)) {
             // El usuario actual puede ver todos los registros
-            $casos = Caso::orderBy('id', 'DESC')->paginate();
+            $casos = Caso::orderBy('id', 'DESC');
         } else {
             // El usuario actual solo puede ver los registros asignados a él
-            $casos = Caso::where('id_user', $user->id)->orderBy('id', 'DESC')->paginate();
+            $casos = Caso::where('id_user', $user->id)->orderBy('id', 'DESC');
         }
         if ($busquedaPor === 'caso') {
             $casos->caso($terminoBusqueda);
@@ -109,7 +109,7 @@ class CasoController extends Controller
             $casos->fechahecho($terminoBusqueda);
         }
        
-        
+        $casos = $casos ->paginate();
         
 		
 		
@@ -245,7 +245,7 @@ class CasoController extends Controller
         
             return response()->json($municipios);
         }
-        $users = User::pluck('name', 'id')->toArray();
+        $users = User::pluck('apellido', 'id')->toArray();
 
         
         return view('caso.edit',compact('users','caso','departamentos','municipios'));
@@ -260,6 +260,7 @@ class CasoController extends Controller
      */
     public function update(Request $request, Caso $caso)
     {
+      
         $caso->ci= $request->ci;
         $caso->id_user=$request->id_user;
         $caso->caso= (strtoupper($request->caso));
