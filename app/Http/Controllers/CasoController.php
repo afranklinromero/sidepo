@@ -16,7 +16,7 @@ use PDF;
 use Codedge\Fpdf\Fpdf\Fpdf;
 
 use Intervention\Image\Facades\Image;
-
+use App\Http\Controllers\QRCodeController;
 
 
 /**
@@ -222,7 +222,10 @@ class CasoController extends Controller
         $archivodenuncias = Archivodenuncia::where('id_caso', $id)->get();
         $users = User::pluck('name', 'id');
         $seguimiento = $caso;
+       
+       
         return view('caso.show', compact('seguimiento','users', 'caso', 'departamentos', 'municipios', 'val2', 'archivodenuncias'));
+    
     }  
           
          

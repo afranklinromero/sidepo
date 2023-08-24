@@ -76,6 +76,8 @@ class SeguimientoController extends Controller
         $seguimiento = Seguimiento::find($id);
 
         $users = User::pluck('apellido', 'id')->toArray();
+        
+        
 
         return view('seguimiento.edit', compact('users','seguimiento'));
     }

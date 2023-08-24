@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('template_title')
@@ -184,10 +185,13 @@
                                                     @php $juicioOralMostrado = true; @endphp
                                                     <label>Documentación Juicio Oral:</label><br>
                                                 @endif
-                                                <a class ="btn   " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
+                                                <a class ="btn btn-success btn-sm  " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
                                                 @role('admin')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Borrar') }}</button>
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar PDF</button>
                                                 @endrole
+                                                <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ $archivodenuncia->public_link }}">Generar QR</button>
+                                                <div class="qr-container "></div>
+                                               
                                                 <div class="d-flex justify-content-center">
                                                 
                                                 
@@ -251,3 +255,32 @@
         </div>
     </section>
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const qrButtons = document.querySelectorAll(".btn-generate-qr");
+        
+        qrButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                const link = this.getAttribute("data-public-link");
+                const qrContainer = this.nextElementSibling; // Selecciona el div para el QR
+
+                // Verifica si ya hay un QR en el contenedor
+                if (qrContainer.querySelector("canvas")) {
+                    // Si hay un QR, elimínalo y restablece la altura
+                    qrContainer.innerHTML = '';
+                    qrContainer.style.height = 'auto';
+                } else {
+                    // Si no hay un QR, genera el QR usando qrcode-generator
+                    const qrcode = new QRCode(qrContainer, {
+                        text: link
+                    });
+
+                    // Ajusta la altura del contenedor al tamaño del QR generado
+                    qrContainer.style.height = qrContainer.offsetHeight + 'px';
+                }
+            });
+        });
+    });
+</script>
+

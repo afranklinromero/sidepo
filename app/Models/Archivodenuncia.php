@@ -44,5 +44,11 @@ class Archivodenuncia extends Model
     {
         return $this->hasOne('App\Models\Caso', 'id', 'id_caso');
     }
+    public function getPublicLinkAttribute()
+    {
+        // Aquí debes definir cómo se calcula o construye el enlace público
+        // Por ejemplo, puedes usar el ID del archivo para construir una URL
+        return route('archivodenuncias.show', $this->id); // Cambia 'archivodenuncias.show' por la ruta correcta
+    }
 
 }
