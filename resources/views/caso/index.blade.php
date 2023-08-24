@@ -68,7 +68,7 @@
                                     </a>
                                     @endrole
                                     @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
-                                                    <a class="btn btn-sm btn-secondary " href="{{ route('seguimientos.index') }}"><i class="fa-solid fa-magnifying-glass"></i> </a>
+                                                    <a class="btn btn-sm btn-secondary " href=""><i class="fa-solid fa-magnifying-glass"></i> </a>
                                     @endrole
                                 </form> 
                              </div>

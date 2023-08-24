@@ -51,5 +51,3 @@ Route::resource('model-has-roles', ModelHasRoleController::class);
 Route::resource('users', UserController::class);
 
 Route::resource('seguimientos', SeguimientoController::class);
-
-

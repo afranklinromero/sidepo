@@ -219,8 +219,10 @@
                                         
                                     </div>
                                 </div>
-                                <div class="mt-2">
-                                <button class="btn btn-primary container-fluid"  type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapses5" aria-expanded="false" aria-controls="Seguimiento">Seguimiento</button>
+                                <div class="mt-2">                             
+                                  
+
+<button class="btn btn-primary container-fluid"  type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapses5" aria-expanded="false" aria-controls="Seguimiento">Seguimiento</button>
                                             <div class="row">
                                                 <div class="col-md-12" >
                                                     <div class="collapse multi-collapses5" id="Seguimiento">
@@ -238,9 +240,12 @@
                                                         @endrole
                                                     </div>  
                                                 </div>  
-                                            </div>       
-                        
-                                </div>
+                                            </div>             
+
+
+
+
+                         </div>
                         </div>
                         
                     </div> 

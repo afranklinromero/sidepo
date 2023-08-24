@@ -44,10 +44,10 @@ class CasoController extends Controller
     
         if (in_array($user->id, $allowedUserIds)) {
             // El usuario actual puede ver todos los registros
-            $casos = Caso::orderBy('id', 'DESC')->paginate();
+            $casos = Caso::orderBy('id', 'DESC');
         } else {
             // El usuario actual solo puede ver los registros asignados a él
-            $casos = Caso::where('id_user', $user->id)->orderBy('id', 'DESC')->paginate();
+            $casos = Caso::where('id_user', $user->id)->orderBy('id', 'DESC');
         }
         if ($busquedaPor === 'caso') {
             $casos->caso($terminoBusqueda);
@@ -115,7 +115,7 @@ class CasoController extends Controller
 		
 	
     
-        
+        $casos = $casos ->paginate();
         $municipios = Municipio::pluck('nombre', 'id');
     
         return view('caso.index', compact('casos', 'municipios'))
