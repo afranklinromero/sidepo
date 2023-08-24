@@ -189,7 +189,7 @@
                                                 @role('admin')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar PDF</button>
                                                 @endrole
-                                                <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ $archivodenuncia->public_link }}">Generar QR</button>
+                                                <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
                                                 <div class="qr-container "></div>
                                                
                                                 <div class="d-flex justify-content-center">
