@@ -28,7 +28,7 @@
                     'modelo' => 'Modelo',
                     'chasis' => 'Chasis',
                     'hecho' => 'Hecho',
-                    
+                    'estado' =>'Estado',
                     'amaterno' => 'Apellido Materno',
                     'asignado' => 'Asignado',
                     'regional' => 'Regional',

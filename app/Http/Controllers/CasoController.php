@@ -16,7 +16,7 @@ use PDF;
 use Codedge\Fpdf\Fpdf\Fpdf;
 
 use Intervention\Image\Facades\Image;
-
+use App\Http\Controllers\QRCodeController;
 
 
 /**
@@ -109,7 +109,7 @@ class CasoController extends Controller
             $casos->fechahecho($terminoBusqueda);
         }
        
-        
+        $casos = $casos ->paginate();
         
 		
 		
@@ -222,7 +222,10 @@ class CasoController extends Controller
         $archivodenuncias = Archivodenuncia::where('id_caso', $id)->get();
         $users = User::pluck('name', 'id');
         $seguimiento = $caso;
+       
+       
         return view('caso.show', compact('seguimiento','users', 'caso', 'departamentos', 'municipios', 'val2', 'archivodenuncias'));
+    
     }  
           
          
@@ -245,7 +248,7 @@ class CasoController extends Controller
         
             return response()->json($municipios);
         }
-        $users = User::pluck('name', 'id')->toArray();
+        $users = User::pluck('apellido', 'id')->toArray();
 
         
         return view('caso.edit',compact('users','caso','departamentos','municipios'));
@@ -260,6 +263,7 @@ class CasoController extends Controller
      */
     public function update(Request $request, Caso $caso)
     {
+      
         $caso->ci= $request->ci;
         $caso->id_user=$request->id_user;
         $caso->caso= (strtoupper($request->caso));

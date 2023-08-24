@@ -6,16 +6,30 @@
             {{ Form::text('estado', $seguimiento->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        
+
+
         <div class="form-group">
-            {{ Form::label('Asignado') }}
-            {{ Form::text('usuario', $seguimiento->usuario ?? $caso->asignado, ['class' => 'form-control' . ($errors->has('usuario') ? ' is-invalid' : ''), 'placeholder' => 'Usuario']) }}
-            {!! $errors->first('usuario', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+    {{ Form::label('Oficial Asignado') }} <br>
+    <select name="id_user" id="id_user" class="form-control seleccion">
+        <option value="">Seleccionar usuario</option> 
+        @foreach ($users as $id => $apellido)
+            <option value="{{ $id }}" {{ $id == $seguimiento->id_user ? 'selected' : '' }}>{{ $apellido }}</option>
+        @endforeach
+    </select>
+    {{ Form::text('usuario', $caso->user->name ?? '' ,['class' => 'form-control', 'readonly' => 'readonly', 'id' => 'usuario']) }}
+    </div>
+
+        <div class="form-group">
+
+
         <div class="form-group">
             {{ Form::label('fecha') }}
             {{ Form::date('fecha', $seguimiento->fecha ?? now()->format('Y-m-d'), ['class' => 'form-control' . ($errors->has('fecha') ? ' is-invalid' : ''), 'placeholder' => 'Fecha']) }}
             {!! $errors->first('fecha', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
+
         <div class="form-group">
             {{ Form::label('observacion') }}
             {{ Form::text('observacion', $seguimiento->observacion, ['class' => 'form-control' . ($errors->has('observacion') ? ' is-invalid' : ''), 'placeholder' => 'Observacion']) }}
@@ -37,3 +51,18 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </div>
+<script>
+     // Inicializar el valor del campo asignado
+    
+
+    // Agregar un evento al cambiar la selección del usuario
+    document.addEventListener('DOMContentLoaded', function() {
+        var selectedUserName = document.querySelector('#id_user option:checked').textContent;
+        document.getElementById('usuario').value = selectedUserName;
+        document.getElementById('usuario').setAttribute('hidden', 'true');
+        document.getElementById('id_user').addEventListener('change', function() {
+            var selectedUserName = this.options[this.selectedIndex].text;
+            document.getElementById('usuario').value = selectedUserName;
+        });
+    });
+</script>

@@ -14,6 +14,7 @@ use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\ArchivodenunciaController;
 use App\Http\Controllers\ModelHasRoleController;
 use App\Http\Controllers\SeguimientoController;
+use App\Http\Controllers\QRCodeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +52,10 @@ Route::resource('model-has-roles', ModelHasRoleController::class);
 Route::resource('users', UserController::class);
 
 Route::resource('seguimientos', SeguimientoController::class);
+
+
+Route::middleware(['web'])->group(function () {
+    Route::get('qrcode/generate', [QRCodeController::class, 'generate'])->name('qrcode.generate');
+    // Otras rutas aquí...
+});
+
