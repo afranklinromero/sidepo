@@ -16,10 +16,11 @@ return new class extends Migration
             $table->integer('tipo');
             $table->string('pdf');
             $table->timestamps();
-            $table->BigInteger('id_caso')->unsigned();
+            $table->unsignedBigInteger('id_caso')->unsigned();
 
-            $table->foreign('id_caso')->references('id')->on('casos');
+            $table->foreign('id_caso')->references('id')->on('casos')->onDelete('cascade');
         });
+
     }
 
     /**
