@@ -17,14 +17,14 @@ return new class extends Migration
             $table->string('usuario');
             $table->date('fecha');
             $table->string('observacion');
-            $table->BigInteger('id_caso')->unsigned();
-            $table->BigInteger('id_usuario')->unsigned();
+            $table->unsignedBigInteger('id_caso');
+            $table->unsignedBigInteger('id_usuario');
             $table->timestamps();
           //  $table->string('id_archivo')->nullable();
 
 
-            $table->foreign('id_caso')->references('id')->on('casos');
-            $table->foreign('id_usuario')->references('id')->on('users');
+          $table->foreign('id_caso')->references('id')->on('casos')->onDelete('cascade'); // Cascade onDelete
+          $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade'); // Cascade onDelete
 
         });
     }
