@@ -115,8 +115,7 @@ class CasoController extends Controller
 		
 	
     
-        $casos = $casos ->paginate();
-        $municipios = Municipio::pluck('nombre', 'id');
+       $municipios = Municipio::pluck('nombre', 'id');
     
         return view('caso.index', compact('casos', 'municipios'))
             ->with('i', ($casos->currentPage() - 1) * $casos->perPage());
