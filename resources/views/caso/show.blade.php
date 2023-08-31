@@ -187,9 +187,15 @@
                                                 @endif
                                                 <a class ="btn btn-success btn-sm  " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
                                                 @role('admin')
+                                                <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar PDF</button>
+                                                @csrf
+                                                    @method('DELETE')
+                                                </form>
                                                 @endrole
-                                                <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
+                                                
+                                                    <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
+                                                  
                                                 <div class="qr-container "></div>
                                                
                                                 <div class="d-flex justify-content-center">
