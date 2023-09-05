@@ -38,17 +38,27 @@ class CasoController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
+        
         $allowedUserIds = [1, 4];
         $busquedaPor = $request->get('busqueda_por');
         $terminoBusqueda = $request->get('termino_busqueda');
     
-        if (in_array($user->id, $allowedUserIds)) {
-            // El usuario actual puede ver todos los registros
-            $casos = Caso::orderBy('id', 'DESC');
-        } else {
-            // El usuario actual solo puede ver los registros asignados a él
-            $casos = Caso::where('id_user', $user->id)->orderBy('id', 'DESC');
+        $casos = Caso::where('id_user', $user->id);
+
+    // Si el usuario es el administrador (usuario 1) o el usuario de seguimiento (usuario 4), mostrar todos los casos
+    if (in_array($user->id, [1, 4])) {
+        $casos->orWhereRaw('1=1'); // Esto agrega una condición siempre verdadera para incluir todos los casos
+    } else {
+        // Si el usuario es miembro del grupo 'jefe_montero', mostrar casos con 'lugar' igual a 'montero'
+        if ($user->grupo === 'MONTERO') {
+            $casos->orWhere('lugar', 'MONTERO');
         }
+
+        // Aquí puedes agregar condiciones adicionales para filtrar casos por región u otros criterios según tu lógica de negocio
+        // Por ejemplo, si tienes una columna 'region' en la tabla 'casos':
+        // $casos->orWhere('region', $user->region);
+    }
+    $casos->orderBy('id', 'DESC');
         if ($busquedaPor === 'caso') {
             $casos->caso($terminoBusqueda);
         } elseif ($busquedaPor === 'nombre') {

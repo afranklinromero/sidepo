@@ -87,7 +87,7 @@
                                 <thead class="thead">
                                     <tr>
                                         
-                                        
+                                        <th>Id</th>
 										<th>Caso</th>
 									
 										<th>Placa</th>
@@ -108,7 +108,7 @@
                                     @foreach ($casos as $caso)
                                         <tr>
                                             
-                                            
+                                            <td>{{ $caso->id}}</td>
 											<td>{{ $caso->caso }}</td>
 											<td>{{ $caso->placa }}</td>
 											<td>{{ $caso->fecha_denuncia }}</td>
