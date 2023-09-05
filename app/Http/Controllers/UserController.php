@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Traits\HasRoles;
-
+use Illuminate\Support\Facades\Hash;
 /**
  * Class UserController
  * @package App\Http\Controllers
@@ -81,7 +81,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
+        
         return view('user.edit', compact('user'));
     }
 

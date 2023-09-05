@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -65,15 +65,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => (strtoupper($data['name'])),
-            'apellido' => (strtoupper($data['apellido'])),
-            'grado' => ($data['grado']),
-            'grupo' => (strtoupper($data['grupo'])),
-            'email' => (strtolower($data['email'])),
+        User::create([
+            'name' => strtoupper($data['name']),
+            'apellido' => strtoupper($data['apellido']),
+            'grado' => $data['grado'],
+            'grupo' => strtoupper($data['grupo']),
+            'email' => strtolower($data['email']),
             'password' => Hash::make($data['password']),
-            'role' => ($data['role']),
+            'role' => strtolower($data['role']),
         ]);
+    
+        return redirect()->route('users.index')
+            ->with('success', 'User created successfully.');
     }
     
+        // se modifico en vendor laravel auth registerUsers para que entre directo a usuariosp
+   
+   
 }
