@@ -154,7 +154,7 @@
             @foreach ($users as $user)
              @if(!empty($user['grado']) || !empty($user['apellido']))
             <option value="{{$user['id']}}">
-                {{$user['apellido'] ?? ''}}
+            {{ $user['grado'] }} {{ $user['name'] }} {{ $user['apellido'] ?? '' }}
             </option>
              @endif
             @endforeach
