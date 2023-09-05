@@ -31,6 +31,12 @@
             {{ Form::text('role', $user->role, ['class' => 'form-control' . ($errors->has('role') ? ' is-invalid' : ''), 'placeholder' => 'Role']) }}
             {!! $errors->first('role', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group">
+            {{ Form::label('password') }}
+            {{ Form::text('password', $user->password, ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'password']) }}
+            {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+
 
     </div>
     <div class="box-footer mt20">
