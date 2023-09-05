@@ -64,7 +64,7 @@
                                     
                                     @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
                                     <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                    {{ __('Create New') }}
+                                    {{ __('Crear nuevo') }}
                                     </a>
                                     @endrole
                                     @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 

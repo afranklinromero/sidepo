@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ __('Create') }} Caso
+    {{ __('Nuevo') }} Caso
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Caso</span>
+                        <span class="card-title">Nuevo Caso</span>
                     </div>
                    
                         <br>
