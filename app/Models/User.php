@@ -25,6 +25,7 @@ class User extends Authenticatable
         'grupo',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -46,13 +47,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public static $rules = [
+        'password' => 'required|string|min:6',
+        'role' => 'required|string', // Agrega una regla de validación para 'role'
+    ];
     public function setNombreAttribute($value)
     {
         $this->attributes['name'] = strtoupper($value);
         $this->attributes['apellido'] = strtoupper($value);
         $this->attributes['grado'] = strtoupper($value);
         $this->attributes['grupo'] = strtoupper($value);
-        $this->attributes['rol'] = $value;
+        
     }
     public function users()
     {

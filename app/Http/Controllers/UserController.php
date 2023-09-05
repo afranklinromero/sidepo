@@ -43,14 +43,21 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        request()->validate(User::$rules);
+{
+    // Valida los campos según las reglas definidas en el modelo User
+    $request->validate(User::$rules);
 
-        $user = User::create($request->all());
+    // Crea el usuario y asigna los datos del formulario
+    $user = new User;
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->password = Hash::make($request->input('password'));
+    $user->role = $request->input('role'); // Asegúrate de incluir el campo 'role'
+    $user->save();
 
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
-    }
+    return redirect()->route('users.index')
+        ->with('success', 'User created successfully.');
+}
 
     /**
      * Display the specified resource.
