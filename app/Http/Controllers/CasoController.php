@@ -143,7 +143,7 @@ class CasoController extends Controller
          
         $departamentos = Departamento::paginate();
         $municipios = Municipio::paginate();
-        $users = User::paginate();
+        $users = User::all();
         $caso = new Caso();
         
         if (request()->ajax()) {
