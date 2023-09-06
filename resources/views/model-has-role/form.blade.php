@@ -15,7 +15,7 @@
        
         <div class="form-group">
         {{ Form::label('Oficial Asignado') }} <br>
-        <select name="model_id" id="model_id" class="from-control seleccion">
+        <select name="model_id" id="model_id" class="from-control seleccion" >
         <option value="">Seleccionar usuario </option> 
         @foreach ($users as $user)
         @if(!empty($user['grado']) || !empty($user['apellido']))

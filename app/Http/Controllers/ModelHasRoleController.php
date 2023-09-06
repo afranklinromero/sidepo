@@ -34,7 +34,7 @@ class ModelHasRoleController extends Controller
     public function create()
     {
         $modelHasRole = new ModelHasRole();
-        $users = User::paginate();
+        $users = User::all();
         $usuario= new User();
         return view('model-has-role.create', compact('modelHasRole', 'usuario','users'));
     }
