@@ -32,10 +32,10 @@
             {!! $errors->first('role', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('password') }}
-            {{ Form::pass('password', $user->password, ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'password']) }}
-            {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+    {{ Form::label('password') }}
+    {{ Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'password']) }}
+    {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
+</div>
 
 
     </div>
