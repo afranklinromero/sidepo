@@ -34,8 +34,9 @@ class ModelHasRoleController extends Controller
     public function create()
     {
         $modelHasRole = new ModelHasRole();
-       $users= new User();
-        return view('model-has-role.create', compact('modelHasRole', 'users'));
+        $users = User::paginate();
+        $usuario= new User();
+        return view('model-has-role.create', compact('modelHasRole', 'usuario','users'));
     }
 
     /**
@@ -52,6 +53,9 @@ class ModelHasRoleController extends Controller
 
         return redirect()->route('model-has-roles.index')
             ->with('success', 'ModelHasRole created successfully.');
+
+            
+
     }
 
     /**
