@@ -46,12 +46,44 @@ class CasoController extends Controller
         $casos = Caso::where('id_user', $user->id);
 
     // Si el usuario es el administrador (usuario 1) o el usuario de seguimiento (usuario 4), mostrar todos los casos
-    if (in_array($user->id, [1, 4])) {
+    if (in_array($user->id, [1, 4, 39])) {
         $casos->orWhereRaw('1=1'); // Esto agrega una condición siempre verdadera para incluir todos los casos
     } else {
         // Si el usuario es miembro del grupo 'jefe_montero', mostrar casos con 'lugar' igual a 'montero'
         if ($user->grupo === 'MONTERO') {
             $casos->orWhere('lugar', 'MONTERO');
+        }
+        if ($user->grupo === 'YAPACANI') {
+            $casos->orWhere('lugar', 'YAPACANI');
+        }if ($user->grupo === 'PUERTO SUAREZ') {
+            $casos->orWhere('lugar', 'PUERTO SUAREZ');
+        }
+        if ($user->grupo === 'SAN IGNACIO DE VELASCO') {
+            $casos->orWhere('lugar', 'SAN IGNACIO DE VELASCO');
+        }
+        if ($user->grupo === 'WARNES') {
+            $casos->orWhere('lugar', 'WARNES');
+        }
+        if ($user->grupo === 'LA GUARDIA') {
+            $casos->orWhere('lugar', 'LA GUARDIA');
+        }
+        if ($user->grupo === 'COTOCA') {
+            $casos->orWhere('lugar', 'COTOCA');
+        }
+        if ($user->grupo === 'JEFEALFA') {
+            $casos->orWhere('lugar', 'JEFEALFA');
+        }
+        if ($user->grupo === 'JEFEBETABRAVO') {
+            $casos->orWhere(function ($query) {
+                $query->where('lugar', 'BETA')
+                      ->orWhere('lugar', 'BRAVO');
+            });
+        }
+        if ($user->grupo === 'JEFEALFA') {
+            $casos->orWhere('lugar', 'JEFEALFA');
+        }
+        if ($user->grupo === 'JEFEALFA') {
+            $casos->orWhere('lugar', 'JEFEALFA');
         }
 
         // Aquí puedes agregar condiciones adicionales para filtrar casos por región u otros criterios según tu lógica de negocio

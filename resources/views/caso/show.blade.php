@@ -234,7 +234,7 @@
                                             <div class="row">
                                                 <div class="col-md-12" >
                                                     <div class="collapse multi-collapses5" id="Seguimiento">
-                                                        @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
+                                                        @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia','visor'])) 
                                                         @if($caso->seguimientos->isEmpty())
                                                             <!-- El caso no tiene seguimientos, muestra el formulario de creación -->
                                                             <form method="POST" action="{{ route('seguimientos.store') }}"  role="form" enctype="multipart/form-data">
