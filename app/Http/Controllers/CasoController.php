@@ -46,7 +46,7 @@ class CasoController extends Controller
         $casos = Caso::where('id_user', $user->id);
 
     // Si el usuario es el administrador (usuario 1) o el usuario de seguimiento (usuario 4), mostrar todos los casos
-    if (in_array($user->id, [1, 4, 39])) {
+    if (in_array($user->id, [1, 4, 3])) {
         $casos->orWhereRaw('1=1'); // Esto agrega una condición siempre verdadera para incluir todos los casos
     } else {
         // Si el usuario es miembro del grupo 'jefe_montero', mostrar casos con 'lugar' igual a 'montero'
