@@ -149,6 +149,7 @@
 
         
             {{ Form::label('Oficial Asignado') }} <br>
+            <input type="text" id="user_search" class="form-control" placeholder="Buscar usuario">
             <select name="id_user" id="id_user" class="from-control seleccion">
             <option value="">Seleccionar usuario </option> 
             @foreach ($users as $user)
@@ -175,8 +176,27 @@
 </div>
 
 <script>
-     // Inicializar el valor del campo asignado
-     document.addEventListener('DOMContentLoaded', function() {
+     // Función para filtrar las opciones de la lista desplegable
+     function filterOptions(searchTerm) {
+        searchTerm = searchTerm.toLowerCase();
+        var select = document.getElementById('id_user');
+        var options = select.getElementsByTagName('option');
+        
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            var optionText = option.textContent.toLowerCase();
+            
+            // Mostrar u ocultar opciones basadas en la búsqueda
+            if (optionText.includes(searchTerm) || searchTerm === '') {
+                option.style.display = '';
+            } else {
+                option.style.display = 'none';
+            }
+        }
+    }
+
+    // Inicializar el valor del campo asignado
+    document.addEventListener('DOMContentLoaded', function() {
         var selectedUserName = document.querySelector('#id_user option:checked').textContent;
         document.getElementById('asignado').value = selectedUserName;
     });
@@ -186,4 +206,11 @@
         var selectedUserName = this.options[this.selectedIndex].text;
         document.getElementById('asignado').value = selectedUserName;
     });
+
+    // Agregar un evento de entrada para el campo de búsqueda
+    document.getElementById('user_search').addEventListener('input', function() {
+        var searchTerm = this.value.trim().toLowerCase();
+        filterOptions(searchTerm);
+    });
+</script>
 </script>

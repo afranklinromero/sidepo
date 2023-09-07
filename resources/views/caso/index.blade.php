@@ -54,7 +54,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Caso') }}
+                                {{ __('Caso') }} asignados encontrados {!! $casos->total() !!}
                             </span>
 
                              <div class="float-right">
@@ -67,8 +67,13 @@
                                     {{ __('Crear nuevo') }}
                                     </a>
                                     @endrole
+<<<<<<< HEAD
                                     @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
                                                     <a class="btn btn-sm btn-secondary " href=""><i class="fa-solid fa-magnifying-glass"></i> </a>
+=======
+                                    @if(auth()->user()->hasRole(['admin', 'seguimiento'])) 
+                                                    <a class="btn btn-sm btn-secondary " href="{{ route('seguimientos.index') }}"><i class="fa-solid fa-magnifying-glass"></i> </a>
+>>>>>>> 56e99313d95cbf524ba741c479e67ca999f55ca7
                                     @endrole
                                 </form> 
                              </div>
@@ -80,7 +85,7 @@
                             </div>
                         @endif
                    
-                         @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento']))
+                         @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor']))
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
