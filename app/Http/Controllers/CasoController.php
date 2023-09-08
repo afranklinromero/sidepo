@@ -73,19 +73,19 @@ class CasoController extends Controller
         if ($user->grupo === 'JEFEALFA') {
             $casos->orWhere('lugar', 'JEFEALFA');
         }
+       
+        if ($user->grupo === 'JEFEALFA') {
+            $casos->orWhere('lugar', 'JEFEALFA');
+        }
+        if ($user->grupo === 'JEFEALFA') {
+            $casos->orWhere('lugar', 'JEFEALFA');
+        }
         if ($user->grupo === 'JEFEBETABRAVO') {
             $casos->orWhere(function ($query) {
                 $query->where('lugar', 'BETA')
                       ->orWhere('lugar', 'BRAVO');
             });
         }
-        if ($user->grupo === 'JEFEALFA') {
-            $casos->orWhere('lugar', 'JEFEALFA');
-        }
-        if ($user->grupo === 'JEFEALFA') {
-            $casos->orWhere('lugar', 'JEFEALFA');
-        }
-
         // Aquí puedes agregar condiciones adicionales para filtrar casos por región u otros criterios según tu lógica de negocio
         // Por ejemplo, si tienes una columna 'region' en la tabla 'casos':
         // $casos->orWhere('region', $user->region);
@@ -157,7 +157,8 @@ class CasoController extends Controller
 		
 	
     
-       $municipios = Municipio::pluck('nombre', 'id');
+        
+        $municipios = Municipio::pluck('nombre', 'id');
     
         return view('caso.index', compact('casos', 'municipios'))
             ->with('i', ($casos->currentPage() - 1) * $casos->perPage());
@@ -347,3 +348,4 @@ class CasoController extends Controller
             ->with('success', 'Caso deleted successfully');
     }
 }
+
