@@ -67,13 +67,10 @@
                                     {{ __('Crear nuevo') }}
                                     </a>
                                     @endrole
-<<<<<<< HEAD
-                                    @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
-                                                    <a class="btn btn-sm btn-secondary " href=""><i class="fa-solid fa-magnifying-glass"></i> </a>
-=======
-                                    @if(auth()->user()->hasRole(['admin', 'seguimiento'])) 
+
+                                     @if(auth()->user()->hasRole(['admin', 'seguimiento'])) 
                                                     <a class="btn btn-sm btn-secondary " href="{{ route('seguimientos.index') }}"><i class="fa-solid fa-magnifying-glass"></i> </a>
->>>>>>> 56e99313d95cbf524ba741c479e67ca999f55ca7
+
                                     @endrole
                                 </form> 
                              </div>
