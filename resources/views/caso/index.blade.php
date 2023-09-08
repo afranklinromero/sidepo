@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-fluid">
         <b>BUSCAR POR</b>
-    {{ Form::open(['route'=>'casos.index', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
+     {{ Form::open(['route'=>'casos.index', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
 
            
             <div class="form-group">
@@ -41,10 +41,10 @@
             </div>
             <div class="form-group">
                 <button type = "submit" class = "btn btn-default">
-                    <span class="glyphicon glyphicon-search"></span>
+                <span class="glyphicon glyphicon-search"></span>
                 </button>
             </div>
-    {{ Form::close() }}
+     {{ Form::close() }}
 
 
         <div class="row">
@@ -54,7 +54,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Caso') }} asignados encontrados {!! $casos->total() !!}
+                                {{ __('Caso') }} asignados encontrados {!! $casos->total() !!} 
                             </span>
 
                              <div class="float-right">
@@ -79,87 +79,87 @@
                                 <p>{{ $message }}</p>
                             </div>
                         @endif
-                   
-                         @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor']))
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        
-                                        <th>Id</th>
-										<th>Caso</th>
-									
-										<th>Placa</th>
-										
-										<th>Denuncia</th>
-									
-										<th>Estado</th>
-										
-										<th>Asignado</th>
-										<th>Regional</th>
-										
-										
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($casos as $caso)
-                                        <tr>
+                        
+                        @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor']))
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead class="thead">
+                                            <tr>
+                                                
+                                                <th>Id</th>
+                                                <th>Caso</th>
                                             
-                                            <td>{{ $caso->id}}</td>
-											<td>{{ $caso->caso }}</td>
-											<td>{{ $caso->placa }}</td>
-											<td>{{ $caso->fecha_denuncia }}</td>
-											
-											<td>{{ $caso->estado }}</td>
-											
-											<td>{{ $caso->asignado }}</td>
+                                                <th>Placa</th>
+                                                
+                                                <th>Denuncia</th>
                                             
+                                                <th>Estado</th>
+                                                
+                                                <th>Asignado</th>
+                                                <th>Regional</th>
+                                                
+                                                
 
-											<td>  
-                                                 @if (is_numeric($caso->lugar))
-                                                    {{ $municipios[$caso->lugar] }}
-                                                @else
-                                                    {{ $caso->lugar }}
-                                                @endif
-                                                </td>
-											<td>
-                                                <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
-                                                  
-                                                  
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
-                                                    @if(auth()->user()->hasRole(['admin', 'denuncia'])) 
-                                                    <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
-                                                    @endrole
-                                                    @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
-                                                     <span class="btn btn-sm {{ $caso->seguimientos->isEmpty() ? 'btn-danger' : 'btn-success' }}" >
-   
-                                                        @if($caso->seguimientos->isEmpty())
-                                                            <i class="fa-solid fa-x"></i>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($casos as $caso)
+                                                <tr>
+                                                    
+                                                    <td>{{ $caso->id}}</td>
+                                                    <td>{{ $caso->caso }}</td>
+                                                    <td>{{ $caso->placa }}</td>
+                                                    <td>{{ $caso->fecha_denuncia }}</td>
+                                                    
+                                                    <td>{{ $caso->estado }}</td>
+                                                    
+                                                    <td>{{ $caso->asignado }}</td>
+                                                    
+
+                                                    <td>  
+                                                        @if (is_numeric($caso->lugar))
+                                                            {{ $municipios[$caso->lugar] }}
                                                         @else
-                                                            <i class="fa-solid fa-check"></i>
+                                                            {{ $caso->lugar }}
                                                         @endif
-                                                    </span>
-                                                    @endrole
+                                                        </td>
+                                                    <td>
+                                                        <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
+                                                        
+                                                        
+                                                            <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
+                                                            @if(auth()->user()->hasRole(['admin', 'denuncia'])) 
+                                                            <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                                                            @endif
+                                                            @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
+                                                            <span class="btn btn-sm {{ $caso->seguimientos->isEmpty() ? 'btn-danger' : 'btn-success' }}" >
+        
+                                                                @if($caso->seguimientos->isEmpty())
+                                                                    <i class="fa-solid fa-x"></i>
+                                                                @else
+                                                                    <i class="fa-solid fa-check"></i>
+                                                                @endif
+                                                            </span>
+                                                            @endif
 
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    @role('admin') 
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
-                                                    @endrole
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {!! $casos->links() !!}
-                        </div>
-                    
-                    </div>
-                   @endif
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            @role('admin') 
+                                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
+                                                            @endrole
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {!! $casos->links() !!}
+                                </div>
+                            
+                            </div>
+                        @endif
                    
                 </div>
                 
