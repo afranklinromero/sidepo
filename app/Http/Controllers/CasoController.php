@@ -71,19 +71,22 @@ class CasoController extends Controller
             $casos->orWhere('lugar', 'COTOCA');
         }
         if ($user->grupo === 'JEFEALFA') {
-            $casos->orWhere('lugar', 'JEFEALFA');
+            $casos->orWhere('grupo', 'ALFA');
         }
        
-        if ($user->grupo === 'JEFEALFA') {
-            $casos->orWhere('lugar', 'JEFEALFA');
-        }
-        if ($user->grupo === 'JEFEALFA') {
-            $casos->orWhere('lugar', 'JEFEALFA');
+       if ($user->grupo === 'JEFEESPECIALES') {
+            $casos->orWhere('grupo', 'ESPECIALES');
         }
         if ($user->grupo === 'JEFEBETABRAVO') {
             $casos->orWhere(function ($query) {
-                $query->where('lugar', 'BETA')
-                      ->orWhere('lugar', 'BRAVO');
+                $query->where('grupo', 'BETA')
+                      ->orWhere('grupo', 'BRAVO');
+            });
+        }
+        if ($user->grupo === 'JEFEGAMACHARLY') {
+            $casos->orWhere(function ($query) {
+                $query->where('grupo', 'GAMA')
+                      ->orWhere('grupo', 'CHARLY');
             });
         }
         // Aquí puedes agregar condiciones adicionales para filtrar casos por región u otros criterios según tu lógica de negocio
