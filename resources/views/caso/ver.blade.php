@@ -77,7 +77,7 @@
                             </div>
                         @endif
                         
-                        @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor']))
+                        @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor','ventanilla']))
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
