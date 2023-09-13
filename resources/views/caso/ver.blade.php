@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-fluid">
         <b>BUSCAR POR</b>
-     {{ Form::open(['route'=>'casos.index', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
+     {{ Form::open(['route'=>'casos.ver', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
 
            
             <div class="form-group">
@@ -58,23 +58,15 @@
                             </span>
 
                              <div class="float-right">
-                             <a href="{{ route('casos.ver') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                    {{ __('Ver Todo') }}
-                                    </a>
                                 <form action="{{ route('casos.index') }}" method="GET">
                                     @csrf
                                    
                                     
-                                    @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
-                                    <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                    {{ __('Crear nuevo') }}
+                                   
+                                    <a href="{{ route('casos.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                    {{ __('voler') }}
                                     </a>
-                                    @endrole
-
-                                     @if(auth()->user()->hasRole(['admin', 'seguimiento'])) 
-                                                    <a class="btn btn-sm btn-secondary " href="{{ route('seguimientos.index') }}"><i class="fa-solid fa-magnifying-glass"></i> </a>
-
-                                    @endrole
+                                   
                                 </form> 
                              </div>
                         </div>
@@ -131,30 +123,15 @@
                                                         @endif
                                                         </td>
                                                     <td>
-                                                        <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
+                                                        
                                                         
                                                         
                                                             <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
-                                                            @if(auth()->user()->hasRole(['admin', 'denuncia'])) 
-                                                            <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
-                                                            @endif
-                                                            @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
-                                                            <span class="btn btn-sm {{ $caso->seguimientos->isEmpty() ? 'btn-danger' : 'btn-success' }}" >
-        
-                                                                @if($caso->seguimientos->isEmpty())
-                                                                    <i class="fa-solid fa-x"></i>
-                                                                @else
-                                                                    <i class="fa-solid fa-check"></i>
-                                                                @endif
-                                                            </span>
-                                                            @endif
+                                                           
 
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            @role('admin') 
-                                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
-                                                            @endrole
-                                                        </form>
+                                                          
+                                                           
+                                                       
                                                     </td>
                                                 </tr>
                                             @endforeach

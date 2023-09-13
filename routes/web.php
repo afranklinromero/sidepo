@@ -37,7 +37,7 @@ Route::get('/administrator',[AdminController::class,'index']);
 Route::resource('registros', RegistroController::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('casos', CasoController::class);
-
+Route::get('/ver', [CasoController::class, 'ver'])->name('casos.ver');
 Route::get('/archivodenuncias', [ArchivodenunciaController::class, 'index'])->name('archivodenuncias.index');
 Route::get('/archivodenuncias/{casos}/create', [ArchivodenunciaController::class, 'create'])->name('archivodenuncias.create');
 Route::post('/archivodenuncias', [ArchivodenunciaController::class, 'store'])->name('archivodenuncias.store');

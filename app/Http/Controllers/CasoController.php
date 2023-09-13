@@ -350,5 +350,92 @@ class CasoController extends Controller
         return redirect()->route('casos.index')
             ->with('success', 'Caso deleted successfully');
     }
+
+
+
+ public function ver(Request $request)
+    {
+        $user = auth()->user();
+        $busquedaPor = $request->get('busqueda_por');
+        $terminoBusqueda = $request->get('termino_busqueda');
+        // Verifica si el usuario es el administrador (usuario 1) o el usuario de seguimiento (usuario 4)
+        $casos = Caso::query();
+        
+        $casos->orderBy('id', 'DESC');
+         
+            if ($busquedaPor === 'caso') {
+                $casos->caso($terminoBusqueda);
+            } elseif ($busquedaPor === 'nombre') {
+                $casos->nombre($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'apaterno') {
+                $casos->apaterno($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'fecha_denuncia') {
+                $casos->fecha_denuncia($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'placa') {
+                $casos->placa($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'vehiculo') {
+                $casos->vehiculo($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'marca') {
+                $casos->marca($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'tipo') {
+                $casos->tipo($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'color') {
+                $casos->color($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'modelo') {
+                $casos->modelo($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'chasis') {
+                $casos->chasis($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'hecho') {
+                $casos->hecho($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'amaterno') {
+                $casos->amaterno($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'estado') {
+                $casos->estado($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'grupo_designado') {
+                $casos->grupo_designado($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'regional') {
+                $casos->regional($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'asignado') {
+                $casos->asignado($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'lugar') {
+                $casos->lugar($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'ci') {
+                $casos->ci($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'fechahecho') {
+                $casos->fechahecho($terminoBusqueda);
+            }
+           
+            $casos = $casos ->paginate();
+            
+        
+        $municipios = Municipio::pluck('nombre', 'id');
+        return view('caso.ver', compact('casos','municipios'))
+            ->with('i', ($casos->currentPage() - 1) * $casos->perPage());
+          
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 }
 
