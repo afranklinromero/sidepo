@@ -57,8 +57,8 @@
                                 {{ __('Caso') }} asignados encontrados {!! $casos->total() !!} 
                             </span>
 
-                             <div class="float-right">
-                             <a href="{{ route('casos.ver') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                            <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
+                             <a href="{{ route('casos.ver') }}" class="btn btn-primary btn-sm "  data-placement="left">
                                     {{ __('Ver Todo') }}
                                     </a>
                                 <form action="{{ route('casos.index') }}" method="GET">
@@ -66,7 +66,7 @@
                                    
                                     
                                     @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
-                                    <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                    <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm"  data-placement="left">
                                     {{ __('Crear nuevo') }}
                                     </a>
                                     @endrole

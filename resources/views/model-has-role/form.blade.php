@@ -20,7 +20,7 @@
         @foreach ($users as $user)
         @if(!empty($user['grado']) || !empty($user['apellido']))
         <option value="{{$user['id']}}">
-        {{ $user['grado'] }} {{ $user['name'] }} {{ $user['apellido'] ?? '' }}
+        {{ $user['apellido'] ?? '' }} {{ $user['name'] }} {{ $user['grado'] }}  
         </option>
         @endif
         @endforeach
@@ -40,4 +40,5 @@
         var selectedUserName = this.options[this.selectedIndex].text;
         document.getElementById('asignado').value = selectedUserName;
     });
+
 </script>
