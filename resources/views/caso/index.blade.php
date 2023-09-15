@@ -58,20 +58,25 @@
                             </span>
 
                             <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
-                             <a href="{{ route('casos.ver') }}" class="btn btn-primary btn-sm "  data-placement="left">
-                                    {{ __('Ver Todo') }}
-                                    </a>
+                                <a href="{{ route('casos.sinpdf') }}" class="btn"  data-placement="left" title="Sin PDF"><i class="fa-regular fa-file fa-xl"></i>
+                                </a>
+                                <a href="{{ route('casos.conpdf') }}" class="btn"  data-placement="left" title="Con PDF"><i class="fa-regular fa-file-pdf fa-xl"></i>
+                                    
+                                </a>
+                                <a href="{{ route('casos.ver') }}" class="btn"  data-placement="left" title="Todo"><i class="fa-regular fa-folder-open fa-xl"></i>
+                                    
+                                </a>
                                 <form action="{{ route('casos.index') }}" method="GET">
                                     @csrf
                                    
                                     
                                     @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
-                                    <a href="{{ route('casos.create') }}" class="btn btn-primary btn-sm"  data-placement="left">
-                                    {{ __('Crear nuevo') }}
+                                    <a href="{{ route('casos.create') }}" class="btn"  data-placement="left" title="Nuevo"><i class="fa-solid fa-file-circle-plus fa-xl"></i>
+                                    
                                     </a>
                                     @endrole
                                     @if(auth()->user()->hasRole(['admin', 'seguimiento'])) 
-                                                    <a class="btn btn-sm btn-secondary " href="{{ route('seguimientos.index') }}"><i class="fa-solid fa-magnifying-glass"></i> </a>
+                                                    <a class="btn " href="{{ route('seguimientos.index') }}" title="Seguimiento"><i class="fa-solid fa-magnifying-glass fa-xl"></i> </a>
                                     @endrole
                                 </form> 
                              </div>
@@ -89,38 +94,27 @@
                                     <table class="table table-striped table-hover">
                                         <thead class="thead">
                                             <tr>
-                                                
-                                                <th>Id</th>
-                                                <th>Caso</th>
-                                            
-                                                <th>Placa</th>
-                                                
-                                                <th>Denuncia</th>
-                                            
-                                                <th>Estado</th>
-                                                
-                                                <th>Asignado</th>
-                                                <th>Regional</th>
-                                                
-                                                
-
-                                                <th></th>
+                                                <th class="col">Id</th>
+                                                <th class="col">Caso</th>
+                                                <th class="col">Placa</th>
+                                                <th class="col">Denuncia</th>
+                                                <th class="col-2">Estado</th>
+                                                <th class="col-2">Asignado</th>
+                                                <th class="col">Grupo</th>
+                                                <th class="col">Lugar</th>
+                                                <th class="col">Accion</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($casos as $caso)
                                                 <tr>
-                                                    
-                                                    <td>{{ $caso->id}}</td>
+                                                   <td>{{ $caso->id}}</td>
                                                     <td>{{ $caso->caso }}</td>
                                                     <td>{{ $caso->placa }}</td>
                                                     <td>{{ $caso->fecha_denuncia }}</td>
-                                                    
                                                     <td>{{ $caso->estado }}</td>
-                                                    
                                                     <td>{{ $caso->asignado }}</td>
-                                                    
-
+                                                    <td>{{ $caso->grupo_designado }}</td>
                                                     <td>  
                                                         @if (is_numeric($caso->lugar))
                                                             {{ $municipios[$caso->lugar] }}
@@ -128,7 +122,7 @@
                                                             {{ $caso->lugar }}
                                                         @endif
                                                         </td>
-                                                    <td>
+                                                    <td class="col-2">
                                                         <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
                                                         
                                                         

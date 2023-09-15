@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                            <a class="btn btn-primary" href="{{ route('casos.index') }}"> {{ __('Volver') }}</a>   {{ __('Seguimiento') }}
+                            <a class="btn btn-primary" href="{{ url()->previous() }}"> {{ __('Volver') }}</a>   {{ __('Seguimiento') }}
                             </span>
                             <!-- 
                             <div class="float-right">

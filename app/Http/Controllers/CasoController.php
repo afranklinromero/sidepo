@@ -50,33 +50,30 @@ class CasoController extends Controller
         $casos->orWhereRaw('1=1'); // Esto agrega una condición siempre verdadera para incluir todos los casos
     } else {
         // Si el usuario es miembro del grupo 'jefe_montero', mostrar casos con 'lugar' igual a 'montero'
-        if ($user->grupo === 'MONTERO') {
+        if ($user->grupo === 'JEFE MONTERO') {
             $casos->orWhere('lugar', 'MONTERO');
         }
-        if ($user->grupo === 'YAPACANI') {
+        if ($user->grupo === 'JEFE YAPACANI') {
             $casos->orWhere('lugar', 'YAPACANI');
-        }if ($user->grupo === 'PUERTO SUAREZ') {
+        }if ($user->grupo === 'JEFE PUERTO SUAREZ') {
             $casos->orWhere('lugar', 'PUERTO SUAREZ');
         }
-        if ($user->grupo === 'SAN IGNACIO DE VELASCO') {
+        if ($user->grupo === 'JEFE SAN IGNACIO DE VELASCO') {
             $casos->orWhere('lugar', 'SAN IGNACIO DE VELASCO');
         }
-        if ($user->grupo === 'WARNES') {
+        if ($user->grupo === 'JEFE WARNES') {
             $casos->orWhere('lugar', 'WARNES');
         }
-        if ($user->grupo === 'LA GUARDIA') {
+        if ($user->grupo === 'JEFE LA GUARDIA') {
             $casos->orWhere('lugar', 'LA GUARDIA');
         }
-        if ($user->grupo === 'COTOCA') {
+        if ($user->grupo === 'JEFE COTOCA') {
             $casos->orWhere('lugar', 'COTOCA');
         }
         if ($user->grupo === 'JEFEALFA') {
-           
-                $casos->orwhere('grupo_designado', 'ALFA')
-                    ->where('lugar', 'CENTRAL');
-            
+           $casos->orwhere('grupo_designado', 'ALFA')
+                ->where('lugar', 'CENTRAL');
         }
-       
        if ($user->grupo === 'JEFEESPECIALES') {
         $casos->where(function($query) {
             $query->orWhere('grupo_designado', 'ESPECIALES')
@@ -449,4 +446,346 @@ class CasoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function sinpdf(Request $request)
+     {
+        $user = auth()->user();
+        $busquedaPor = $request->get('busqueda_por');
+        $terminoBusqueda = $request->get('termino_busqueda');
+        $userId = $user->apellido;
+        $casosConPDF = Archivodenuncia::distinct('id_caso')->pluck('id_caso')->toArray();
+        
+        
+        
+      
+                 if (in_array($user->id, [1, 4, 3])) {
+                    $casos = Caso::where('id_user', $user->id)
+                   ->whereNotIn('id', $casosConPDF);
+            }
+            else{
+                if ($user->grupo === 'JEFE MONTERO') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where('grupo_designado', 'MONTERO')
+                    ->whereNotIn('id', $casosConPDF);
+                    
+                }  
+                if ($user->grupo === 'JEFE YAPACANI') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where('grupo_designado', 'YAPACANI')
+                    ->whereNotIn('id', $casosConPDF);
+                }  
+                if ($user->grupo === 'JEFE SAN IGNACIO DE VELASCO') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where('grupo_designado', 'JEFE SAN IGNACIO DE VELASCO')
+                    ->whereNotIn('id', $casosConPDF);
+                }  
+                if ($user->grupo === 'JEFE WARNES') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where('grupo_designado', 'JEFE WARNES')
+                    ->whereNotIn('id', $casosConPDF);
+                }  
+                if ($user->grupo === 'JEFE LA GUARDIA') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where('grupo_designado', 'JEFE LA GUARDIA')
+                    ->whereNotIn('id', $casosConPDF);
+                }  
+                if ($user->grupo === 'JEFE COTOCA') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where('grupo_designado', 'JEFE COTOCA')
+                    ->whereNotIn('id', $casosConPDF);
+                } 
+                if ($user->grupo === 'JEFE PUERTO SUAREZ') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where('grupo_designado', 'JEFE PUERTO SUAREZ')
+                    ->whereNotIn('id', $casosConPDF);
+                } 
+              
+                if ($user->grupo === 'JEFEESPECIALES') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where(function ($query)use ($casosConPDF) {
+                    $query->where('grupo_designado', 'ESPECIALES')
+                           ->orWhere('lugar', 'CENTRAL')
+                           ->whereNotIn('id', $casosConPDF);
+                    });
+                }
+                if ($user->grupo === 'JEFEALFA') {
+                    $casos = Caso::where('id_user', $user->id)
+                    ->where(function ($query)use ($casosConPDF) {
+                        $query->where('grupo_designado', '')
+                           ->orWhere('lugar', 'CENTRAL')
+                           ->whereNotIn('id', $casosConPDF);
+                    });
+                }
+                if ($user->grupo === 'JEFEBETABRAVO') {
+                    $casos = Caso::where('id_user', $user->id)
+                            ->orWhere(function ($query) use ($casosConPDF){
+                        $query->where(function ($subquery) {
+                            $subquery->where('grupo_designado', 'BETA')
+                                     ->orWhere('grupo_designado', 'BRAVO');
+                        })
+                        ->where('lugar', 'CENTRAL')
+                        ->whereNotIn('id', $casosConPDF);
+                    });
+                }
+                if ($user->grupo === 'JEFEGAMACHARLY') {
+                    $casos = Caso::where('id_user', $user->id)
+                            ->orWhere(function ($query) use ($casosConPDF) {
+                        $query->where(function ($subquery) {
+                            $subquery->where('grupo_designado', 'GAMA')
+                              ->orWhere('grupo_designado', 'CHARLY');
+                            })
+                            ->where('lugar', 'CENTRAL')
+                            ->whereNotIn('id', $casosConPDF);
+                        });
+                }
+                
+             }   
+        $casos->orderBy('id', 'DESC');
+          
+             if ($busquedaPor === 'caso') {
+                 $casos->caso($terminoBusqueda);
+             } elseif ($busquedaPor === 'nombre') {
+                 $casos->nombre($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'apaterno') {
+                 $casos->apaterno($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'fecha_denuncia') {
+                 $casos->fecha_denuncia($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'placa') {
+                 $casos->placa($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'vehiculo') {
+                 $casos->vehiculo($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'marca') {
+                 $casos->marca($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'tipo') {
+                 $casos->tipo($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'color') {
+                 $casos->color($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'modelo') {
+                 $casos->modelo($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'chasis') {
+                 $casos->chasis($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'hecho') {
+                 $casos->hecho($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'amaterno') {
+                 $casos->amaterno($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'estado') {
+                 $casos->estado($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'grupo_designado') {
+                 $casos->grupo_designado($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'regional') {
+                 $casos->regional($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'asignado') {
+                 $casos->asignado($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'lugar') {
+                 $casos->lugar($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'ci') {
+                 $casos->ci($terminoBusqueda);
+             }
+             elseif ($busquedaPor === 'fechahecho') {
+                 $casos->fechahecho($terminoBusqueda);
+             }
+            
+             $casos = $casos ->paginate();
+             
+         
+         $municipios = Municipio::pluck('nombre', 'id');
+         return view('caso.sinpdf', compact('casos','municipios'))
+             ->with('i', ($casos->currentPage() - 1) * $casos->perPage());
+           
+     }
+ 
+     /**
+      * Show the form for creating a new resource.
+      *
+      * @return \Illuminate\Http\Response
+      */
+
+
+      public function conpdf(Request $request)
+    {
+        $user = auth()->user();
+        $busquedaPor = $request->get('busqueda_por');
+        $terminoBusqueda = $request->get('termino_busqueda');
+        
+        $casosConPDF = Archivodenuncia::distinct('id_caso')->pluck('id_caso')->toArray();
+
+      
+            
+           
+           
+         if (in_array($user->id, [1, 4, 3])) {
+                $casos = Caso::whereIn('id', $casosConPDF);
+        }
+        else{
+            if ($user->grupo === 'JEFE MONTERO') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where('grupo_designado', 'MONTERO');
+                
+            }  
+            if ($user->grupo === 'JEFE YAPACANI') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where('grupo_designado', 'YAPACANI');
+                
+            }  
+            if ($user->grupo === 'JEFE SAN IGNACIO DE VELASCO') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where('grupo_designado', 'JEFE SAN IGNACIO DE VELASCO');
+                
+            }  
+            if ($user->grupo === 'JEFE WARNES') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where('grupo_designado', 'JEFE WARNES');
+                
+            }  
+            if ($user->grupo === 'JEFE LA GUARDIA') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where('grupo_designado', 'JEFE LA GUARDIA');
+                
+            }  
+            if ($user->grupo === 'JEFE COTOCA') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where('grupo_designado', 'JEFE COTOCA');
+                
+            } 
+            if ($user->grupo === 'JEFE PUERTO SUAREZ') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where('grupo_designado', 'JEFE PUERTO SUAREZ');
+                
+            } 
+          
+            if ($user->grupo === 'JEFEESPECIALES') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where(function ($query) {
+                $query->where('grupo_designado', 'ESPECIALES')
+                       ->orWhere('lugar', 'CENTRAL');
+                });
+            }
+            if ($user->grupo === 'JEFEALFA') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                ->where(function ($query) {
+                    $query->where('grupo_designado', '')
+                       ->orWhere('lugar', 'CENTRAL');
+                });
+            }
+            if ($user->grupo === 'JEFEBETABRAVO') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                        ->orWhere(function ($query) {
+                    $query->where(function ($subquery) {
+                        $subquery->where('grupo_designado', 'BETA')
+                                 ->orWhere('grupo_designado', 'BRAVO');
+                    })
+                    ->where('lugar', 'CENTRAL');
+                });
+            }
+            if ($user->grupo === 'JEFEGAMACHARLY') {
+                $casos = Caso::whereIn('id', $casosConPDF)
+                        ->orWhere(function ($query) {
+                    $query->where(function ($subquery) {
+                        $subquery->where('grupo_designado', 'GAMA')
+                          ->orWhere('grupo_designado', 'CHARLY');
+                        })
+                        ->where('lugar', 'CENTRAL');
+                    });
+            }
+            
+         }   
+
+     
+      
+        
+        $casos->orderBy('id', 'DESC');
+         
+            if ($busquedaPor === 'caso') {
+                $casos->caso($terminoBusqueda);
+            } elseif ($busquedaPor === 'nombre') {
+                $casos->nombre($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'apaterno') {
+                $casos->apaterno($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'fecha_denuncia') {
+                $casos->fecha_denuncia($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'placa') {
+                $casos->placa($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'vehiculo') {
+                $casos->vehiculo($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'marca') {
+                $casos->marca($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'tipo') {
+                $casos->tipo($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'color') {
+                $casos->color($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'modelo') {
+                $casos->modelo($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'chasis') {
+                $casos->chasis($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'hecho') {
+                $casos->hecho($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'amaterno') {
+                $casos->amaterno($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'estado') {
+                $casos->estado($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'grupo_designado') {
+                $casos->grupo_designado($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'regional') {
+                $casos->regional($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'asignado') {
+                $casos->asignado($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'lugar') {
+                $casos->lugar($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'ci') {
+                $casos->ci($terminoBusqueda);
+            }
+            elseif ($busquedaPor === 'fechahecho') {
+                $casos->fechahecho($terminoBusqueda);
+            }
+           
+            $casos = $casos ->paginate();
+            
+        
+        $municipios = Municipio::pluck('nombre', 'id');
+        return view('caso.ver', compact('casos','municipios'))
+            ->with('i', ($casos->currentPage() - 1) * $casos->perPage());
+          
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
 }

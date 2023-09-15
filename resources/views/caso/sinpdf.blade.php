@@ -64,7 +64,7 @@
                                     
                                    
                                     <a href="{{ route('casos.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                    {{ __('volver') }}
+                                    {{ __('voler') }}
                                     </a>
                                    
                                 </form> 
@@ -82,9 +82,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
                                         <thead class="thead">
-                                        
-                                                
-                                            <tr>
+                                        <tr>
                                                 <th class="col">Id</th>
                                                 <th class="col">Caso</th>
                                                 <th class="col">Placa</th>
@@ -94,7 +92,6 @@
                                                 <th class="col">Grupo</th>
                                                 <th class="col">Lugar</th>
                                                 <th class="col">Accion</th>
-                                          
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -104,7 +101,6 @@
                                                     <td>{{ $caso->id}}</td>
                                                     <td>{{ $caso->caso }}</td>
                                                     <td>{{ $caso->placa }}</td>
-                                                    
                                                     <td>{{ $caso->fecha_denuncia }}</td>
                                                     
                                                     <td>{{ $caso->estado }}</td>
@@ -118,8 +114,7 @@
                                                         @else
                                                             {{ $caso->lugar }}
                                                         @endif
-                                                    </td>
-
+                                                        </td>
                                                     <td>
                                                         
                                                         

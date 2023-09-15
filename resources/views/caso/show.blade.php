@@ -14,7 +14,7 @@
                         <div class="float-left">
                             <span class="card-title"> Registro del Caso</span>
                         
-                            <a class="btn btn-primary" href="{{ route('casos.index') }}"> {{ __('Volver') }}</a>
+                            <a class="btn btn-primary" href="{{ url()->previous() }}"> {{ __('Volver') }}</a>
                         </div>
                         
                         </div>
@@ -185,17 +185,20 @@
                                                     @php $juicioOralMostrado = true; @endphp
                                                     <label>Documentación Juicio Oral:</label><br>
                                                 @endif
-                                                <a class ="btn btn-success btn-sm  " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
-                                                @role('admin')
+                                                <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
                                                 <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar PDF</button>
-                                                @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                                @endrole
-                                                
-                                                    <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
-                                                  
+                                                        <a class ="btn btn-success btn-sm  " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
+                                                        @role('admin')
+                                                      
+                                                        <button type="submit" class="btn btn-danger btn-sm">Borrar PDF</button>
+                                                        @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
+                                                        </form>
+                                                        @endrole
+                                                        
+                                                       
+                                                </div>  
                                                 <div class="qr-container "></div>
                                                
                                                 <div class="d-flex justify-content-center">
