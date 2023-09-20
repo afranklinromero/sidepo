@@ -64,7 +64,7 @@
                                     
                                    
                                     <a href="{{ route('casos.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                    {{ __('voler') }}
+                                    {{ __('volver') }}
                                     </a>
                                    
                                 </form> 
@@ -82,23 +82,19 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
                                         <thead class="thead">
+                                        
+                                                
                                             <tr>
-                                                
-                                                <th>Id</th>
-                                                <th>Caso</th>
-                                            
-                                                <th>Placa</th>
-                                                
-                                                <th>Denuncia</th>
-                                            
-                                                <th>Estado</th>
-                                                
-                                                <th>Asignado</th>
-                                                <th>Regional</th>
-                                                
-                                                
-
-                                                <th></th>
+                                                <th class="col">Id</th>
+                                                <th class="col">Caso</th>
+                                                <th class="col">Placa</th>
+                                                <th class="col">Denuncia</th>
+                                                <th class="col-2">Estado</th>
+                                                <th class="col-2">Asignado</th>
+                                                <th class="col">Grupo</th>
+                                                <th class="col">Lugar</th>
+                                                <th class="col">Accion</th>
+                                          
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -108,12 +104,13 @@
                                                     <td>{{ $caso->id}}</td>
                                                     <td>{{ $caso->caso }}</td>
                                                     <td>{{ $caso->placa }}</td>
+                                                    
                                                     <td>{{ $caso->fecha_denuncia }}</td>
                                                     
                                                     <td>{{ $caso->estado }}</td>
                                                     
                                                     <td>{{ $caso->asignado }}</td>
-                                                    
+                                                    <td>{{ $caso->grupo_designado }}</td>
 
                                                     <td>  
                                                         @if (is_numeric($caso->lugar))
@@ -121,7 +118,8 @@
                                                         @else
                                                             {{ $caso->lugar }}
                                                         @endif
-                                                        </td>
+                                                    </td>
+
                                                     <td>
                                                         
                                                         

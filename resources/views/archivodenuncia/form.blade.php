@@ -22,6 +22,8 @@
             {!! $errors->first('id_caso', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
+        <input type="hidden" name="pdf_data" id="pdf_data" value="1" readonly>
+
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>

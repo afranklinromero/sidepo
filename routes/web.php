@@ -38,6 +38,8 @@ Route::resource('registros', RegistroController::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('casos', CasoController::class);
 Route::get('/ver', [CasoController::class, 'ver'])->name('casos.ver');
+Route::get('/conpdf', [CasoController::class, 'conpdf'])->name('casos.conpdf');
+Route::get('/sinpdf', [CasoController::class, 'sinpdf'])->name('casos.sinpdf');
 Route::get('/archivodenuncias', [ArchivodenunciaController::class, 'index'])->name('archivodenuncias.index');
 Route::get('/archivodenuncias/{casos}/create', [ArchivodenunciaController::class, 'create'])->name('archivodenuncias.create');
 Route::post('/archivodenuncias', [ArchivodenunciaController::class, 'store'])->name('archivodenuncias.store');

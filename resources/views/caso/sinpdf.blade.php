@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-fluid">
         <b>BUSCAR POR</b>
-     {{ Form::open(['route'=>'casos.index', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
+     {{ Form::open(['route'=>'casos.ver', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
 
            
             <div class="form-group">
@@ -57,29 +57,16 @@
                                 {{ __('Caso') }} asignados encontrados {!! $casos->total() !!} 
                             </span>
 
-                            <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
-                                <a href="{{ route('casos.sinpdf') }}" class="btn"  data-placement="left" title="Sin PDF"><i class="fa-regular fa-file fa-xl"></i>
-                                </a>
-                                <a href="{{ route('casos.conpdf') }}" class="btn"  data-placement="left" title="Con PDF"><i class="fa-regular fa-file-pdf fa-xl"></i>
-                                    
-                                </a>
-                                <a href="{{ route('casos.ver') }}" class="btn"  data-placement="left" title="Todo"><i class="fa-regular fa-folder-open fa-xl"></i>
-                                    
-                                </a>
+                             <div class="float-right">
                                 <form action="{{ route('casos.index') }}" method="GET">
                                     @csrf
                                    
                                     
-                                    @if(auth()->user()->hasRole(['admin', 'ventanilla'])) 
-                                    <a href="{{ route('casos.create') }}" class="btn"  data-placement="left" title="Nuevo"><i class="fa-solid fa-file-circle-plus fa-xl"></i>
-                                    
+                                   
+                                    <a href="{{ route('casos.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                    {{ __('voler') }}
                                     </a>
-                                    @endrole
-
-                                    @if(auth()->user()->hasRole(['admin', 'seguimiento'])) 
-                                                    <a class="btn " href="{{ route('seguimientos.index') }}" title="Seguimiento"><i class="fa-solid fa-magnifying-glass fa-xl"></i> </a>
-
-                                    @endrole
+                                   
                                 </form> 
                              </div>
                         </div>
@@ -90,12 +77,12 @@
                             </div>
                         @endif
                         
-                        @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor']))
+                        @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor','ventanilla']))
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
                                         <thead class="thead">
-                                            <tr>
+                                        <tr>
                                                 <th class="col">Id</th>
                                                 <th class="col">Caso</th>
                                                 <th class="col">Placa</th>
@@ -110,13 +97,17 @@
                                         <tbody>
                                             @foreach ($casos as $caso)
                                                 <tr>
-                                                   <td>{{ $caso->id}}</td>
+                                                    
+                                                    <td>{{ $caso->id}}</td>
                                                     <td>{{ $caso->caso }}</td>
                                                     <td>{{ $caso->placa }}</td>
                                                     <td>{{ $caso->fecha_denuncia }}</td>
+                                                    
                                                     <td>{{ $caso->estado }}</td>
+                                                    
                                                     <td>{{ $caso->asignado }}</td>
                                                     <td>{{ $caso->grupo_designado }}</td>
+
                                                     <td>  
                                                         @if (is_numeric($caso->lugar))
                                                             {{ $municipios[$caso->lugar] }}
@@ -124,31 +115,16 @@
                                                             {{ $caso->lugar }}
                                                         @endif
                                                         </td>
-                                                    <td class="col-2">
-                                                        <form action="{{ route('casos.destroy',$caso->id) }}" method="POST">
+                                                    <td>
+                                                        
                                                         
                                                         
                                                             <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
-                                                            @if(auth()->user()->hasRole(['admin', 'denuncia'])) 
-                                                            <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
-                                                            @endif
-                                                            @if(auth()->user()->hasRole(['admin', 'seguimiento','denuncia'])) 
-                                                            <span class="btn btn-sm {{ $caso->seguimientos->isEmpty() ? 'btn-danger' : 'btn-success' }}" >
-        
-                                                                @if($caso->seguimientos->isEmpty())
-                                                                    <i class="fa-solid fa-x"></i>
-                                                                @else
-                                                                    <i class="fa-solid fa-check"></i>
-                                                                @endif
-                                                            </span>
-                                                            @endif
+                                                           
 
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            @role('admin') 
-                                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
-                                                            @endrole
-                                                        </form>
+                                                          
+                                                           
+                                                       
                                                     </td>
                                                 </tr>
                                             @endforeach

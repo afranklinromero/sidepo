@@ -165,7 +165,10 @@
        
          
         <input type="hidden" name="asignado" id="asignado" value="{{ $caso->user->name ?? '' }}" readonly>
-        </div>
+        
+        <input type="hidden" name="pdf" id="pdf" value="0" readonly>
+    
+    </div>
 
 
 
