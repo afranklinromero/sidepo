@@ -39,11 +39,13 @@ class CasoController extends Controller
     {
         $user = auth()->user();
         
-        $allowedUserIds = [1, 4];
+       
         $busquedaPor = $request->get('busqueda_por');
         $terminoBusqueda = $request->get('termino_busqueda');
-    
-        $casos = Caso::where('id_user', $user->id);
+        
+
+        $casos = Caso::where('id_user', $user);
+     
 
     // Si el usuario es el administrador (usuario 1) o el usuario de seguimiento (usuario 4), mostrar todos los casos
     if (in_array($user->id, [1, 4, 3])) {
@@ -51,51 +53,92 @@ class CasoController extends Controller
     } else {
         // Si el usuario es miembro del grupo 'jefe_montero', mostrar casos con 'lugar' igual a 'montero'
         if ($user->grupo === 'JEFE MONTERO') {
-            $casos->orWhere('lugar', 'MONTERO');
+            $casos = Caso::where(function ($query) {
+                $query->Where('lugar', 'MONTERO')
+                ->orWhere('lugar', 1);
+            });
+           
         }
         if ($user->grupo === 'JEFE YAPACANI') {
-            $casos->orWhere('lugar', 'YAPACANI');
+            $casos = Caso::where(function ($query) {
+                $query->Where('lugar', 'YAPACANI')
+                ->orWhere('lugar', 1);
+            });
+            
         }if ($user->grupo === 'JEFE PUERTO SUAREZ') {
-            $casos->orWhere('lugar', 'PUERTO SUAREZ');
+            $casos = Caso::where(function ($query) {
+                $query->Where('lugar', 'PUERTO SUAREZ')
+                ->orWhere('lugar', 1);
+            });
+        
         }
         if ($user->grupo === 'JEFE SAN IGNACIO DE VELASCO') {
-            $casos->orWhere('lugar', 'SAN IGNACIO DE VELASCO');
+            $casos = Caso::where(function ($query) {
+                $query->Where('lugar', 'SAN IGNACIO DE VELASCO')
+                ->orWhere('lugar', 1);
+            });
+            
         }
         if ($user->grupo === 'JEFE WARNES') {
-            $casos->orWhere('lugar', 'WARNES');
+            $casos = Caso::where(function ($query) {
+                $query->Where('lugar', 'WARNES')
+                ->orWhere('lugar', 1);
+            });
+           
         }
         if ($user->grupo === 'JEFE LA GUARDIA') {
-            $casos->orWhere('lugar', 'LA GUARDIA');
+            $casos = Caso::where(function ($query) {
+                $query->Where('lugar', 'LA GUARDIA')
+                ->orWhere('lugar', 1);
+            });
+           
         }
         if ($user->grupo === 'JEFE COTOCA') {
-            $casos->orWhere('lugar', 'COTOCA');
-        }
-        if ($user->grupo === 'JEFEALFA') {
-           $casos->orwhere('grupo_designado', 'ALFA')
-                ->where('lugar', 'CENTRAL');
-        }
-       if ($user->grupo === 'JEFEESPECIALES') {
-        $casos->where(function($query) {
-            $query->orWhere('grupo_designado', 'ESPECIALES')
-                  ->where('lugar', 'CENTRAL');
-        });
-        }
-        if ($user->grupo === 'JEFEBETABRAVO') {
-            $casos->orWhere(function ($query) {
-                $query->where(function ($subquery) {
-                    $subquery->where('grupo_designado', 'BETA')
-                             ->orWhere('grupo_designado', 'BRAVO');
-                })
-                ->where('lugar', 'CENTRAL');
+            $casos = Caso::where(function ($query) {
+                $query->Where('lugar', 'COTOCA')
+                ->orWhere('lugar', 1);
             });
         }
-        if ($user->grupo === 'JEFEGAMACHARLY') {
-            $casos->orWhere(function ($query) {
-                $query->where(function ($subquery) {
-                    $subquery->where('grupo_designado', 'GAMA')
+        if ($user->grupo === 'JEFEALFA') {
+            $casos = Caso::where(function ($query) {
+
+           $query->where('grupo_designado', 'ALFA')
+           ->where(function ($subquery) {
+            $subquery->where('lugar', 'CENTRAL')
+            ->orWhere('lugar', 1);
+        });
+      });
+        }
+        if ($user->grupo === 'JEFEESPECIALES') {
+            $casos = Caso::where(function ($query) {
+                $query->where('grupo_designado', 'ESPECIALES')
+                      ->where(function ($subquery) {
+                          $subquery->where('lugar', 'CENTRAL')
+                                   ->orWhere('lugar', 1);
+                      });
+                    });
+        }
+        if ($user->grupo === 'JEFEBETABRAVO') {
+            $casos = Caso::where(function ($query) {
+               $query->where('grupo_designado', 'BETA')
+                       ->orWhere('grupo_designado', 'BRAVO');
+                })
+                ->where(function ($subquery) {
+                    $subquery->where('lugar', 'CENTRAL')
+                             ->orWhere('lugar', 1);
+                });
+            
+        }
+        if ($user->grupo === 'JEFEGAMACHARLY') 
+        { $casos = Caso::where(function ($query) {
+         
+             
+            $query->where('grupo_designado', 'GAMA')
                       ->orWhere('grupo_designado', 'CHARLY');
                     })
-                    ->where('lugar', 'CENTRAL');
+                    ->where(function ($subquery) {
+                        $subquery ->where('lugar', 'CENTRAL')->
+                    orWhere('lugar', 1);
                 });
         }
         // Aquí puedes agregar condiciones adicionales para filtrar casos por región u otros criterios según tu lógica de negocio
@@ -246,7 +289,7 @@ class CasoController extends Controller
         $req->fechahecho=$request->fechahecho;
         $req->ci=$request->ci;
         $req->id_user=$request->id_user;
-
+        $req->pdf=$request->pdf;
      
         //$req->archivo= $request->archivo->store('public');
         
@@ -453,93 +496,94 @@ class CasoController extends Controller
         $busquedaPor = $request->get('busqueda_por');
         $terminoBusqueda = $request->get('termino_busqueda');
         $userId = $user->apellido;
-        $casosConPDF = Archivodenuncia::distinct('id_caso')->pluck('id_caso')->toArray();
+       
         
         
         
+        if (in_array($user->id, [1, 4, 3])) {
+            $casos = Caso::where('pdf', 0);
+    }
+    else{
+        if ($user->grupo === 'JEFE MONTERO') {
+            $casos = Caso::where('pdf', 0)
+            ->where('grupo_designado', 'MONTERO');
+            
+        }  
+        if ($user->grupo === 'JEFE YAPACANI') {
+            $casos = Caso::where('pdf', 0)
+            ->where('grupo_designado', 'YAPACANI');
+            
+        }  
+        if ($user->grupo === 'JEFE SAN IGNACIO DE VELASCO') {
+            $casos = Caso::where('pdf', 0)
+            ->where('grupo_designado', 'SAN IGNACIO DE VELASCO');
+            
+        }  
+        if ($user->grupo === 'JEFE WARNES') {
+            $casos = Caso::where('pdf', 0)
+            ->where('grupo_designado', 'WARNES');
+            
+        }  
+        if ($user->grupo === 'JEFE LA GUARDIA') {
+            $casos = Caso::where('pdf', 0)
+            ->where('grupo_designado', 'LA GUARDIA');
+            
+        }  
+        if ($user->grupo === 'JEFE COTOCA') {
+            $casos = Caso::where('pdf', 0)
+            ->where('grupo_designado', 'COTOCA');
+            
+        } 
+        if ($user->grupo === 'JEFE PUERTO SUAREZ') {
+            $casos = Caso::where('pdf', 0)
+            ->where('grupo_designado', 'SUAREZ');
+            
+        } 
       
-                 if (in_array($user->id, [1, 4, 3])) {
-                    $casos = Caso::where('id_user', $user->id)
-                   ->whereNotIn('id', $casosConPDF);
-            }
-            else{
-                if ($user->grupo === 'JEFE MONTERO') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where('grupo_designado', 'MONTERO')
-                    ->whereNotIn('id', $casosConPDF);
-                    
-                }  
-                if ($user->grupo === 'JEFE YAPACANI') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where('grupo_designado', 'YAPACANI')
-                    ->whereNotIn('id', $casosConPDF);
-                }  
-                if ($user->grupo === 'JEFE SAN IGNACIO DE VELASCO') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where('grupo_designado', 'JEFE SAN IGNACIO DE VELASCO')
-                    ->whereNotIn('id', $casosConPDF);
-                }  
-                if ($user->grupo === 'JEFE WARNES') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where('grupo_designado', 'JEFE WARNES')
-                    ->whereNotIn('id', $casosConPDF);
-                }  
-                if ($user->grupo === 'JEFE LA GUARDIA') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where('grupo_designado', 'JEFE LA GUARDIA')
-                    ->whereNotIn('id', $casosConPDF);
-                }  
-                if ($user->grupo === 'JEFE COTOCA') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where('grupo_designado', 'JEFE COTOCA')
-                    ->whereNotIn('id', $casosConPDF);
-                } 
-                if ($user->grupo === 'JEFE PUERTO SUAREZ') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where('grupo_designado', 'JEFE PUERTO SUAREZ')
-                    ->whereNotIn('id', $casosConPDF);
-                } 
-              
-                if ($user->grupo === 'JEFEESPECIALES') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where(function ($query)use ($casosConPDF) {
-                    $query->where('grupo_designado', 'ESPECIALES')
-                           ->orWhere('lugar', 'CENTRAL')
-                           ->whereNotIn('id', $casosConPDF);
-                    });
-                }
-                if ($user->grupo === 'JEFEALFA') {
-                    $casos = Caso::where('id_user', $user->id)
-                    ->where(function ($query)use ($casosConPDF) {
-                        $query->where('grupo_designado', '')
-                           ->orWhere('lugar', 'CENTRAL')
-                           ->whereNotIn('id', $casosConPDF);
-                    });
-                }
-                if ($user->grupo === 'JEFEBETABRAVO') {
-                    $casos = Caso::where('id_user', $user->id)
-                            ->orWhere(function ($query) use ($casosConPDF){
+        if ($user->grupo === 'JEFEESPECIALES') {
+            $casos = Caso::where('pdf', 0)
+            ->where(function ($query) {
+            $query->where('grupo_designado', 'ESPECIALES')
+            ->where(function ($subquery) {
+                $subquery->where('lugar', 'CENTRAL')
+                         ->orWhere('lugar', 1);
+            });
+            });
+        }
+        if ($user->grupo === 'JEFEALFA') {
+            $casos = Caso::where('pdf', 0)
+            ->where(function ($query) {
+                $query->where('grupo_designado', 'ALFA')
+                ->where(function ($subquery) {
+                    $subquery->where('lugar', 'CENTRAL')
+                             ->orWhere('lugar', 1);
+                });
+                  
+            });
+        }
+        if ($user->grupo === 'JEFEBETABRAVO') {
+            $casos = Caso::where('pdf', 0)
+                    ->orWhere(function ($query) {
                         $query->where(function ($subquery) {
                             $subquery->where('grupo_designado', 'BETA')
                                      ->orWhere('grupo_designado', 'BRAVO');
                         })
                         ->where('lugar', 'CENTRAL')
-                        ->whereNotIn('id', $casosConPDF);
+                        ->orWhere('lugar', 1);
                     });
-                }
-                if ($user->grupo === 'JEFEGAMACHARLY') {
-                    $casos = Caso::where('id_user', $user->id)
-                            ->orWhere(function ($query) use ($casosConPDF) {
+   }
+        if ($user->grupo === 'JEFEGAMACHARLY') {
+            $casos = Caso::where('pdf', 0)
+                    ->orWhere(function ($query) {
                         $query->where(function ($subquery) {
                             $subquery->where('grupo_designado', 'GAMA')
-                              ->orWhere('grupo_designado', 'CHARLY');
-                            })
-                            ->where('lugar', 'CENTRAL')
-                            ->whereNotIn('id', $casosConPDF);
-                        });
-                }
-                
-             }   
+                                     ->orWhere('grupo_designado', 'CHARLY');
+                        })
+                        ->where('lugar', 'CENTRAL')
+                        ->orWhere('lugar', 1);
+                    });
+   }
+     }   
         $casos->orderBy('id', 'DESC');
           
              if ($busquedaPor === 'caso') {
@@ -623,69 +667,64 @@ class CasoController extends Controller
         $user = auth()->user();
         $busquedaPor = $request->get('busqueda_por');
         $terminoBusqueda = $request->get('termino_busqueda');
-        
-        $casosConPDF = Archivodenuncia::distinct('id_caso')->pluck('id_caso')->toArray();
-
-      
-            
-           
+         
            
          if (in_array($user->id, [1, 4, 3])) {
-                $casos = Caso::whereIn('id', $casosConPDF);
+                $casos = Caso::where('pdf', 1);
         }
         else{
             if ($user->grupo === 'JEFE MONTERO') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where('grupo_designado', 'MONTERO');
                 
             }  
             if ($user->grupo === 'JEFE YAPACANI') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where('grupo_designado', 'YAPACANI');
                 
             }  
             if ($user->grupo === 'JEFE SAN IGNACIO DE VELASCO') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where('grupo_designado', 'JEFE SAN IGNACIO DE VELASCO');
                 
             }  
             if ($user->grupo === 'JEFE WARNES') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where('grupo_designado', 'JEFE WARNES');
                 
             }  
             if ($user->grupo === 'JEFE LA GUARDIA') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where('grupo_designado', 'JEFE LA GUARDIA');
                 
             }  
             if ($user->grupo === 'JEFE COTOCA') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where('grupo_designado', 'JEFE COTOCA');
                 
             } 
             if ($user->grupo === 'JEFE PUERTO SUAREZ') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where('grupo_designado', 'JEFE PUERTO SUAREZ');
                 
             } 
           
             if ($user->grupo === 'JEFEESPECIALES') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where(function ($query) {
                 $query->where('grupo_designado', 'ESPECIALES')
                        ->orWhere('lugar', 'CENTRAL');
                 });
             }
             if ($user->grupo === 'JEFEALFA') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                 ->where(function ($query) {
                     $query->where('grupo_designado', '')
                        ->orWhere('lugar', 'CENTRAL');
                 });
             }
             if ($user->grupo === 'JEFEBETABRAVO') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                         ->orWhere(function ($query) {
                     $query->where(function ($subquery) {
                         $subquery->where('grupo_designado', 'BETA')
@@ -695,7 +734,7 @@ class CasoController extends Controller
                 });
             }
             if ($user->grupo === 'JEFEGAMACHARLY') {
-                $casos = Caso::whereIn('id', $casosConPDF)
+                $casos = Caso::where('pdf', 1)
                         ->orWhere(function ($query) {
                     $query->where(function ($subquery) {
                         $subquery->where('grupo_designado', 'GAMA')

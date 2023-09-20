@@ -45,26 +45,28 @@ class ArchivodenunciaController extends Controller
      */
     public function store(Request $request)
     {
+ // Valida y guarda el modelo Archivodenuncia
+ request()->validate(Archivodenuncia::$rules);
 
-        $req = new Archivodenuncia();
+ $archivodenuncia = new Archivodenuncia();
+ $archivodenuncia->tipo = $request->tipo;
+ $archivodenuncia->id_caso = $request->id_caso;
 
-        request()->validate(Archivodenuncia::$rules);
+ if ($request->hasFile('pdf')) {
+     $archivo = $request->file('pdf');
+     $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
+     $archivo->storeAs('public/pdf', $nombreArchivo);
+     $archivodenuncia->pdf = $nombreArchivo;
+ }
 
-      //  $archivodenuncia = Archivodenuncia::create($request->all());
+ $archivodenuncia->save();
+        
 
-            $req->tipo= $request->tipo;
-            $req->id_caso= $request->id_caso;
-            
-
-           // $val = $request->id_caso;
-        if ($request->hasFile('pdf')) {
-            $archivo = $request->file('pdf');
-            $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
-            $archivo->storeAs('public/pdf', $nombreArchivo);
-            $req->pdf =$nombreArchivo;
-
-            $req->save();
-        }
+        $caso = Caso::find($request->id_caso);
+       
+        $caso->pdf = $request->pdf_data; // Reemplaza 'pdf' por el nombre del campo correcto
+    
+        $caso->save();
         return redirect()->route('casos.index')
             ->with('success', 'Archivodenuncia created successfully.');
     
