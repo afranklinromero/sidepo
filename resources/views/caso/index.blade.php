@@ -113,7 +113,9 @@
                                                     <td>{{ $caso->placa }}</td>
                                                     <td>{{ $caso->fecha_denuncia }}</td>
                                                     <td>{{ $caso->estado }}</td>
-                                                    <td>{{ $caso->asignado }}</td>
+                                                    <td> {{ $caso->user->name }}
+                                                        {{ $caso->user->apellido }}<br>
+                                                        Grado: {{ $caso->user->grado }}</td>
                                                     <td>{{ $caso->grupo_designado }}</td>
                                                     <td>  
                                                         @if (is_numeric($caso->lugar))
