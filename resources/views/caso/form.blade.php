@@ -215,5 +215,5 @@
         var searchTerm = this.value.trim().toLowerCase();
         filterOptions(searchTerm);
     });
-</script>
+
 </script>

@@ -135,9 +135,10 @@
         {{ Form::label('Oficial Asignado') }} <br>
         <select name="id_user" id="id_user" class="from-control seleccion">
         <option value="">Seleccionar usuario </option> 
-        @foreach ($users as $id =>$apellido)
-        <option value="{{ $id }}" {{ $id == $caso->id_user ? 'selected' : '' }}>{{ $apellido }}</option>
-           
+        @foreach ($users as $user)
+        <option value="{{ $user->id }}" {{ $user->id == $caso->id_user ? 'selected' : '' }}>
+                {{ $user->apellido }} {{ $user->name }} (Grado: {{ $user->grado }})
+            </option> 
         @endforeach
         </select>
         <input type="hidden" name="asignado" id="asignado" value="{{ $caso->user->apellido ?? '' }}" readonly>
