@@ -345,7 +345,7 @@ class CasoController extends Controller
         
             return response()->json($municipios);
         }
-        $users = User::all('apellido','name','grado');
+        $users = User::all('apellido','name','grado','id');
 
         
         return view('caso.edit',compact('users','caso','departamentos','municipios'));
