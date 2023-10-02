@@ -185,6 +185,7 @@
                                                     @php $juicioOralMostrado = true; @endphp
                                                     <label>Documentación Juicio Oral:</label><br>
                                                 @endif
+                                                
                                                 <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
                                                 <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
                                                         <a class ="btn btn-success btn-sm  " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
@@ -193,12 +194,15 @@
                                                         <button type="submit" class="btn btn-danger btn-sm">Borrar PDF</button>
                                                         @csrf
                                                             @method('DELETE')
-                                                            <button class="btn-generate-qr btn btn-sm btn-info" style="color: white;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
+                                                            
                                                         </form>
                                                         @endrole
                                                         
                                                        
                                                 </div>  
+                                                @role('admin')
+                                                <button class="float-right btn-generate-qr btn btn-sm btn-info" style="color: white; display: flex; gap: 10px; align-items: center;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
+                                                @endrole
                                                 <div class="qr-container "></div>
                                                
                                                 <div class="d-flex justify-content-center">
