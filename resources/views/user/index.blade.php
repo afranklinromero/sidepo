@@ -70,7 +70,7 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ 1 }}</td>
+                                            <td>{{ $i++ }}</td>
                                             
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->apellido }}</td>
