@@ -12,7 +12,7 @@
     Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
     <!-- Carga el script de ViewerJS -->
 
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
