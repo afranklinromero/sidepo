@@ -26,7 +26,7 @@ class UserController extends Controller
     {
        
             $users = User::orderBy('id'); // Eliminamos la restricción a un solo usuario
-            $i = 1;
+            
             $busquedaPor = $request->get('busqueda_por');
             $terminoBusqueda = $request->get('termino_busqueda');
             
@@ -37,7 +37,9 @@ class UserController extends Controller
             }
             
             $users = $users->paginate(10); // Ajusta el número según tus necesidades
-
+            $currentPage = $users->currentPage();
+           
+            $i = ($currentPage - 1) * 10 + 1;
             return view('user.index', compact('users','i'));
     }
     
