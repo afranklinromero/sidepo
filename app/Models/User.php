@@ -18,6 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    
     protected $fillable = [
         'name',
         'apellido',
@@ -67,6 +68,17 @@ class User extends Authenticatable
         
     }
 
-
+    public function scopeNombre($query, $name)
+	{
+		if($name)
+			return $query->where('name', 'LIKE', "%$name%");
+			
+	}
+	public function scopeApaterno($query, $apellido)
+	{
+		if($apellido)
+			return $query->where('apellido', 'LIKE', "%$apellido%");
+			
+	}
 }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelHasRole;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -20,7 +21,7 @@ class ModelHasRoleController extends Controller
      */
     public function index()
     {
-        $modelHasRoles = ModelHasRole::paginate();
+        $modelHasRoles = ModelHasRole::with('user','role')->paginate();
 
         return view('model-has-role.index', compact('modelHasRoles'))
             ->with('i', (request()->input('page', 1) - 1) * $modelHasRoles->perPage());

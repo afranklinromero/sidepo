@@ -263,7 +263,7 @@ footer {
                             </div>
                             <div class="col">    
                                 
-                                <a href="departamento" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
+                                <a href="departamentos" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
                                             <i class="fa fa-thermometer-half fa-2x"></i>
