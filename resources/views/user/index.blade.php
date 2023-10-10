@@ -28,7 +28,27 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+                    {{ Form::open(['route'=>'users.index', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
 
+                        
+                <div class="form-group">
+                    {{ Form::select('busqueda_por', [
+                    
+                        'name' => 'Nombre',
+                        'apellido' => 'Apellido',
+                    
+                        
+                        ], null, ['class' => 'form-control']) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::text('termino_busqueda', null, ['class'=>'form-control', 'placeholder'=> 'Ingrese el término de búsqueda'] )}}
+                </div>
+                <div class="form-group">
+                                <button type = "submit" class = "btn btn-default">
+                                <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+        {{ Form::close() }}
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -49,7 +69,7 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ 1 }}</td>
                                             
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->apellido }}</td>

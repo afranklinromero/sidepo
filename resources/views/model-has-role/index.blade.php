@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Model Has Role') }}
+                                {{ __('Roles') }}
                             </span>
 
                              <div class="float-right">
@@ -36,10 +36,11 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Role Id</th>
-										<th>Model Type</th>
-										<th>Model Id</th>
-
+										<th>Role</th>
+									
+										<th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Grado</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -48,9 +49,11 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $modelHasRole->role_id }}</td>
-											<td>{{ $modelHasRole->model_type }}</td>
-											<td>{{ $modelHasRole->model_id }}</td>
+											<td>{{ $modelHasRole->role->name  }}</td>
+											
+											<td>{{ $modelHasRole->user->name }}</td>
+                                            <td>{{ $modelHasRole->user->apellido }}</td>
+                                            <td>{{ $modelHasRole->user->grado }}</td>
 
                                             <td>
                                            

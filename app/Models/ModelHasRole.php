@@ -39,8 +39,12 @@ class ModelHasRole extends Eloquent
      */
     public function role()
     {
-        return $this->hasOne('App\Models\Role', 'id', 'role_id');
+        return $this->belongsTo(Role::class);
     }
     
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'model_id');
+    }
 
 }

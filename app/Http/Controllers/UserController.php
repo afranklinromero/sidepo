@@ -12,24 +12,42 @@ use Illuminate\Support\Facades\Hash;
  */
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+       
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate();
+       
+            $users = User::orderBy('id'); // Eliminamos la restricción a un solo usuario
 
-        return view('user.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+            $busquedaPor = $request->get('busqueda_por');
+            $terminoBusqueda = $request->get('termino_busqueda');
+            
+            if ($busquedaPor === 'name') {
+                $users->where('name', 'LIKE', '%' . $terminoBusqueda . '%');
+            } elseif ($busquedaPor === 'apellido') {
+                $users->where('apellido', 'LIKE', '%' . $terminoBusqueda . '%');
+            }
+            
+            $users = $users->paginate(10); // Ajusta el número según tus necesidades
+
+            return view('user.index', compact('users'));
     }
-
+    
+        
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         $user = new User();
