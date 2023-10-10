@@ -150,6 +150,22 @@ footer {
                                 </div>
                                 <div class="col">    
                                 
+                                <a href="{{ url('/reportes') }}" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
+                                   <div style="text-align: -webkit-center;">
+                                       <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
+                                           <i class="fa fa-chart-pie fa-2x"></i>
+                                       </div>
+                                                                   
+                                       <h2 class="mt-6 text-xl font-semibold">REPORTES</h2>
+
+                                       <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                           INGRESAR.
+                                       </p>
+                                   </div>
+                               </a>
+                           </div>
+                                <div class="col">    
+                                
                                     <a href="#" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                         <div style="text-align: -webkit-center;">
                                             <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
