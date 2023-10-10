@@ -28,6 +28,7 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+                    <b>BUSCAR POR</b>
                     {{ Form::open(['route'=>'users.index', 'method'=> 'GET', 'class'=>'form-inline pull-rigth'])}}
 
                         

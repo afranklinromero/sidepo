@@ -170,7 +170,7 @@ footer {
                                     <a href="#" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                         <div style="text-align: -webkit-center;">
                                             <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                                <i class="fa fa-z-half fa-2x"></i>
+                                                <i class="fa fa-folder fa-2x"></i>
                                             </div>
                                                                         
                                             <h2 class="mt-6 text-xl font-semibold">ARCHIVO</h2>
@@ -186,7 +186,7 @@ footer {
                                 <a href="#" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-compass fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">DESMARCADO</h2>
@@ -202,7 +202,7 @@ footer {
                                 <a href="#" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-thumbtack fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">MARCADO</h2>
@@ -218,7 +218,7 @@ footer {
                                 <a href="#" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-clipboard fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">BOLETINES</h2>
@@ -234,7 +234,7 @@ footer {
                                 <a href="#" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-book fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">LIBRO DE NOVEDADES</h2>
@@ -250,7 +250,7 @@ footer {
                                 <a href="#" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-tag fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">SECRETARIA</h2>
@@ -266,7 +266,7 @@ footer {
                                 <a href="departamentos" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-globe fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">DEPARTAMENTO</h2>
@@ -282,7 +282,7 @@ footer {
                                 <a href="municipios" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-city fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">MUNICIPIO</h2>
@@ -298,7 +298,7 @@ footer {
                                 <a href="model-has-roles" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-address-card fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">ROLES</h2>
@@ -314,7 +314,7 @@ footer {
                                 <a href="users" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
                                     <div style="text-align: -webkit-center;">
                                         <div class="mt-3 rounded-circle btn btn-success d-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem; ">
-                                            <i class="fa fa-thermometer-half fa-2x"></i>
+                                            <i class="fa fa-address-book fa-2x"></i>
                                         </div>
                                                                     
                                         <h2 class="mt-6 text-xl font-semibold">USUARIOS</h2>
