@@ -94,6 +94,7 @@
                                                 <th class="col">Grupo</th>
                                                 <th class="col">Lugar</th>
                                                 <th class="col">Accion</th>
+                                                
                                           
                                             </tr>
                                         </thead>
@@ -121,15 +122,15 @@
                                                     </td>
 
                                                     <td>
-                                                        
-                                                        
-                                                        
-                                                            <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
-                                                           
-
-                                                          
-                                                           
                                                        
+                                                            <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
+                                                     
+                                                    
+                                                            @if(auth()->user()->hasRole(['ventanilla']))
+                                                         <a href="{{ route('archivodenuncias.create', $caso->id) }}" class="btn btn-sm btn-primary float-right"  data-placement="left">
+                                                         {{ __('Crear PDF') }}
+                                                         </a>
+                                                         @endrole
                                                     </td>
                                                 </tr>
                                             @endforeach
