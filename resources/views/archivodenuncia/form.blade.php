@@ -6,7 +6,12 @@
             {{ Form::select('tipo', [  
              '1' => 'Etapa preliminar',
              '2' => 'Etapa Preparatoria',
-             '3' => 'Juicio Oral',
+             '3' => 'Recuperado',
+             '4' => 'Entregado',
+             '5' => 'Marcado',
+             '6' => 'Desmarcado',
+             '7' => 'Baja Tributaria',
+             
               ], $archivodenuncia->tipo, ['class' => 'form-control' . ($errors->has('tipo') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione.....']) }}
             {!! $errors->first('tipo', '<div class="invalid-feedback">:message</div>') !!}
         </div>

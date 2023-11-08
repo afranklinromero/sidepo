@@ -165,6 +165,12 @@
                                             $etapaPreliminarMostrada = false;
                                             $etapaPreparatoriaMostrada = false;
                                             $juicioOralMostrado = false;
+
+                                            $recuperado = false;
+                                            $entregado = false;
+                                            $marcado = false;
+                                            $desmarcado = false;
+                                            $bajaTributaria = false;
                                            
                                             @endphp
 
@@ -181,9 +187,26 @@
                                                     <label>Documentación Etapa Preparatoria:</label><br>
                                                 @endif
 
-                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 3 && !$juicioOralMostrado)
-                                                    @php $juicioOralMostrado = true; @endphp
-                                                    <label>Documentación Juicio Oral:</label><br>
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 3 && !$recuperado)
+                                                    @php $recuperado = true; @endphp
+                                                    <label>Documentación Recuperado:</label><br>
+                                                @endif
+
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 4 && !$entregado)
+                                                    @php $entregado = true; @endphp
+                                                    <label>Documentación Entregado:</label><br>
+                                                @endif
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 5 && !$marcado)
+                                                    @php $marcado = true; @endphp
+                                                    <label>Documentación Marcado:</label><br>
+                                                @endif
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 6 && !$desmarcado)
+                                                    @php $desmarcado = true; @endphp
+                                                    <label>Documentación Desmarcado:</label><br>
+                                                @endif
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 7 && !$bajaTributaria)
+                                                    @php $bajaTributaria = true; @endphp
+                                                    <label>Documentación Baja Tributaria:</label><br>
                                                 @endif
                                                 
                                                 <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
