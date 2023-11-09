@@ -1,20 +1,18 @@
 <div class="box box-info padding-1">
     <div class="box-body">
         
-        <div class="form-group">
-            {{ Form::label('Etapa') }}
-            {{ Form::select('tipo', [  
-             '1' => 'Etapa preliminar',
-             '2' => 'Etapa Preparatoria',
-             '3' => 'Recuperado',
-             '4' => 'Entregado',
-             '5' => 'Marcado',
-             '6' => 'Desmarcado',
-             '7' => 'Baja Tributaria',
-             
-              ], $archivodenuncia->tipo, ['class' => 'form-control' . ($errors->has('tipo') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione.....']) }}
-            {!! $errors->first('tipo', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+    <div class="form-group">
+    {{ Form::label('Etapa') }}
+    {{ Form::select('tipo', [
+        '1' => 'Etapa preliminar',
+        '2' => 'Etapa Preparatoria',
+        '3' => 'Recuperado',
+        '4' => 'Entregado',
+        '5' => 'Marcado',
+        '7' => 'Baja Tributaria',
+        ] + (auth()->user()->hasRole(['admin', 'desmarque'])? ['6' => 'Desmarcado'] : []), $archivodenuncia->tipo, ['class' => 'form-control' . ($errors->has('tipo') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione.....']) }}
+        {!! $errors->first('tipo', '<div class="invalid-feedback">:message</div>') !!}
+</div>
         
         <div class="form-group">
             <label for="pdf">Archivo PDF</label>

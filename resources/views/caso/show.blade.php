@@ -169,8 +169,9 @@
                                             $recuperado = false;
                                             $entregado = false;
                                             $marcado = false;
-                                            $desmarcado = false;
+                                            
                                             $bajaTributaria = false;
+                                            $desmarcado = false;
                                            
                                             @endphp
 
@@ -200,14 +201,16 @@
                                                     @php $marcado = true; @endphp
                                                     <label>Documentación Marcado:</label><br>
                                                 @endif
-                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 6 && !$desmarcado)
-                                                    @php $desmarcado = true; @endphp
-                                                    <label>Documentación Desmarcado:</label><br>
-                                                @endif
+                                             
                                                 @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 7 && !$bajaTributaria)
                                                     @php $bajaTributaria = true; @endphp
                                                     <label>Documentación Baja Tributaria:</label><br>
                                                 @endif
+                                                
+                                                    @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 6 && !$desmarcado)
+                                                        @php $desmarcado = true; @endphp
+                                                        <label>Documentación Desmarcado:</label><br>
+                                                    @endif
                                                 
                                                 <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
                                                 <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">

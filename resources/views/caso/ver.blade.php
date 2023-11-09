@@ -77,7 +77,7 @@
                             </div>
                         @endif
                         
-                        @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor','ventanilla']))
+                        @if(auth()->user()->hasRole(['admin', 'denuncia', 'seguimiento', 'visor','ventanilla','desmarque']))
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
@@ -124,8 +124,9 @@
                                                     <td>
                                                        
                                                             <a class="btn btn-sm btn-primary " href="{{ route('casos.show',$caso->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
-                                                     
-                                                    
+                                                            @if(auth()->user()->hasRole(['desmarque']))
+                                                            <a class="btn btn-sm btn-success" href="{{ route('casos.edit',$caso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                                                            @endrole
                                                             @if(auth()->user()->hasRole(['ventanilla']))
                                                          <a href="{{ route('archivodenuncias.create', $caso->id) }}" class="btn btn-sm btn-primary float-right"  data-placement="left">
                                                          {{ __('Crear PDF') }}
