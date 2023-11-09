@@ -72,7 +72,7 @@ footer {
                         <div class="row justify-content-center">
                             <div class="row row-cols-1 row-cols-md-3 g-4">
                                 
-                            @if(auth()->user()->hasRole(['denuncia', 'seguimiento', 'ventanilla']))       
+                            @if(auth()->user()->hasRole(['denuncia', 'seguimiento', 'ventanilla', 'desmarque']))       
                             <div class="col">    
                                 
                                 <a href="{{ url('/casos') }}" class="card scale-100 p-6   shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2">
