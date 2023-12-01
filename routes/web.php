@@ -27,12 +27,17 @@ use App\Http\Controllers\QRCodeController;
 |
 */
 Route::get('/', function () {
-    if(auth()->user()->role=='admin') {
+    if(auth()->user() && auth()->user()->role == 'admin') {
         return view('administrator');
-    }else{
+    } else {
         return view('welcome');
-    }})
-    ->middleware('auth');
+    }
+    })
+
+    ;
+    Route::get('/login', function () {
+        return view('auth.login');
+    });
     Auth::routes();
 Route::get('/administrator',[AdminController::class,'index']);
 Route::resource('registros', RegistroController::class);
