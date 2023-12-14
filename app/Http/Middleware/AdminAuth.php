@@ -20,7 +20,7 @@ class AdminAuth
             return $next($request);
            } 
        }
-        return redirect() ->to('welcome');
+        return redirect() ->to('menu');
     }
 
 }

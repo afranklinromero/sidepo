@@ -30,7 +30,7 @@ Route::get('/', function () {
     if(auth()->user() && auth()->user()->role == 'admin') {
         return view('administrator');
     } else {
-        return view('welcome');
+        return view('menu');
     }
     })
 
