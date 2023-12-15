@@ -27,14 +27,20 @@ use App\Http\Controllers\QRCodeController;
 |
 */
 Route::get('/', function () {
-    if(auth()->user() && auth()->user()->role == 'admin') {
-        return view('administrator');
+    if (auth()->check()) {
+        $userRole = auth()->user()->role;
+
+        if ($userRole == 'admin') {
+            return view('administrator');
+        } else {
+            // Puedes agregar condiciones adicionales para otros roles si es necesario
+            // Por ahora, cualquier otro rol se dirigirá a la vista 'menu'
+            return view('menu');
+        }
     } else {
         return view('welcome');
     }
-    })
-
-    ;
+});
     Route::get('/login', function () {
         return view('auth.login');
     });

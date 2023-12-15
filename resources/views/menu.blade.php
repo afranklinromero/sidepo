@@ -77,10 +77,7 @@ footer {
                         @else
                         @if (Route::has('register'))
                             
-                            <li class="nav-item">
-                            
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
+                          
                         @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -114,7 +111,7 @@ footer {
                             <div class="card-header" 
                                 style="background-color: black;
                                 color: white;">
-                                {{ __('Admin') }}</div>
+                                {{ __('Bienvenido') }}</div>
 
                             <div class="card-body">
                                 @if (session('status'))
@@ -123,7 +120,7 @@ footer {
                                     </div>
                                 @endif
 
-                                <p>Hola {{ Auth::user()->name }} estas conectado usuario del Sistema</p>
+                                <p>Hola {{ Auth::user()->name }} estas conectado como usuario del Sistema</p>
                             </div>
                         </div>
                         <br>
