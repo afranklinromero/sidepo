@@ -16,10 +16,10 @@
                         
                             <a class="btn btn-primary" href="{{ url()->previous() }}"> {{ __('Volver') }}</a>
                         </div>
-                        
-                        </div>
-                            <button class="btn btn-primary container-fluid" style="margin-top:-5px" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">Datos de Registro</button>
-                            <div class="card-body ">
+                        <br>
+                      
+                            <button class="btn btn-primary container-fluid"  type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">Datos de Registro</button>
+                            <div>
 
 
                                 <div class="row">
@@ -155,8 +155,8 @@
                             
                             
                             </div>
-                        
-                            <button class="btn btn-primary container-fluid" style="margin-top:-25px" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapses" aria-expanded="false" aria-controls="multiCollapseExample4">Pdf</button>
+                            <br>
+                            <button class="btn btn-primary container-fluid"  type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Pdf Privado</button>
                                 <div class="row">
                                     <div class="col-md-12" >
                                         <div class="collapse multi-collapses" id="multiCollapseExample4">
@@ -262,11 +262,120 @@
                                         
                                     </div>
                                 </div>
-                                <div class="mt-2">                             
-                                  
+                            <br>
+                            <button class="btn btn-primary container-fluid"  type="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#multiCollapse6" 
+                            aria-expanded="false" 
+                            aria-controls="multiCollapse6">Pdf Publico</button>
+                                <div class="row">
+                                    <div class="col-md-12" >
+                                        <div class="collapse multi-collapses" id="multiCollapse6">
+                            
+                                            @php
+                                            $etapaPreliminarMostrada = false;
+                                            $etapaPreparatoriaMostrada = false;
+                                            $juicioOralMostrado = false;
 
-<button class="btn btn-primary container-fluid"  type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapses5" aria-expanded="false" aria-controls="Seguimiento">Seguimiento</button>
-                                            <div class="row">
+                                            $recuperado = false;
+                                            $entregado = false;
+                                            $marcado = false;
+                                            
+                                            $bajaTributaria = false;
+                                            $desmarcado = false;
+                                           
+                                            @endphp
+
+                                            
+                                            @foreach ($archivodenuncias as $archivodenuncia)
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 1 && !$etapaPreliminarMostrada)
+                                                    @php $etapaPreliminarMostrada = true; @endphp
+                                                    
+                                                    <label>Documentación Etapa Preliminar:</label><br>
+                                                @endif
+
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 2 && !$etapaPreparatoriaMostrada)
+                                                    @php $etapaPreparatoriaMostrada = true; @endphp
+                                                    <label>Documentación Etapa Preparatoria:</label><br>
+                                                @endif
+
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 3 && !$recuperado)
+                                                    @php $recuperado = true; @endphp
+                                                    <label>Documentación Recuperado:</label><br>
+                                                @endif
+
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 4 && !$entregado)
+                                                    @php $entregado = true; @endphp
+                                                    <label>Documentación Entregado:</label><br>
+                                                @endif
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 5 && !$marcado)
+                                                    @php $marcado = true; @endphp
+                                                    <label>Documentación Marcado:</label><br>
+                                                @endif
+                                             
+                                                @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 7 && !$bajaTributaria)
+                                                    @php $bajaTributaria = true; @endphp
+                                                    <label>Documentación Baja Tributaria:</label><br>
+                                                @endif
+                                                
+                                                    @if ($archivodenuncia->pdf && $archivodenuncia->tipo == 6 && !$desmarcado)
+                                                        @php $desmarcado = true; @endphp
+                                                        <label>Documentación Desmarcado:</label><br>
+                                                    @endif
+                                                
+                                                <div class="float-right" style="display: flex; gap: 10px; align-items: center;">
+                                                <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
+                                                        <a class ="btn btn-success btn-sm  " href="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}" target="_blank">Abrir PDF</a>
+                                                        @role('admin')
+                                                      
+                                                        <button type="submit" class="btn btn-danger btn-sm">Borrar PDF</button>
+                                                        @csrf
+                                                            @method('DELETE')
+                                                            
+                                                        </form>
+                                                        @endrole
+                                                        
+                                                       
+                                                </div>  
+                                                @role('admin')
+                                                <button class="float-right btn-generate-qr btn btn-sm btn-info" style="color: white; display: flex; gap: 10px; align-items: center;" data-public-link="{{ asset('storage/pdf/' . $archivodenuncia->pdf) }}">Generar QR</button>
+                                                @endrole
+                                                <div class="qr-container "></div>
+                                               
+                                                <div class="d-flex justify-content-center">
+                                                
+                                                
+                                            
+                                                    <object data="{{asset('storage/pdf/' . $archivodenuncia->pdf)}}" type="application/pdf" frameborder="0" width="100%" height="400px">
+                                                        <iframe src="https://docs.google.com/viewer?url={{asset('storage/pdf/' . $archivodenuncia->pdf)}}&embedded=true" style="width:100%; height:400px;" frameborder="0"></iframe>
+                                                    </object>
+
+                                            
+                                            
+
+                                            
+
+                                            
+                                            
+                                                
+                                                </div>
+                        
+                                                
+
+                                                <form action="{{ route('archivodenuncias.destroy',$archivodenuncia->id) }}" method="POST">
+                                                    @csrf 
+                                                    @method('DELETE')
+                                                
+                                                </form>
+                                            
+                                            @endforeach
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            <br>
+                             <button class="btn btn-primary container-fluid"  type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapses5" aria-expanded="false" aria-controls="Seguimiento">Seguimiento</button>
+                            <div class="row">
                                                 <div class="col-md-12" >
                                                     <div class="collapse multi-collapses5" id="Seguimiento">
                                                     @if(auth()->user()->hasRole(['admin', 'seguimiento','visor']) || !$caso->seguimientos->isEmpty()) 
@@ -291,8 +400,9 @@
 
 
 
-                         </div>
-                        </div>
+                            </div>
+                            <br>
+                       
                         
                     </div> 
                     
