@@ -253,7 +253,7 @@
 									<li>Poliza de importacion y F.R.V. y/o declaracion de mercaderia de importacion
 										(D.I.M.)</li>
 									<li>Inpuesta a la inscripcion nueva G.A.M.</li>
-									<li>Fotocopia de C.I. del propietario</li>
+									<li>C.I. del propietario</li>
 									<li>Deposito de 70 Bs.</li>
 									<li>Presencia fisica del vehiculo</li>
 								</ul>
