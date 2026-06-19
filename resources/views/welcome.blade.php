@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <style>
         body {
             /* Altura del navbar en vista web */
@@ -134,6 +134,12 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#oficinas">Oficinas</a>
                 </li>
+
+           <li class="nav-item">
+    <a class="nav-link btn btn-reserva text-white px-3 py-2" href="{{ route('reserva') }}">
+        Reserva Cita
+    </a>
+</li>
             </ul>
 
             <div class="ms-auto">
@@ -148,7 +154,7 @@
 <div id="carouselExample"
      class="carousel slide"
      data-bs-ride="carousel"
-     data-bs-interval="4000"
+     data-bs-interval="5000"
      data-bs-pause="false">
 
     <div class="carousel-inner">
@@ -158,7 +164,7 @@
         </div>
 
         <div class="carousel-item">
-           <img src="img/baner/5.jpg" class="d-block w-100" alt="Banner 2">
+           <img src="img/baner/6.jpg" class="d-block w-100" alt="Banner 2">
         </div>
 
         <div class="carousel-item">

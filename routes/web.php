@@ -40,11 +40,9 @@ Route::get('/', function () {
     } else {
         return view('welcome');
     }
-});
-    Route::get('/login', function () {
-        return view('auth.login');
     });
-    Auth::routes();
+Route::get('/login', function () { return view('auth.login');});
+Auth::routes();
 Route::get('/administrator',[AdminController::class,'index']);
 Route::resource('registros', RegistroController::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -66,7 +64,7 @@ Route::resource('model-has-roles', ModelHasRoleController::class);
 Route::resource('users', UserController::class);
 Route::resource('seguimientos', SeguimientoController::class);
 Route::middleware(['web'])->group(function () {
-Route::get('qrcode/generate', [QRCodeController::class, 'generate'])->name('qrcode.generate');
-Route::get('/reportes', [ReporterController::class, 'index']);
-});
-
+    Route::get('qrcode/generate', [QRCodeController::class, 'generate'])->name('qrcode.generate');
+    Route::get('/reportes', [ReporterController::class, 'index']);
+    });
+Route::get('/reserva', function () { return view('reserva');})->name('reserva');
