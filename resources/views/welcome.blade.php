@@ -158,7 +158,7 @@
         </div>
 
         <div class="carousel-item">
-            <img src="{{ asset('img/baner/2.jpg') }}?v={{ filemtime(public_path('img/baner/2.jpg')) }}">
+           <img src="img/baner/2.jpg" class="d-block w-100" alt="Banner 2">
         </div>
 
         <div class="carousel-item">
