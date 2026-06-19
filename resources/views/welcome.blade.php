@@ -164,7 +164,7 @@
         </div>
 
         <div class="carousel-item">
-           <img src="img/baner/7.jpg" class="d-block w-100" alt="Banner 2">
+           <img src="img/baner/6.jpg" class="d-block w-100" alt="Banner 2">
         </div>
 
         <div class="carousel-item">
