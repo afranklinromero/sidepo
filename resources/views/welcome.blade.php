@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 <style>
         body {
@@ -103,62 +103,85 @@
 
         
 
-      <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top" style="position: absolute">
-            <div class="container-fluid">
-                <a class="navbar-brand text-white" href="#">Inicio</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item ">
-                            <a class="nav-link text-white" href="#mision">Misión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#vision">Visión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#contactos">Contactos telefónicos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#requisitos">Requisitos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#oficinas">Oficinas</a>
-                        </li>
-                    
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Inicio</a>
 
-                        
-                    </ul>
-                    <div class="ms-auto">
-                        <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
-                    </div>
-                </div>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#mision">Misión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#vision">Visión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#contactos">Contactos telefónicos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#requisitos">Requisitos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#oficinas">Oficinas</a>
+                </li>
+            </ul>
+
+            <div class="ms-auto">
+                <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
             </div>
-        </nav>
-            <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel" >
-                <div class="carousel-inner" style="padding-top:8px">
-                    <div class="carousel-item active">
-                        <img src="img/baner/1.jpg" class="d-block w-100" alt="...">
-               
-           
-                    </div>
-                    <div class="carousel-item" >
-                        <img src="img/baner/2.jpg" class="d-block w-100" alt="...">
-                        
-                          
-                        
-                    </div>
-                    <div class="carousel-item" > 
-                                <img src="img/baner/3.jpg" class="d-block w-100" alt="...">
-                              
-                                    
-                                   
-                    </div>
-                </div>
-            </div>
-<!-- Contenido -->
+        </div>
+    </div>
+</nav>
+
+
+<!-- CAROUSEL CORREGIDO -->
+<div id="carouselExample"
+     class="carousel slide"
+     data-bs-ride="carousel"
+     data-bs-interval="4000"
+     data-bs-pause="false">
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <img src="img/baner/1.jpg" class="d-block w-100" alt="Banner 1">
+        </div>
+
+        <div class="carousel-item">
+            <img src="img/baner/2.jpg" class="d-block w-100" alt="Banner 2">
+        </div>
+
+        <div class="carousel-item">
+            <img src="img/baner/3.jpg" class="d-block w-100" alt="Banner 3">
+        </div>
+
+    </div>
+
+    <!-- Controles (IMPORTANTE para estabilidad visual) -->
+    <button class="carousel-control-prev" type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
+<!-- FIN CAROUSEL -->
 
 <div class=container>
     <section id="inicio">
@@ -217,7 +240,7 @@
 								<ul>
 									<li>Ruat</li>
 									<li>Poliza de importacion y F.R.V.</li>
-									<li>Fotocopia de C.I. del propietario</li>
+									<li>C.I. del propietario</li>
 									<li>Poder notariado</li>
 									<li>Factura e informe del chapista</li>
 									<li>Deposito de 30 Bs.</li>
@@ -235,7 +258,7 @@
 								<ul>
 									<li>Ruat</li>
 									<li>Poliza de importacion y F.R.V.</li>
-									<li>Fotocopia de C.I. del propietario</li>
+									<li>C.I. del propietario</li>
 									<li>Poder notariado</li>
 									<li>Factura de compra y poliza del motor</li>
 									<li>Deposito de 30 Bs.</li>
@@ -282,7 +305,7 @@
 									<li>Ruat</li>
 									<li>Poliza de importacion y F.R.V.</li>
 									<li>Poder notariado y/o minuta</li>
-									<li>Fotocopia de C.I. del comprador y vendedor</li>
+									<li>C.I. del comprador y vendedor</li>
 									<li>Inpuesta a la inscripcion nueva G.A.M.</li>
 									<li>Deposito de 70 Bs.</li>
 									<li>Presencia fisica del vehiculo</li>
@@ -298,7 +321,7 @@
 								<ul>
 									<li>Ruat</li>
 									<li>Poliza de importacion y F.R.V.</li>
-									<li>Fotocopia de C.I. del propietario</li>
+									<li>C.I. del propietario</li>
 									<li>Poder notariado y/o minuta (en caso de de que el RUAT no se
 										encuentre registrado a nombre del solicitante)</li>
 									<li>Memorial dirigido al Sr. Director Deptal. Diprove.</li>
@@ -318,7 +341,7 @@
 									<li>Resolucion de inscripcion del vehiculo</li>
 									<li>Minuta de transferencia y/o poder notariado</li>
 									<li>Contrato de trabajo </li>
-									<li>Fotocopia de CI. de propietario </li>
+									<li>C.I. del propietario </li>
 									<li>Memorial dirigido al Sr. Dir. Dptal. de Diprove</li>
 									<li>Deposito de 30 Bs.</li>
 
@@ -611,9 +634,8 @@
 </script>
 
 <!-- Scripts de Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
 </body>
