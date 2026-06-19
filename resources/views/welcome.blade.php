@@ -584,10 +584,15 @@
 
         <div class="row">
 
-        </div>
-        <div style ="width:10" class="text-center md-5">
-        <iframe  width="550" height="315" src="https://www.youtube.com/embed/E8VSjtecu3w?modestbranding=1" frameborder="0" allowfullscreen></iframe>
-        </div>
+       <div class="text-center my-4">
+    <div class="ratio ratio-16x9">
+        <iframe 
+            src="https://www.youtube.com/embed/E8VSjtecu3w?modestbranding=1"
+            title="YouTube video"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
     </section>
 <br>
 <br>
