@@ -9,13 +9,13 @@
         body {
             /* Altura del navbar en vista web */
           
-            /* Altura del navbar */
+            /* Altura del navbar */ padding-top: 70px;
     
         }
 
         @media (max-width: 991.98px) {
             body {
-                padding-top: 0; /* Elimina el espacio extra en vista móvil */
+                padding-top: 57px; /* Elimina el espacio extra en vista móvil */
             }
         }
        
@@ -104,7 +104,7 @@
         
 
   <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-nav fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand text-white" href="#">Inicio</a>
 
