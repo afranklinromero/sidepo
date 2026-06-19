@@ -158,7 +158,7 @@
         </div>
 
         <div class="carousel-item">
-           <img src="img/baner/2.jpg" class="d-block w-100" alt="Banner 2">
+           <img src="img/baner/5.jpg" class="d-block w-100" alt="Banner 2">
         </div>
 
         <div class="carousel-item">
@@ -396,7 +396,7 @@
 					<div class="col-md-6 col-lg-4 item">
 						<div class="box"><img class="rounded-circle" src="img/logo/d2.png">
 							<h3 class="name">DONDE PAGAR</h3>
-							<p class="title">NRO DE CUENTA</p>
+							
 							<div class="pricing-body">
 								<h3 style="text-align: center;">EN CUALQUIR SUCURSAL DEL BANCO UNION A NIVEL NACIONAL, BUSCANDO EL NUMERO DE CUENTA DE SU CIUDAD O REGION </h3><br>
 								<h3 style="text-align: center;"><a style="color: darkgreen; font-size: 24px;" href="https://bancounion.com.bo/AgenciasAtm/AgenciasAtms">click aqui para buscar su banco</a></h3>
