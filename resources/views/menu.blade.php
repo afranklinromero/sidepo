@@ -224,7 +224,7 @@ footer {
                             
                             </div>
                             @endhasanyrole
-                            @hasanyrole('valores')
+                            @hasanyrole('valores|admin')
                             <div class="col">    
                                 
                            
