@@ -9,7 +9,7 @@
         body {
             /* Altura del navbar en vista web */
           
-            /* Altura del navbar */ padding-top: 70px;
+            /* Altura del navbar */ padding-top: 58px;
     
         }
 
@@ -135,11 +135,11 @@
                     <a class="nav-link text-white" href="#oficinas">Oficinas</a>
                 </li>
 
-           <li class="nav-item">
-    <a class="nav-link btn btn-reserva text-white px-3 py-2" href="{{ route('reserva') }}">
-        Reserva Cita
-    </a>
-</li>
+                <li class="nav-item">
+            <a class="nav-link btn btn-reserva text-white px-3 py-2" href="{{ route('tramite.valorada.form') }}">
+                Reserva Cita
+            </a>
+        </li>
             </ul>
 
             <div class="ms-auto">

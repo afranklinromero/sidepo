@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tramites', function (Blueprint $table) {
-            $table->id();
+        Schema::create('tipo_tramites', function (Blueprint $table) {
+    $table->id();
 
-        $table->string('nombre');
-        $table->text('descripcion')->nullable();
-        $table->decimal('costo',10,2)->nullable();
-        $table->timestamps();
-        });
+    $table->string('nombre');
+    $table->text('descripcion')->nullable();
+
+    $table->boolean('activo')->default(true);
+
+    $table->timestamps();
+});
     }
 
     /**
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tramites');
+        Schema::dropIfExists('tipo_tramites');
     }
 };

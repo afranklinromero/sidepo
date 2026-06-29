@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Traits\HasRoles;
@@ -64,6 +64,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
 {
+    
     // Valida los campos según las reglas definidas en el modelo User
     $request->validate(User::$rules);
 
@@ -75,8 +76,10 @@ class UserController extends Controller
     $user->role = $request->input('role'); // Asegúrate de incluir el campo 'role'
     $user->save();
 
-    return redirect()->route('users.index')
-        ->with('success', 'User created successfully.');
+     $user->assignRole($request->role);
+    return redirect()
+        ->route('administrator')
+        ->with('success', 'Usuario creado correctamente');
 }
 
     /**

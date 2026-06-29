@@ -23,4 +23,4 @@ class AdminAuth
         return redirect() ->to('menu');
     }
 
-}
+} 

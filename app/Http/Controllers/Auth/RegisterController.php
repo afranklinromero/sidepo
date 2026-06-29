@@ -63,23 +63,26 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-        User::create([
-            'name' => strtoupper($data['name']),
-            'apellido' => strtoupper($data['apellido']),
-            'grado' => $data['grado'],
-            'grupo' => strtoupper($data['grupo']),
-            'email' => strtolower($data['email']),
-            'password' => Hash::make($data['password']),
-            'role' => strtolower($data['role']),
-        ]);
+protected function create(array $data)
+{
+    return User::create([
+        'name' => strtoupper($data['name']),
+        'apellido' => strtoupper($data['apellido']),
+        'grado' => $data['grado'],
+        'grupo' => strtoupper($data['grupo']),
+        'email' => strtolower($data['email']),
+        'password' => Hash::make($data['password']),
+        'role' => strtolower($data['role']),
+    ]);
+}
     
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
-    }
-    
-        // se modifico en vendor laravel auth registerUsers para que entre directo a usuariosp
+        // se modifico en vendor laravel auth registerUsers para que entre directo a usuarios
    
-   
+protected function registered(\Illuminate\Http\Request $request, $user)
+{
+    // redirige sin hacer login automático
+    return redirect()
+        ->route('users.index')
+        ->with('success', 'Usuario creado correctamente');
+}   
 }
